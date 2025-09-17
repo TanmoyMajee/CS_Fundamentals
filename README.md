@@ -1,1 +1,92 @@
 # Project_Q-A
+
+🔹 Project 1: RagIt (PDF Chat Application)
+1.	Can you explain your project RagIt in simple words?
+“Sure, I’ll explain. RagIt is an AI-powered Document Q&A platform that allows users to upload a document and ask natural language questions to get context-aware answers.”
+
+Transition to Motivation
+👉 “The idea behind building this was…”
+👉 “…to help users quickly get answers from research papers or make notes from long e-books without reading every page
+Transition to Technical Highlights
+👉 “From the technical side, I implemented a RAG pipeline…”
+👉 “…where the document is split into chunks, converted into embeddings, stored in Qdrant for vector similarity search, and then LangChain with a HuggingFace LLM generates accurate, context-aware responses. The platform also keeps chat history and even supports free and premium usage plans.”
+Transition to Tech Stack
+👉 “For the tech stack, I used React on the frontend, Node.js with Express on the backend, Prisma ORM for database management, Qdrant as the vector database, and Firebase for storage and authentication. Both the frontend and backend are built with TypeScript instead of plain JavaScript, which gave me better type safety and fewer runtime errors.”
+
+
+3.	Why did you choose this project idea? // Motivation
+“I chose this idea because going through long documents is time-consuming. This project makes it easier to quickly extract answers — for example, from research papers or e-books — without reading every page.”
+
+4.	 “Can you explain how your RAG application works?” Flow 
+How does the system work step by step when a user uploads a PDF and asks a question? 
+
+When a user uploads a document, the backend extracts the text and splits it into chunks. Each chunk is converted into embeddings using a HuggingFace sentence tansformer model and saved inside Qdrant, which is a vector database. For every new conversation, I create a separate collection in Qdrant based on the conversation ID, so that the data from one session doesn’t get mixed up with another. This way each chat stays independent and organized.”
+When the user asks a question, we create an embedding for that query and use Qdrant to fetch the most relevant chunks. Then I built a retrieval chain in LangChain, where those chunks are combined with a custom prompt. The prompt makes sure the model only answers from the given context. Finally, a HuggingFace LLM generates the response, and both the user’s question and the AI’s answer are stored in the database to maintain chat history.”
+
+4.	What is an embedding? Why do you need it?
+5.	Why did you use Qdrant instead of MongoDB or MySQL?
+6.	What is the role of LangChain in your project?
+7.	How does the HuggingFace LLM generate answers?
+8.	Why did you choose Firebase authentication instead of JWT?
+9.	What challenges did you face while building RagIt?
+10.	If I upload a very large PDF, how does your system handle it?
+11.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
+12.	How would you improve RagIt in the future?
+13.	Why k=3 chunks in retrieval? How did you decide?
+14.	How do you ensure answers don’t hallucinate outside the document? (→ your prompt already addresses this)
+15.	How do you chunk PDF text? (chunk size and overlap)
+16.	How do you create embeddings and which model did you use?
+17.	Why Qdrant and how many chunks do you retrieve?
+18.	How do you avoid LLM hallucination — ensuring answers come from the PDF?
+19.	How do you scale the system for large documents or many users?
+20.	How do you store and secure user PDFs?
+21.	What are the main limitations and future improvements?
+22.	•  What is HuggingFace and why did you use it?
+23.	•  What is LangChain and why did you use it?
+24.	•  What is a retriever chain? How does it work?
+25.	•  How do you create embeddings for documents and queries?
+26.	•  How do you split documents into chunks? Why is it needed?
+27.	•  What is Qdrant and why did you choose it as a vector database?
+28.	•  How do you manage multiple sessions in your app?
+29.	•  How do you ensure the model only answers from the given context?
+30.	•  How do you handle chat history storage?
+31.	•  What are alternatives to HuggingFace, LangChain, or Qdrant?
+32.	•  How do you perform similarity search in the vector DB?
+33.	•  How do you handle scalability if many users upload documents?
+
+
+
+***************************************************************
+
+________________________________________
+🔹 Project 2: Chat App (Real-time Messaging)
+1.	Can you explain your Chat App project?
+2.	Why did you use Socket.IO instead of normal API calls?
+3.	How do you handle real-time updates in React?
+4.	How do you differentiate between one-to-one chat and group chat?
+5.	How do you store chats in MongoDB? What is the schema design?
+6.	How do you make sure only logged-in users can send/receive messages?
+7.	How does JWT authentication work in your app?
+8.	If many users are online at the same time, how does your app scale?
+9.	What challenges did you face while building this app?
+10.	How would you add features like typing indicators or read receipts?
+________________________________________
+🔹 Project 3: Blog Application (MERN Blog Platform)
+1.	Can you explain your Blog App project?
+2.	How did you implement CRUD operations for posts?
+3.	How does your JWT authentication work in this app?
+4.	How do you handle image uploads?
+5.	How did you build the comment section?
+6.	How do you ensure only the post owner can edit or delete a post?
+7.	What challenges did you face while building the blog?
+8.	If multiple users update the same post at the same time, what happens?
+9.	Why did you choose the MERN stack for this project?
+10.	How would you improve this blog app in the future?
+________________________________________
+🔹 General Project Questions (for any project)
+1.	Which project are you most proud of, and why?
+2.	Which project was the most challenging?
+3.	How did you debug issues when something wasn’t working?
+4.	How do you ensure your projects are scalable and maintainable?
+5.	If you had more time, what improvements would you add to your projects?
+
