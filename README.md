@@ -24,35 +24,45 @@ When a user uploads a document, the backend extracts the text and splits it into
 When the user asks a question, we create an embedding for that query and use Qdrant to fetch the most relevant chunks. Then I built a retrieval chain in LangChain, where those chunks are combined with a custom prompt. The prompt makes sure the model only answers from the given context. Finally, a HuggingFace LLM generates the response, and both the user’s question and the AI’s answer are stored in the database to maintain chat history.”
 
 4.	What is an embedding? Why do you need it?
-5.	Why did you use Qdrant instead of MongoDB or MySQL?
-6.	What is the role of LangChain in your project?
-7.	How does the HuggingFace LLM generate answers?
-8.	Why did you choose Firebase authentication instead of JWT?
-9.	What challenges did you face while building RagIt?
-10.	If I upload a very large PDF, how does your system handle it?
-11.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
-12.	How would you improve RagIt in the future?
-13.	Why k=3 chunks in retrieval? How did you decide?
-14.	How do you ensure answers don’t hallucinate outside the document? (→ your prompt already addresses this)
-15.	How do you chunk PDF text? (chunk size and overlap)
-16.	How do you create embeddings and which model did you use?
-17.	Why Qdrant and how many chunks do you retrieve?
-18.	How do you avoid LLM hallucination — ensuring answers come from the PDF?
-19.	How do you scale the system for large documents or many users?
-20.	How do you store and secure user PDFs?
-21.	What are the main limitations and future improvements?
-22.	•  What is HuggingFace and why did you use it?
-23.	•  What is LangChain and why did you use it?
-24.	•  What is a retriever chain? How does it work?
-25.	•  How do you create embeddings for documents and queries?
-26.	•  How do you split documents into chunks? Why is it needed?
-27.	•  What is Qdrant and why did you choose it as a vector database?
-28.	•  How do you manage multiple sessions in your app?
-29.	•  How do you ensure the model only answers from the given context?
-30.	•  How do you handle chat history storage?
-31.	•  What are alternatives to HuggingFace, LangChain, or Qdrant?
-32.	•  How do you perform similarity search in the vector DB?
-33.	•  How do you handle scalability if many users upload documents?
+   “Embeddings are numerical vector representations of text that capture the meaning of the text. In my project, each chunk of the document gets its own embedding vector based on its content. Then, when the user asks a question, that question is also turned into an embedding. By comparing these vectors, the system can find the most similar chunks in the document and pass them to the model. That’s how semantic search works here.”
+  	
+6.	Why did you use Qdrant instead of MongoDB or MySQL?
+  I used Qdrant because it’s designed for vector similarity search, which is essential for retrieving relevant chunks from embeddings. Relational databases like MySQL or Postgres aren’t built for that use case. In my project, Qdrant handled the embeddings, while Prisma with Postgres managed structured data like users, sessions, and messages
+
+8.	What is the role of LangChain in your project?
+ “LangChain is an open-source framework that helps build applications powered by LLMs. In my project, its role was to connect different components of the RAG pipeline.
+For example, I used classes like PDFLoader to read documents, RecursiveCharacterTextSplitter to break them into smaller chunks, and HuggingFaceTransformersEmbeddings to generate embeddings. On the other side, LangChain provides functions like createRetrievalChain and createStuffDocumentsChain, which help me connect the retriever with my LLM.
+So overall, LangChain made it easy to orchestrate the whole flow — from loading the document, splitting it, generating embeddings, storing them, and finally retrieving the right chunks to pass into the LLM for answering.”
+  	
+10.	what is HuggingFace , what is the role in yr project?
+    “HuggingFace is a platform that provides pre-trained NLP models. In my project, I used their embedding model Xenova/all-MiniLM-L6-v2 (a sentence transformer) to convert document chunks and user queries into vectors, and their LLM (DeepSeek) to generate natural language answers. So, HuggingFace powered both the embedding generation and the answer generation parts of my RAG pipeline
+   	
+13.	What challenges did you face while building RagIt?
+    
+15.	If I upload a very large PDF, how does your system handle it?
+16.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
+17.	How would you improve RagIt in the future?
+18.	Why k=3 chunks in retrieval? How did you decide?
+19.	How do you ensure answers don’t hallucinate outside the document? (→ your prompt already addresses this)
+20.	How do you chunk PDF text? (chunk size and overlap)
+21.	How do you create embeddings and which model did you use?
+22.	Why Qdrant and how many chunks do you retrieve?
+23.	How do you avoid LLM hallucination — ensuring answers come from the PDF?
+24.	How do you scale the system for large documents or many users?
+25.	How do you store and secure user PDFs?
+26.	What are the main limitations and future improvements?
+27.	•  What is HuggingFace and why did you use it?
+28.	•  What is LangChain and why did you use it?
+29.	•  What is a retriever chain? How does it work?
+30.	•  How do you create embeddings for documents and queries?
+31.	•  How do you split documents into chunks? Why is it needed?
+32.	•  What is Qdrant and why did you choose it as a vector database?
+33.	•  How do you manage multiple sessions in your app?
+34.	•  How do you ensure the model only answers from the given context?
+35.	•  How do you handle chat history storage?
+36.	•  What are alternatives to HuggingFace, LangChain, or Qdrant?
+37.	•  How do you perform similarity search in the vector DB?
+38.	•  How do you handle scalability if many users upload documents?
 
 
 
