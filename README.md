@@ -38,7 +38,12 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
     “HuggingFace is a platform that provides pre-trained NLP models. In my project, I used their embedding model Xenova/all-MiniLM-L6-v2 (a sentence transformer) to convert document chunks and user queries into vectors, and their LLM (DeepSeek) to generate natural language answers. So, HuggingFace powered both the embedding generation and the answer generation parts of my RAG pipeline
    	
 13.	What challenges did you face while building RagIt?
-    
+    One major challenge was setting up the retrieval chain, which is the main augmentation step. Fetching the right chunks, combining them with a custom prompt, and then passing everything to the LLM was tricky to understand at first. To tackle this, I first built a small demo project to test the retrieval chain separately before integrating it into the main app.
+
+Another challenge was keeping every conversation’s data isolated. To prevent embeddings from different sessions from mixing, I created session-based collections in Qdrant, so each conversation stores its own vectors and can be retrieved independently.
+
+Finally, while implementing a plan-based payment system with Stripe, I had to build middleware to track how many sessions a user can create and how many queries are allowed per plan. Integrating these checks with Prisma and Stripe’s APIs required careful backend logic
+
 15.	If I upload a very large PDF, how does your system handle it?
 16.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
 17.	How would you improve RagIt in the future?
