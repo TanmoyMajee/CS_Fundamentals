@@ -61,30 +61,37 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 
 >Finally, while implementing a plan-based payment system with Stripe, I had to build middleware to track how many sessions a user can create and how many queries are allowed per plan. Integrating these checks with Prisma and Stripe’s APIs required careful backend logic
 
-15.	If I upload a very large PDF, how does your system handle it?
-16.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
-17.	How would you improve RagIt in the future?
-18.	Why k=3 chunks in retrieval? How did you decide?
-19.	How do you ensure answers don’t hallucinate outside the document? (→ your prompt already addresses this)
-20.	How do you chunk PDF text? (chunk size and overlap)
-21.	How do you create embeddings and which model did you use?
-22.	Why Qdrant and how many chunks do you retrieve?
-23.	How do you avoid LLM hallucination — ensuring answers come from the PDF?
-24.	How do you scale the system for large documents or many users?
-25.	How do you store and secure user PDFs?
-26.	What are the main limitations and future improvements?
-27.	•  What is HuggingFace and why did you use it?
-28.	•  What is LangChain and why did you use it?
-29.	•  What is a retriever chain? How does it work?
-30.	•  How do you create embeddings for documents and queries?
-31.	•  How do you split documents into chunks? Why is it needed?
-32.	•  What is Qdrant and why did you choose it as a vector database?
-33.	•  How do you manage multiple sessions in your app?
-34.	•  How do you ensure the model only answers from the given context?
-35.	•  How do you handle chat history storage?
-36.	•  What are alternatives to HuggingFace, LangChain, or Qdrant?
-37.	•  How do you perform similarity search in the vector DB?
-38.	•  How do you handle scalability if many users upload documents?
+**15.	If I upload a very large PDF, how does your system handle it?**
+>If a very large document is uploaded, the first step is file handling.
+I use Multer with memoryStorage in my Node.js backend to temporarily store the uploaded PDF in memory.
+Then LangChain’s PDFLoader extracts the text, and a RecursiveCharacterTextSplitter breaks it into smaller overlapping chunks.
+Each chunk gets its own embedding vector and is stored in Qdrant.
+Because we only retrieve a few most relevant chunks when answering, the size of the PDF doesn’t slow down the query or overload the model.
+This chunking and retrieval strategy lets the system handle very large documents efficiently within the LLM’s context limits.
+
+17.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
+18.	How would you improve RagIt in the future?
+19.	Why k=3 chunks in retrieval? How did you decide?
+20.	How do you ensure answers don’t hallucinate outside the document? (→ your prompt already addresses this)
+21.	How do you chunk PDF text? (chunk size and overlap)
+22.	How do you create embeddings and which model did you use?
+23.	Why Qdrant and how many chunks do you retrieve?
+24.	How do you avoid LLM hallucination — ensuring answers come from the PDF?
+25.	How do you scale the system for large documents or many users?
+26.	How do you store and secure user PDFs?
+27.	What are the main limitations and future improvements?
+28.	•  What is HuggingFace and why did you use it?
+29.	•  What is LangChain and why did you use it?
+30.	•  What is a retriever chain? How does it work?
+31.	•  How do you create embeddings for documents and queries?
+32.	•  How do you split documents into chunks? Why is it needed?
+33.	•  What is Qdrant and why did you choose it as a vector database?
+34.	•  How do you manage multiple sessions in your app?
+35.	•  How do you ensure the model only answers from the given context?
+36.	•  How do you handle chat history storage?
+37.	•  What are alternatives to HuggingFace, LangChain, or Qdrant?
+38.	•  How do you perform similarity search in the vector DB?
+39.	•  How do you handle scalability if many users upload documents?
 
 
 
