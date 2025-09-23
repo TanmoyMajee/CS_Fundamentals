@@ -109,18 +109,30 @@ ________________________________________
 >Tech Stack:
 “For the tech stack, I used React with Tailwind CSS for the frontend, Node.js with Express for the backend, MongoDB with Mongoose for the database, and Socket.IO for real-time messaging.”
 
-3.	Why did you use Socket.IO instead of normal API calls?
-4.	How do you handle real-time updates in React?
-5.	How do you differentiate between one-to-one chat and group chat?
-6.	How do you store chats in MongoDB? What is the schema design? how did u retrive  chat history?
-7.	How do you make sure only logged-in users can send/receive messages?
-8.	How does JWT authentication work in your app?
-9.	Why did you use Firebase in addition to JWT?
-10.	If many users are online at the same time, how does your app scale?
-11.	What challenges did you face while building this app?
-12.	How do you show the online/offline indicator?
-13.	How would you scale your chat app if thousands of users are online?
-14.	How would you add features like typing indicators or read receipts?
+**3.	Socket.IO **
+*✅ What is Socket.IO?*
+>Socket.IO is a JavaScript library that enables real-time, bidirectional communication between the client and server. It builds on top of WebSockets and includes features like automatic reconnections and fallback mechanisms.
+
+*✅ Why did you use Socket.IO instead of normal API calls?*
+>In my chat app, real-time updates are crucial. With normal API calls, the client would need to constantly poll the server, which is inefficient and introduces latency. Socket.IO, on the other hand, keeps a persistent connection, allowing the server to instantly push messages to the client. This results in a smoother and more responsive chat experience.
+
+>Short Polling: The client repeatedly sends requests to the server at regular intervals, even if there’s no new data. This can cause unnecessary traffic and load.
+
+>Long Polling: The client sends a request, and the server holds that request open until new data is available. Once the server responds, the client immediately sends another request. This reduces unnecessary traffic but still keeps the connection open for new data.
+
+>WebSockets: The client and server establish a continuous, two-way connection. Once established, either side can send messages at any time without the need for repeated requests. This is the most efficient and real-time method.
+
+5.	How do you handle real-time updates in React?
+6.	How do you differentiate between one-to-one chat and group chat?
+7.	How do you store chats in MongoDB? What is the schema design? how did u retrive  chat history?
+8.	How do you make sure only logged-in users can send/receive messages?
+9.	How does JWT authentication work in your app?
+10.	Why did you use Firebase in addition to JWT?
+11.	If many users are online at the same time, how does your app scale?
+12.	What challenges did you face while building this app?
+13.	How do you show the online/offline indicator?
+14.	How would you scale your chat app if thousands of users are online?
+15.	How would you add features like typing indicators or read receipts?
 ________________________________________
 🔹 Project 3: Blog Application (MERN Blog Platform)
 1.	Can you explain your Blog App project?
