@@ -99,16 +99,28 @@ This chunking and retrieval strategy lets the system handle very large documents
 
 ________________________________________
 🔹 Project 2: Chat App (Real-time Messaging)
-1.	Can you explain your Chat App project?
-2.	Why did you use Socket.IO instead of normal API calls?
-3.	How do you handle real-time updates in React?
-4.	How do you differentiate between one-to-one chat and group chat?
-5.	How do you store chats in MongoDB? What is the schema design?
-6.	How do you make sure only logged-in users can send/receive messages?
-7.	How does JWT authentication work in your app?
-8.	If many users are online at the same time, how does your app scale?
-9.	What challenges did you face while building this app?
-10.	How would you add features like typing indicators or read receipts?
+** 1.	Can you explain your Chat App project? **
+
+>I built a real-time chat application that allows users to chat both one-to-one and in groups. For authentication, I used JWT along with Firebase, which also supports Google login, to keep sessions secure. I implemented protected routes so that only authenticated users can access the chat features. The app also shows an online and offline indicator for users, and with Socket.IO, messages are delivered instantly. All the chat history is stored in MongoDB so that users can continue conversations where they left off.”
+
+>What I Learned:
+“Through this project, I gained hands-on experience with real-time communication using Socket.IO, and improved my understanding of integrating authentication and managing protected routes.”
+
+>Tech Stack:
+“For the tech stack, I used React with Tailwind CSS for the frontend, Node.js with Express for the backend, MongoDB with Mongoose for the database, and Socket.IO for real-time messaging.”
+
+3.	Why did you use Socket.IO instead of normal API calls?
+4.	How do you handle real-time updates in React?
+5.	How do you differentiate between one-to-one chat and group chat?
+6.	How do you store chats in MongoDB? What is the schema design? how did u retrive  chat history?
+7.	How do you make sure only logged-in users can send/receive messages?
+8.	How does JWT authentication work in your app?
+9.	Why did you use Firebase in addition to JWT?
+10.	If many users are online at the same time, how does your app scale?
+11.	What challenges did you face while building this app?
+12.	How do you show the online/offline indicator?
+13.	How would you scale your chat app if thousands of users are online?
+14.	How would you add features like typing indicators or read receipts?
 ________________________________________
 🔹 Project 3: Blog Application (MERN Blog Platform)
 1.	Can you explain your Blog App project?
@@ -123,9 +135,12 @@ ________________________________________
 10.	How would you improve this blog app in the future?
 ________________________________________
 🔹 General Project Questions (for any project)
+
 1.	Which project are you most proud of, and why?
-2.	Which project was the most challenging?
-3.	How did you debug issues when something wasn’t working?
-4.	How do you ensure your projects are scalable and maintainable?
-5.	If you had more time, what improvements would you add to your projects?
+2.	What’s the difference between WebSockets and HTTP?
+3.	why u use react not angular ? Why did you choose MongoDB? or chose mern stack 
+5.	Which project was the most challenging?
+6.	How did you debug issues when something wasn’t working?
+7.	How do you ensure your projects are scalable and maintainable?
+8.	If you had more time, what improvements would you add to your projects?
 
