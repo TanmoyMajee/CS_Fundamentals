@@ -1,19 +1,25 @@
+# HR
 
-Tell me about yourself.
+🔹 **1.Tell me about yourself**
+>Good morning/afternoon, my name is Tanmoy Majhi.
+I am currently in my final year of B.Tech in Computer Science at Heritage Institute of Technology. Before that, 
+I completed my Diploma in Computer Science from A.P.C. Roy Polytechnic, Jadavpur, which is located in Kolkata, where I originally belong.
+I am passionate about software development, especially in areas like full stack web development and Generative AI.
+>
+>“Over the last five years of my journey in computer science, I have worked with multiple technology stacks and explored different domains. I have built some impactful projects, mainly using the MERN stack, such as a RAG-based application and a real-time chat application.”
 
-Walk me through your resume.
+>Alongside development, I have solved more than 600 coding problems,  on platfrom like LeetCode , codeforces , which has improved my problem-solving skills.Outside academics, I enjoy watching football and playing chess.
 
-What are your strengths?
-“My primary strengths are problem-solving and consistent learning.
+**2. What are your strengths?**
+>“My primary strengths are problem-solving and consistent learning.
 When it comes to problem-solving, I like breaking down complex problems into smaller, manageable parts. For example, while developing my real-time chat application, I faced an issue with message duplication in group chats. I carefully debugged the code and refined the socket connections to make sure messages were delivered correctly.
 
-I’m also very consistent in learning. I regularly solve DSA problems on platforms like LeetCode, which keeps me sharp and helps me keep improving my skills. Even when the problems are tough, I keep practicing and learn from every attempt, which shows my dedication and resilience.
+>I’m also very consistent in learning. I regularly solve DSA problems on platforms like LeetCode, which keeps me sharp and helps me keep improving my skills. Even when the problems are tough, I keep practicing and learn from every attempt, which shows my dedication and resilience.
 
-What are your weakness?
-“My main weakness is that I sometimes spend too much time trying to perfect my work.
-For example, when I was working on the RAG-based project, I spent extra time polishing the chat interface instead of focusing on finishing the core features first.
-This can delay progress if I’m not careful.
-“To overcome this, I have started setting deadlines to finish the most priority tasks first, and then I work on improving the design if there is time left.”
+** 3. What are your weakness?**
+>>“My main weakness is that I sometimes spend too much time trying to perfect my work.
+For example, when I was working on the RAG-based project, I spent extra time polishing the chat interface instead of focusing on finishing the core features first. This can delay progress if I’m not careful.
+>>“To overcome this, I have started setting deadlines to finish the most priority tasks first, and then I work on improving the design if there is time left.”
 
 
 Why should we hire you?
