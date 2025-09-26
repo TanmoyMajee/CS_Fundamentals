@@ -21,7 +21,9 @@ When it comes to problem-solving, I like breaking down complex problems into sma
 For example, when I was working on the RAG-based project, I spent extra time polishing the chat interface instead of focusing on finishing the core features first. This can delay progress if I’m not careful.
 >>“To overcome this, I have started setting deadlines to finish the most priority tasks first, and then I work on improving the design if there is time left.”
 
+**Where do you see yourself in 5 years?**
 
+>“In five years, I see myself as an experienced full-stack developer who can build scalable and efficient applications. I also want to deepen my expertise in generative AI and cloud computing. Ultimately, I aim to lead projects, contribute meaningfully to real-world solutions, and help the company achieve its goals.”
 Why should we hire you?
 
 Why do you want to work for our company?
@@ -38,7 +40,7 @@ What are your short-term goals?
 
 What are your long-term goals?
 
-Where do you see yourself in 5 years?
+
 
 Why did you choose your field/branch of study?
 
