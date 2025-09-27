@@ -17,8 +17,8 @@ When it comes to problem-solving, I like breaking down complex problems into sma
 >I’m also very consistent in learning. I regularly solve DSA problems on platforms like LeetCode, which keeps me sharp and helps me keep improving my skills. Even when the problems are tough, I keep practicing and learn from every attempt, which shows my dedication and resilience.
 
 ** 3. What are your weakness?**
->>“My main weakness is that I sometimes spend too much time trying to perfect my work.
-For example, when I was working on the RAG-based project, I spent extra time polishing the chat interface instead of focusing on finishing the core features first. This can delay progress if I’m not careful.
+>>“My main weakness is that I sometimes spend too much time trying to perfect my work./perfectionict
+For example, when I was working on the RAG-based project, I spent extra time polishing the chat interface instead of focusing on finishing the core features first. This can delay progress if I’m not careful. its a good 
 >>“To overcome this, I have started setting deadlines to finish the most priority tasks first, and then I work on improving the design if there is time left.”
 
 **Where do you see yourself in 5 years? / Career & Goals**
