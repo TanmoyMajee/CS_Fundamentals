@@ -5,7 +5,7 @@
 I am currently in my final year of B.Tech in Computer Science at Heritage Institute of Technology. Before that, 
 I completed my Diploma in Computer Science from A.P.C. Roy Polytechnic, Jadavpur, which is located in Kolkata, where I originally belong.
 I am passionate about software development, especially in areas like full stack web development and Generative AI.
->
+
 >“Over the last five years of my journey in computer science, I have worked with multiple technology stacks and explored different domains. I have built some impactful projects, mainly using the MERN stack, such as a RAG-based application and a real-time chat application.”
 
 >Alongside development, I have solved more than 600 coding problems,  on platfrom like LeetCode , codeforces , which has improved my problem-solving skills.Outside academics, I enjoy watching football and playing chess.
@@ -21,10 +21,16 @@ When it comes to problem-solving, I like breaking down complex problems into sma
 For example, when I was working on the RAG-based project, I spent extra time polishing the chat interface instead of focusing on finishing the core features first. This can delay progress if I’m not careful.
 >>“To overcome this, I have started setting deadlines to finish the most priority tasks first, and then I work on improving the design if there is time left.”
 
-**Where do you see yourself in 5 years?**
+**Where do you see yourself in 5 years? / Career & Goals**
 
->“In five years, I see myself as an experienced full-stack developer who can build scalable and efficient applications. I also want to deepen my expertise in generative AI and cloud computing. Ultimately, I aim to lead projects, contribute meaningfully to real-world solutions, and help the company achieve its goals.”
-Why should we hire you?
+>“In five years, I see myself as an experienced full-stack developer who can build /capable of building scalable and efficient applications. I also want to gain/ deepen/expand my expertise in generative AI and cloud computing. Ultimately, I aim to lead impactful projects, contribute meaningfully to real-world solutions, and help the company achieve its goals.”
+
+**Why should we hire you?**
+
+** What is Your Motivation**
+>I feel motivated when I build projects that can help people in the real world or provide useful solutions. Creating something that others can use and benefit from gives me satisfaction and inspires me to keep learning and improving.”
+
+
 
 Why do you want to work for our company?
 
@@ -34,7 +40,7 @@ Tell me about your family background.
 
 Describe yourself in 3 words.
 
-Career & Goals
+
 
 What are your short-term goals?
 
