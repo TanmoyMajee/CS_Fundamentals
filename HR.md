@@ -16,6 +16,9 @@ I am passionate about software development, especially in areas like full stack 
 ** Internship Challanges **
 >During my internship, one of the main challenges I faced was transitioning from JavaScript to TypeScript. Since I didn’t have prior experience with TypeScript, it took me a few days to get comfortable with its type system and syntax. However, this challenge ultimately helped me improve the quality and maintainability of my code, making it more robust. In the end, this experience significantly contributed to my growth as a develope
 
+** Internship Key TakeWay ** 
+>During my internship, I had access to valuable video resources on generative AI and RAG applications. These materials greatly deepened my understanding of how to build RAG pipelines, which, in turn, helped me develop my own project. Additionally, I also gained experience working with TypeScript, which improved my coding skills and the quality of my code
+
 
 **2. What are your strengths?**
 >“My primary strengths are problem-solving and consistent learning.
