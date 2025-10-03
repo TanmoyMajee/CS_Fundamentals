@@ -37,6 +37,8 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 
 **Why should we hire you?**
 
+
+
 ** What is Your Motivation**
 >I feel motivated when I build projects that can help people in the real world or provide useful solutions. Creating something that others can use and benefit from gives me satisfaction and inspires me to keep learning and improving.”
 
@@ -44,9 +46,12 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 
 Why do you want to work for our company?
 
-Why are you interested in this role?
 
-Tell me about your family background.
+
+**Tell me about your family background.**
+>We are a family of four. My father is a private driver, my mother is a homemaker, and my younger sister is an artist and beautician. We are a close-knit family and always support each other.
+
+Why are you interested in this role?
 
 Describe yourself in 3 words.
 
