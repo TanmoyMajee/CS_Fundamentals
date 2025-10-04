@@ -61,6 +61,8 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 
 >Finally, while implementing a plan-based payment system with Stripe, I had to build middleware to track how many sessions a user can create and how many queries are allowed per plan. Integrating these checks with Prisma and Stripe’s APIs required careful backend logic
 
+**Challanges to  INtegrate AI Model **
+
 **15.	If I upload a very large PDF, how does your system handle it?**
 >If a very large document is uploaded, the first step is file handling.
 I use Multer with memoryStorage in my Node.js backend to temporarily store the uploaded PDF in memory.
