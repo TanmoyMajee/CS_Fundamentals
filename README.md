@@ -61,7 +61,19 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 
 >Finally, while implementing a plan-based payment system with Stripe, I had to build middleware to track how many sessions a user can create and how many queries are allowed per plan. Integrating these checks with Prisma and Stripe’s APIs required careful backend logic
 
+
 **Challanges to  INtegrate AI Model **
+>In my project, I utilized two primary AI models. First, I used the Hugging Face Sentence Transformer to generate embeddings, which helped in converting text into meaningful vector representations. Secondly, I leveraged the DeepSeek LLM to generate the final responses.
+
+>In my project, I first used LangChain’s default HuggingFaceInference class. Later, Hugging Face updated their system to use something called “Inference Providers,” where you have to mention the provider name (like novita or together) in the API request. The default class didn’t allow adding a custom provider name, so it stopped working properly with the new setup.
+
+>To solve this, I built my own custom LLM class where I could set the provider, endpoint, headers, and retry logic manually. This made the integration work smoothly with Hugging Face’s updated policy.
+
+
+**What is Prisma & Why did u use it **
+>Prisma is an open-source ORM (Object Relational Mapping tool) that lets us write database queries in JavaScript or TypeScript instead of raw SQL, making them more readable and type-safe. It also simplifies migrations, helping us manage schema changes effortlessly and reducing errors. 
+
+
 
 **15.	If I upload a very large PDF, how does your system handle it?**
 >If a very large document is uploaded, the first step is file handling.
@@ -149,6 +161,9 @@ ________________________________________
 10.	How would you improve this blog app in the future?
 ________________________________________
 🔹 General Project Questions (for any project)
+
+** What is the role in this project **
+>I was the sole developer for this project,handling everything from development to deployment.
 
 1.	Which project are you most proud of, and why?
 2.	What’s the difference between WebSockets and HTTP?
