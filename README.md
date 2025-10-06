@@ -61,6 +61,18 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 
 >Finally, while implementing a plan-based payment system with Stripe, I had to build middleware to track how many sessions a user can create and how many queries are allowed per plan. Integrating these checks with Prisma and Stripe’s APIs required careful backend logic
 
+**How I Implemented the Retrieval Chain:**
+*Initialization:*
+>I began by initializing the LLM model and setting up a ChatPromptTemplate (a LangChain class) that defines how the model should respond — for example, to be concise and mention when there isn’t enough information in the context.
+
+*Document Chain:*
+>Then I used the createStuffDocumentsChain() function from LangChain. This function combines the LLM and the prompt into a single chain that processes the retrieved documents and generates a context-aware response.
+
+*Retrieval Chain:*
+>After that, I used the createRetrievalChain() function, which connects the document chain with a retriever (from the vector store). The retriever is responsible for fetching the most relevant document chunks from the vector database.
+
+*Execution:*
+Finally, I invoked the retrievalChain by passing the user’s query as input. The chain first retrieves the relevant context using the retriever, then passes it through the document chain to generate a final answer.
 
 **Challanges to  INtegrate AI Model **
 >In my project, I utilized two primary AI models. First, I used the Hugging Face Sentence Transformer to generate embeddings, which helped in converting text into meaningful vector representations. Secondly, I leveraged the DeepSeek LLM to generate the final responses.
