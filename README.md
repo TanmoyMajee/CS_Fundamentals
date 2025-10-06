@@ -62,6 +62,7 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 >Finally, while implementing a plan-based payment system with Stripe, I had to build middleware to track how many sessions a user can create and how many queries are allowed per plan. Integrating these checks with Prisma and Stripe’s APIs required careful backend logic
 
 **How I Implemented the Retrieval Chain:**
+
 *Initialization:*
 >I began by initializing the LLM model and setting up a ChatPromptTemplate (a LangChain class) that defines how the model should respond — for example, to be concise and mention when there isn’t enough information in the context.
 
@@ -72,7 +73,7 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 >After that, I used the createRetrievalChain() function, which connects the document chain with a retriever (from the vector store). The retriever is responsible for fetching the most relevant document chunks from the vector database.
 
 *Execution:*
-Finally, I invoked the retrievalChain by passing the user’s query as input. The chain first retrieves the relevant context using the retriever, then passes it through the document chain to generate a final answer.
+>Finally, I invoked the retrievalChain by passing the user’s query as input. The chain first retrieves the relevant context using the retriever, then passes it through the document chain to generate a final answer.
 
 **Challanges to  INtegrate AI Model **
 >In my project, I utilized two primary AI models. First, I used the Hugging Face Sentence Transformer to generate embeddings, which helped in converting text into meaningful vector representations. Secondly, I leveraged the DeepSeek LLM to generate the final responses.
@@ -95,17 +96,28 @@ Each chunk gets its own embedding vector and is stored in Qdrant.
 Because we only retrieve a few most relevant chunks when answering, the size of the PDF doesn’t slow down the query or overload the model.
 This chunking and retrieval strategy lets the system handle very large documents efficiently within the LLM’s context limits.
 
+24.	How do you avoid LLM hallucination — ensuring answers come from the PDF?
+>To avoid LLM hallucination and ensure answers come only from the PDF, I use a retrieval-augmented generation (RAG) setup. First, I convert the PDF into vector embeddings and store them in a vector database (Qdrant). Then, when a user asks a question, a retriever fetches only the most relevant chunks from the PDF. The LLM receives both the query and these retrieved chunks as context. I also use a prompt template that instructs the LLM to answer only using the provided context and to respond with “I don’t have enough information” if the context is insufficient. This way, the LLM is grounded in the PDF content and doesn’t make up information.
+
+** future,  improvement:**
+
+*Multi-Document Support:*
+>Right now, the system works on a single PDF per conversation. In the future, it could handle multiple PDFs or documents at once, allowing the retriever to fetch relevant information from all sources. This would make the system more flexible and useful for larger datasets.
+
+*Caching Frequent Queries:*
+>For repeated or common questions, we could cache the answers so the system doesn’t have to query the vector store and LLM every time. This would reduce response time and save API usage, improving performance.
+
+*Streaming Responses:*
+>Currently, the LLM generates the full answer before sending it back. By streaming the response, users could see the answer as it’s being generated, making the system feel faster and more interactive.
+
 17.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
-18.	How would you improve RagIt in the future?
 19.	Why k=3 chunks in retrieval? How did you decide?
-20.	How do you ensure answers don’t hallucinate outside the document? (→ your prompt already addresses this)
 21.	How do you chunk PDF text? (chunk size and overlap)
 22.	How do you create embeddings and which model did you use?
 23.	Why Qdrant and how many chunks do you retrieve?
-24.	How do you avoid LLM hallucination — ensuring answers come from the PDF?
 25.	How do you scale the system for large documents or many users?
 26.	How do you store and secure user PDFs?
-27.	What are the main limitations and future improvements?
+27.	What are the main limitations 
 28.	•  What is HuggingFace and why did you use it?
 29.	•  What is LangChain and why did you use it?
 30.	•  What is a retriever chain? How does it work?
