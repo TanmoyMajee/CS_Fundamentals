@@ -189,11 +189,20 @@ ________________________________________
 ** What is the role in this project **
 >I was the sole developer for this project,handling everything from development to deployment.
 
-1.	Which project are you most proud of, and why?
-2.	What’s the difference between WebSockets and HTTP?
-3.	why u use react not angular ? Why did you choose MongoDB? or chose mern stack 
-5.	Which project was the most challenging?
-6.	How did you debug issues when something wasn’t working?
-7.	How do you ensure your projects are scalable and maintainable?
-8.	If you had more time, what improvements would you add to your projects?
+**Why MERN Stack **
+>I chose the MERN stack because it lets me use JavaScript/TypeScript everywhere, making development smoother and faster. It’s also very popular in startups, which means it’s easy to find support and scale projects. Plus, the learning curve is gentle for developers who are already familiar with JavaScript
+
+1.	Which project are you most proud of, and why? , what is the most challenging project ?
+
+**4.	why u use react not angular ?  or chose mern stack**
+>I chose React over Angular because React is lightweight, flexible, and component-based, which makes it easier to build interactive and reusable UI components. It also has a large community and ecosystem, faster learning curve, and integrates well with other libraries and tools, which speeds up development.
+
+**Why did you choose MongoDB?**
+>I chose MongoDB because it’s a NoSQL database that stores data in flexible, JSON-like documents. This makes it easy to handle dynamic or unstructured data like blog posts, chats, and PDFs, which fits well with my MERN stack app. It also scales easily and integrates smoothly with Node.js, making development faster compared to traditional SQL databases.
+
+** Diff WebSocke vs HTTP**
+
+7.	How did you debug issues when something wasn’t working?
+8.	How do you ensure your projects are scalable and maintainable?
+9.	If you had more time, what improvements would you add to your projects?
 
