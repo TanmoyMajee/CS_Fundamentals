@@ -47,7 +47,7 @@
 >   I used Qdrant because it’s designed for vector similarity search, which is essential for retrieving relevant chunks from embeddings. Relational databases like MySQL or Postgres aren’t built for that use case. In my project, Qdrant handled the embeddings, while Prisma with Postgres managed structured data like users, sessions, and messages
 
 **8.	What is the role of LangChain in your project?**
-> “LangChain is an open-source framework that helps build applications powered by LLMs. In my project, its role was to connect different components of the RAG pipeline.
+> “LangChain is an open-source Library that helps build applications powered by LLMs. In my project, its role was to connect different components of the RAG pipeline.
 For example, I used classes like PDFLoader to read documents, RecursiveCharacterTextSplitter to break them into smaller chunks, and HuggingFaceTransformersEmbeddings to generate embeddings. On the other side, LangChain provides functions like createRetrievalChain and createStuffDocumentsChain, which help me connect the retriever with my LLM.
 So overall, LangChain made it easy to orchestrate the whole flow — from loading the document, splitting it, generating embeddings, storing them, and finally retrieving the right chunks to pass into the LLM for answering.”
   	
