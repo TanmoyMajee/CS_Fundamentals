@@ -268,11 +268,9 @@ EQUI JOIN	Join using = condition
 NON-EQUI JOIN	Join using <, >, BETWEEN, etc.
 
 
-# Nth Highest Salary — Short Notes
+```
 
-Quick ways to get the **Nᵗʰ highest salary** (N is a positive integer).
-
----
+** Nth Highest Salary — Short Notes **
 
 ## 1. `LIMIT` (MySQL)
 
@@ -290,7 +288,6 @@ SELECT DISTINCT salary
 FROM employees
 ORDER BY salary DESC
 LIMIT N-1, 1;
-```
 
 > Note: use `DISTINCT` so duplicates don't change the rank.
 
