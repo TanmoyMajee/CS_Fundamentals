@@ -266,3 +266,86 @@ SELF JOIN	Table joined with itself
 NATURAL JOIN	Joins automatically on columns with same names
 EQUI JOIN	Join using = condition
 NON-EQUI JOIN	Join using <, >, BETWEEN, etc.
+
+
+# Nth Highest Salary — Short Notes
+
+Quick ways to get the **Nᵗʰ highest salary** (N is a positive integer).
+
+---
+
+## 1. `LIMIT` (MySQL)
+
+**One-line:** Skip `N-1` distinct salaries and fetch 1.
+
+```sql
+-- standard (count + OFFSET)
+SELECT DISTINCT salary
+FROM employees
+ORDER BY salary DESC
+LIMIT 1 OFFSET N-1;
+
+-- MySQL alternative (offset, count)
+SELECT DISTINCT salary
+FROM employees
+ORDER BY salary DESC
+LIMIT N-1, 1;
+```
+
+> Note: use `DISTINCT` so duplicates don't change the rank.
+
+---
+
+## 2. `DENSE_RANK()` (best for ties)
+
+**One-line:** Rank distinct salaries without gaps; pick rank = N.
+
+```sql
+SELECT salary
+FROM (
+  SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS rnk
+  FROM employees
+) t
+WHERE rnk = N;
+```
+
+---
+
+## 3. `COUNT(DISTINCT ...)` subquery (works everywhere)
+
+**One-line:** Count how many *distinct* salaries are greater than current salary.
+
+```sql
+SELECT salary
+FROM employees e1
+WHERE (
+  SELECT COUNT(DISTINCT e2.salary) 
+  FROM employees e2 
+  WHERE e2.salary > e1.salary
+) = N-1;
+```
+
+---
+
+## 4. `ROW_NUMBER()` fixed for duplicates
+
+**One-line:** Apply `ROW_NUMBER()` to `DISTINCT` salaries, then pick rn = N.
+
+```sql
+SELECT salary
+FROM (
+  SELECT salary, ROW_NUMBER() OVER (ORDER BY salary DESC) AS rn
+  FROM (SELECT DISTINCT salary FROM employees) s
+) t
+WHERE rn = N;
+```
+
+---
+
+## Quick recommendation
+
+* Use **`DENSE_RANK()`** for clarity and correct handling of ties.
+* Use **`LIMIT`** for simple MySQL solutions (remember `DISTINCT`).
+* `COUNT(DISTINCT)` is portable to DBs without window functions.
+
+
