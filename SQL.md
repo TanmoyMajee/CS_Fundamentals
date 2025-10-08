@@ -155,7 +155,99 @@ SELECT ROUND(MONTHS_BETWEEN(TO_DATE('15-FEB-2025','DD-MON-YYYY'),
 | MONTHS_BETWEEN() | Find month difference | `MONTHS_BETWEEN(date1, date2)` |
 
 ---
+# SQL JOINs — Complete Interview Notes
 
-**Author:** Tanmoy Majee  
-**Topic:** SQL Function Notes  
-**Date:** October 2025
+## 🔹 What is a JOIN?
+A **JOIN** in SQL is used to combine rows from two or more tables based on a related column between them.  
+It helps retrieve data that is stored across multiple tables by linking them through a **common column** (usually a primary key and foreign key).
+
+---
+
+## 🔸 Condition to Perform a JOIN
+1. There must be **at least one common column** between the tables.  
+2. The relationship is usually defined using **ON** or **USING** keywords.  
+3. The condition specifies **how rows from one table match rows in another**.
+
+Example:
+```sql
+SELECT e.name, d.dept_name
+FROM employees e
+JOIN departments d
+ON e.dept_id = d.dept_id;
+
+🔹 Types of JOINs in SQL
+1. INNER JOIN
+Returns only the rows that have matching values in both tables.
+
+sql
+Copy code
+SELECT * FROM A INNER JOIN B ON A.id = B.id;
+2. LEFT JOIN (LEFT OUTER JOIN)
+Returns all rows from the left table and matching rows from the right table.
+If there is no match, NULLs are returned for columns of the right table.
+
+sql
+Copy code
+SELECT * FROM A LEFT JOIN B ON A.id = B.id;
+3. RIGHT JOIN (RIGHT OUTER JOIN)
+Returns all rows from the right table and matching rows from the left table.
+If no match exists, NULLs appear for columns of the left table.
+
+sql
+Copy code
+SELECT * FROM A RIGHT JOIN B ON A.id = B.id;
+4. FULL JOIN (FULL OUTER JOIN)
+Returns all rows from both tables, whether or not there is a match.
+Non-matching rows from each side will have NULLs for missing values.
+
+sql
+Copy code
+SELECT * FROM A FULL JOIN B ON A.id = B.id;
+5. CROSS JOIN
+Returns the Cartesian product of both tables — every row from the first table is combined with every row from the second table.
+
+sql
+Copy code
+SELECT * FROM A CROSS JOIN B;
+6. SELF JOIN
+A table is joined with itself to compare rows within the same table (requires table aliases).
+
+sql
+Copy code
+SELECT a.name, b.name
+FROM employees a
+JOIN employees b ON a.manager_id = b.id;
+7. NATURAL JOIN
+Automatically joins tables using all columns with the same names in both tables.
+It eliminates duplicate columns from the result.
+
+sql
+Copy code
+SELECT * FROM A NATURAL JOIN B;
+⚠️ Note: Avoid using NATURAL JOIN in production because if a new column with the same name is added, it may produce unexpected results.
+
+8. EQUI JOIN
+A join that uses the equality operator (=) to match rows between tables (most common type).
+Example: INNER JOIN is a type of equi join.
+
+9. NON-EQUI JOIN
+A join that uses operators other than = (like <, >, or BETWEEN).
+
+sql
+Copy code
+SELECT e.name, s.grade
+FROM employees e
+JOIN salary s
+ON e.salary BETWEEN s.min_salary AND s.max_salary;
+
+💡 Summary Table
+Type	Returns
+INNER JOIN	Only matching rows from both tables
+LEFT JOIN	All rows from left + matching from right
+RIGHT JOIN	All rows from right + matching from left
+FULL JOIN	All rows from both tables
+CROSS JOIN	All possible row combinations
+SELF JOIN	Table joined with itself
+NATURAL JOIN	Joins automatically on columns with same names
+EQUI JOIN	Join using = condition
+NON-EQUI JOIN	Join using <, >, BETWEEN, etc.
