@@ -82,6 +82,19 @@ SELECT REPLACE('Hello World', 'World', 'Tanmoy') FROM dual;
 SELECT REPLACE('123-456-7890', '-', '') FROM dual;  -- 1234567890
 ```
 
+## 🔁 Concat || Double pipe
+
+**Syntax:**
+```sql
+SELECT first_name || ' ' || last_name AS full_name
+FROM employees;
+```
+**Syntax:**
+```sql
+SELECT CONCAT_WS(' - ', first_name, last_name, department) AS employee_info
+FROM employees;
+```
+
 ---
 
 ## 🔢 LIMIT / FETCH
