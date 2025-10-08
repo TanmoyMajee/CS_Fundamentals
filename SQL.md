@@ -164,9 +164,11 @@ It helps retrieve data that is stored across multiple tables by linking them thr
 ---
 
 ## 🔸 Condition to Perform a JOIN
+1. Must Match the DATA TYPE of both colom **
 1. There must be **at least one common column** between the tables.  
 2. The relationship is usually defined using **ON** or **USING** keywords.  
 3. The condition specifies **how rows from one table match rows in another**.
+
 
 Example:
 ```sql
