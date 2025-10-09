@@ -15,49 +15,30 @@ It increases **redundancy** to reduce the need for expensive joins.
 | Best for | Write-heavy systems | Read-heavy systems |
 
 ---
+### ⚙️ Real-Life Examples of Write-Heavy vs Read-Heavy Systems
 
-### 📘 Example
+#### 📝 Write-Heavy Systems
+These systems perform frequent **insert**, **update**, or **delete** operations.
 
-#### ✅ Normalized Tables
-**Students**
-| student_id | name |
-|-------------|------|
-| 1 | Tanmoy |
-| 2 | Rahul |
+**Examples:**
+- **Banking applications:** Transactions are continuously inserted and updated (balance, transfers, etc.).
+- **E-commerce order systems:** New orders, stock updates, and payments are recorded every second.
+- **Social media posting system:** Every post, like, or comment is a new write operation.
 
-**Courses**
-| course_id | student_id | course_name |
-|------------|-------------|--------------|
-| 101 | 1 | DBMS |
-| 102 | 1 | OS |
-| 103 | 2 | CN |
+➡️ Such systems prefer **Normalization** to maintain data accuracy and avoid redundancy.
 
-**Query:**
-```sql
-SELECT s.name, c.course_name
-FROM Students s
-JOIN Courses c ON s.student_id = c.student_id;
-This needs a join — which can be slow on large datasets.
+---
 
-⚡ Denormalized Table
-StudentCourses
+#### 📖 Read-Heavy Systems
+These systems perform frequent **select (read)** operations and fewer writes.
 
-student_id	name	courses
-1	Tanmoy	DBMS, OS
-2	Rahul	CN
+**Examples:**
+- **Reporting or analytics dashboards:** Data is read repeatedly to generate reports or charts.
+- **News or blog websites:** Many users read articles, but only admins write/update content.
+- **Recommendation systems (e.g., Netflix, Amazon):** Data is read often to suggest products or movies.
 
-Query:
+➡️ Such systems often use **Denormalization** to speed up reads and reduce join operations.
 
-sql
-Copy code
-SELECT name, courses FROM StudentCourses;
-No join needed → Faster read performance.
 
-🧩 When to Use Denormalization
-System is read-heavy (e.g., reports, dashboards).
-
-Join queries are slowing down performance.
-
-You need faster query response and can tolerate redundancy.
 
 
