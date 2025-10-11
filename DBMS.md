@@ -335,3 +335,57 @@ When explaining, say —
 > “We start with one Student table that has redundancy.  
 Normalization step by step removes insertion, deletion, and update anomalies  
 until every dependency is based on a superkey in BCNF.”
+
+# 🔑 Keys in DBMS
+
+Keys are attributes (or a set of attributes) used to **uniquely identify a record** in a table.
+
+---
+
+## 1️⃣ Super Key
+- A **set of one or more attributes** that can uniquely identify a row.
+- Can include extra, unnecessary attributes.
+- Every table has at least one super key (all attributes combined).
+
+📝 *Example*: `{id}`, `{id, email}`, `{id, phone}`
+
+---
+
+## 2️⃣ Candidate Key
+- A **minimal super key** — no attribute can be removed without losing uniqueness.
+- Ensures **uniqueness** and **minimality**.
+- Every candidate key is a super key, but not every super key is a candidate key.
+
+📝 *Example*: `{id}`, `{email}`
+
+---
+
+## 3️⃣ Primary Key
+- The **chosen candidate key** to uniquely identify rows.
+- **Unique** and **cannot be NULL**.
+- Only **one** primary key per table.
+
+---
+
+## 4️⃣ Foreign Key
+- A field in one table that **refers to the primary key** of another.
+- Ensures **referential integrity** between tables.
+
+---
+
+## 5️⃣ Alternate Key
+- **Candidate keys** that are **not chosen** as the primary key.
+
+---
+
+## 6️⃣ Composite Key
+- A **combination of two or more attributes** used together for unique identification.
+
+---
+
+## 7️⃣ Unique Key
+- Similar to primary key but **allows one NULL value**.
+- Ensures all non-null values are **unique**.
+
+---
+
