@@ -427,3 +427,79 @@ Keys are attributes (or a set of attributes) used to **uniquely identify a recor
 
 ---
 
+# 💰 Transaction & ACID Properties — DBMS Notes
+
+## 🔹 What is a Transaction?
+A **transaction** is a single logical unit of work in a database that consists of one or more operations (like `INSERT`, `UPDATE`, `DELETE`) executed together.  
+
+It ensures that the database remains **consistent and reliable**, even in case of failures.
+
+🧠 Example:  
+Transferring ₹1000 from **Account A** to **Account B** involves two operations:
+1. Deduct ₹1000 from A’s balance.  
+2. Add ₹1000 to B’s balance.  
+
+Both must happen together — or not at all.
+
+---
+
+## 🔹 What is ACID?
+**ACID** stands for the four key properties that guarantee reliable processing of transactions.
+ACID ensures that transactions are **safe, accurate, and dependable** even with errors, crashes, or concurrent users.
+
+---
+
+## ⚙️ ACID Properties Explained (with Banking Example)
+
+### 1️⃣ Atomicity — “All or Nothing”
+- Ensures that **either the entire transaction is completed or none of it is**.  
+- Example:  
+  - When ₹1000 is transferred from A → B  
+  - If ₹1000 is deducted from A **but not added to B** (due to a crash),  
+  - Then **the whole transaction is rolled back** — both balances remain unchanged.  
+- ❗ Prevents partial transactions.
+- 
+  Steps involved:
+  1. **Read(A)** – Get A’s current balance.  
+  2. **A = A - 1000** – Deduct ₹1000 from A.  
+  3. **Write(A)** – Save A’s new balance.  
+  4. **Read(B)** – Get B’s current balance.  
+  5. **B = B + 1000** – Add ₹1000 to B.  
+  6. **Write(B)** – Save B’s new balance.  
+
+---
+
+### 2️⃣ Consistency — “Valid State to Valid State”
+- Ensures the database remains in a **consistent state** before and after the transaction.  
+- Example:  
+  - Before transfer: A = ₹5000, B = ₹2000 → Total = ₹7000  
+  - After transfer: A = ₹4000, B = ₹3000 → Total still = ₹7000  
+- No rule or constraint is broken (e.g., no negative balance, totals remain correct).
+
+---
+
+### 3️⃣ Isolation — “No Interference”
+- Ensures that **multiple transactions can run at the same time** without affecting each other.  
+- Example:  
+  - You are transferring ₹1000 from A → B  
+  - At the same time, another transaction checks A’s balance.  
+  - Isolation ensures that the second transaction **won’t see intermediate results** (like ₹1000 already deducted but not yet added).  
+- ❗ Prevents inconsistent or dirty reads.
+
+---
+
+### 4️⃣ Durability — “Permanent Once Done”
+- Once a transaction is **committed**, its results are **permanently saved** — even after system failure.  
+- Example:  
+  - After the transfer completes, and the database commits,  
+  - Even if the system crashes right after, the ₹1000 transfer remains valid when it restarts.  
+- ❗ Ensures reliability after commit.
+
+---
+
+## 🧠 Why ACID is Important
+- Maintains **data integrity** and **reliability**.  
+- Prevents **data loss**, **duplication**, or **inconsistent updates**.  
+- Essential for **banking, ticket booking, e-commerce**, and any system involving concurrent transactions.
+
+---
