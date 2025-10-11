@@ -356,6 +356,17 @@ Hence, the table is **not in BCNF**.
 - Removes **redundancy** and **update anomalies**.  
 - **Stricter than 3NF** — every BCNF table is in 3NF, but not vice versa.
 
+# ⚙️ Functional Dependency (FD) — DBMS Notes
+
+## 🔹 Definition
+A **Functional Dependency** exists when **one attribute uniquely determines another attribute** in a relation (table).
+---
+
+## 🔹 Example
+If in a STUDENT table:
+`roll_no → name, course, branch`
+
+This means the value of `roll_no` uniquely determines `name`, `course`, and `branch`.
 
 🧠 **Interview Tip:**  
 When explaining, say —  
