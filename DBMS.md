@@ -182,196 +182,156 @@ until all related students are removed or updated — ensuring data remains cons
 | **BCNF (Boyce-Codd Normal Form)** | A stronger version of 3NF — for every functional dependency X → Y, X must be a super key. | Solves anomalies not handled by 3NF. |
 ---
 
-### 🧩 Unnormalized Table (UNF)
-
-| StudentID | StudentName | Course | Instructor | InstructorPhone |
-|------------|--------------|---------|-------------|------------------|
-| 1 | Rahul | DBMS, OS | Dr. Sen, Dr. Roy | 9999, 8888 |
-| 2 | Priya | DBMS | Dr. Sen | 9999 |
-| 3 | Aman | CN, OS | Dr. Das, Dr. Roy | 7777, 8888 |
-
-🔸 **Problems:**  
-- Multiple values in one cell (non-atomic).  
-- Repetition of instructor data.  
-- Hard to update or delete cleanly.
+# 🧠 Normalization Example — Student & Branch Table
 
 ---
 
-### 🔹 1NF — First Normal Form
+## 📋 Initial Table (Unnormalized Form)
 
-**Rule:**  
-- Each column should have atomic (single) values.  
-- No repeating groups or arrays.
-
-**👉 Convert to 1NF:**
-
-| StudentID | StudentName | Course | Instructor | InstructorPhone |
-|------------|--------------|---------|-------------|------------------|
-| 1 | Rahul | DBMS | Dr. Sen | 9999 |
-| 1 | Rahul | OS | Dr. Roy | 8888 |
-| 2 | Priya | DBMS | Dr. Sen | 9999 |
-| 3 | Aman | CN | Dr. Das | 7777 |
-| 3 | Aman | OS | Dr. Roy | 8888 |
-
-✅ **Now all cells are atomic.**
+| id | name | age | branch_code | branch_name | branch_HOD |
+|----|------|-----|--------------|--------------|-------------|
+| 1 | A | 18 | 1 | CS | X |
+| 2 | B | 19 | 1 | CS | X |
+| 3 | C | 18 | 1 | CS | X |
+| 4 | D | 19 | 2 | ECE | Y |
+| 5 | E | 20 | 2 | ECE | Y |
+| 6 | F | 19 | 3 | ME | Z |
 
 ---
 
-### 🔹 2NF — Second Normal Form
+## ⚠️ Anomalies in This Table
 
-**Rule:**  
-- Must be in 1NF.  
-- No **partial dependency** — non-key attributes should depend on the whole primary key, not part of it.
+### 🟡 1. Insertion Anomaly
+If a new **branch (IT)** is introduced but **no student** has enrolled yet,  
+we **cannot insert** that branch data without leaving student columns empty.
 
-If we consider `(StudentID, Course)` as the **composite primary key**,  
-then attributes like `StudentName` depend only on `StudentID`, not the full key.
-
-**👉 Convert to 2NF:**
-
-**Student Table:**
-
-| StudentID | StudentName |
-|------------|--------------|
-| 1 | Rahul |
-| 2 | Priya |
-| 3 | Aman |
-
-**Enrollment Table:**
-
-| StudentID | Course | Instructor | InstructorPhone |
-|------------|---------|-------------|------------------|
-| 1 | DBMS | Dr. Sen | 9999 |
-| 1 | OS | Dr. Roy | 8888 |
-| 2 | DBMS | Dr. Sen | 9999 |
-| 3 | CN | Dr. Das | 7777 |
-| 3 | OS | Dr. Roy | 8888 |
-
-✅ Partial dependency removed.
+➡️ **Example:**  
+To add branch "IT", we must insert a student with null or dummy values.  
+This causes incomplete (invalid) data.
 
 ---
 
-### 🔹 3NF — Third Normal Form
+### 🔴 2. Deletion Anomaly
+If the **last student** of a branch is deleted,  
+the **branch information** is also lost.
 
-**Rule:**  
-- Must be in 2NF.  
-- No **transitive dependency** (non-key attribute depends on another non-key attribute).
-
-Here, `InstructorPhone` depends on `Instructor`, not directly on `Course`.
-
-**👉 Convert to 3NF:**
-
-**Instructor Table:**
-
-| Instructor | InstructorPhone |
-|-------------|------------------|
-| Dr. Sen | 9999 |
-| Dr. Roy | 8888 |
-| Dr. Das | 7777 |
-
-**Course Table:**
-
-| Course | Instructor |
-|---------|-------------|
-| DBMS | Dr. Sen |
-| OS | Dr. Roy |
-| CN | Dr. Das |
-
-**Enrollment Table:**
-
-| StudentID | Course |
-|------------|---------|
-| 1 | DBMS |
-| 1 | OS |
-| 2 | DBMS |
-| 3 | CN |
-| 3 | OS |
-
-✅ Transitive dependency removed (InstructorPhone moved out).
+➡️ **Example:**  
+If all students of **ME** branch are deleted,  
+then branch "ME" and its HOD "Z" are also removed from the database.
 
 ---
 
-### 🔹 BCNF — Boyce-Codd Normal Form
+### 🟢 3. Update Anomaly
+If the **HOD of a branch changes**,  
+we need to update it in **multiple rows**.
 
-**Rule:**  
-- Must be in 3NF.  
-- For every functional dependency **X → Y**, X should be a **super key**.
-
-Suppose one instructor can teach multiple courses,  
-and each course can also be handled by multiple instructors (many-to-many).
-
-**CourseInstructor Table (before BCNF):**
-
-| Course | Instructor |
-|---------|-------------|
-| DBMS | Dr. Sen |
-| DBMS | Dr. Roy |
-| CN | Dr. Das |
-
-Here, neither `Course` nor `Instructor` alone is a super key.  
-So, this violates BCNF.
-
-**👉 Convert to BCNF:**
-
-**Course Table:**
-
-| CourseID | CourseName |
-|-----------|-------------|
-| C1 | DBMS |
-| C2 | OS |
-| C3 | CN |
-
-**Instructor Table:**
-
-| InstructorID | InstructorName | Phone |
-|---------------|----------------|--------|
-| I1 | Dr. Sen | 9999 |
-| I2 | Dr. Roy | 8888 |
-| I3 | Dr. Das | 7777 |
-
-**CourseInstructor Table:**
-
-| CourseID | InstructorID |
-|-----------|---------------|
-| C1 | I1 |
-| C1 | I2 |
-| C3 | I3 |
-
-**Enrollment Table:**
-
-| StudentID | CourseID |
-|------------|-----------|
-| 1 | C1 |
-| 1 | C2 |
-| 2 | C1 |
-| 3 | C3 |
-| 3 | C2 |
-
-✅ Now every dependency has a super key → satisfies BCNF.
-
-
-
-## 💬 Real-Life Analogy
-
-Think of a **college database**:
-- 1NF: One student-course per row.  
-- 2NF: Separate student details.  
-- 3NF: Move instructor and phone separately.  
-- BCNF: Use unique IDs for every instructor and course.
-
-✅ This ensures minimal redundancy, easy updates, and data consistency.
+➡️ **Example:**  
+If HOD of **ECE** changes from "Y" to "P",  
+we must update it in every student row with branch_code = 2.  
+Missing one will lead to inconsistent data.
 
 ---
 
-## 📘 Interview Tip
-
-While answering in interviews:
-1. Start by defining **Normalization** and why it’s needed.  
-2. Mention **anomalies** (Insertion, Deletion, Update).  
-3. Explain each **Normal Form** briefly.  
-4. Use one **consistent example** (like Student–Course–Instructor).  
-5. End by saying BCNF ensures every dependency is based on a **super key**.
+## 🧩 Step-by-Step Normalization
 
 ---
 
+### 🔹 1NF (First Normal Form)
+- All data is atomic (no repeating groups).  
+- Our table already satisfies 1NF.
+
+---
+
+### 🔹 2NF (Second Normal Form)
+- Remove **partial dependency**.  
+- Attributes like `branch_name` and `branch_HOD` depend only on `branch_code`,  
+  not on the entire primary key `(id, branch_code)`.
+
+✅ **Split the table:**
+
+**Student Table**
+
+| id | name | age | branch_code |
+|----|------|-----|--------------|
+| 1 | A | 18 | 1 |
+| 2 | B | 19 | 1 |
+| 3 | C | 18 | 1 |
+| 4 | D | 19 | 2 |
+| 5 | E | 20 | 2 |
+| 6 | F | 19 | 3 |
+
+**Branch Table**
+
+| branch_code | branch_name | branch_HOD |
+|--------------|--------------|-------------|
+| 1 | CS | X |
+| 2 | ECE | Y |
+| 3 | ME | Z |
+
+---
+
+### 🔹 3NF (Third Normal Form)
+- Remove **transitive dependency**.  
+- Suppose `branch_HOD` depends on `branch_name` instead of `branch_code`.  
+  Then we separate the HOD information.
+
+✅ **Split into another table:**
+
+**Branch Table**
+
+| branch_code | branch_name |
+|--------------|-------------|
+| 1 | CS |
+| 2 | ECE |
+| 3 | ME |
+
+**HOD Table**
+
+| branch_name | branch_HOD |
+|--------------|-------------|
+| CS | X |
+| ECE | Y |
+| ME | Z |
+
+---
+
+### 🔹 BCNF (Boyce-Codd Normal Form)
+- For every functional dependency **X → Y**, X must be a **superkey**.  
+- Here, `branch_name → branch_HOD` and `branch_code → branch_name` both hold.  
+  So to make sure all determinants are superkeys, we use unique identifiers.
+
+✅ **Final BCNF Structure**
+
+**Student Table**
+
+| student_id | name | age | branch_code |
+|-------------|------|-----|--------------|
+| 1 | A | 18 | 1 |
+| 2 | B | 19 | 1 |
+| 3 | C | 18 | 1 |
+| 4 | D | 19 | 2 |
+| 5 | E | 20 | 2 |
+| 6 | F | 19 | 3 |
+
+**Branch Table**
+
+| branch_code | branch_name | HOD_ID |
+|--------------|--------------|---------|
+| 1 | CS | 101 |
+| 2 | ECE | 102 |
+| 3 | ME | 103 |
+
+**HOD Table**
+
+| HOD_ID | HOD_Name |
+|---------|-----------|
+| 101 | X |
+| 102 | Y |
+| 103 | Z |
 
 
+🧠 **Interview Tip:**  
+When explaining, say —  
+> “We start with one Student table that has redundancy.  
+Normalization step by step removes insertion, deletion, and update anomalies  
+until every dependency is based on a superkey in BCNF.”
