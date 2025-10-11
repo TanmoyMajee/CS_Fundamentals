@@ -295,39 +295,66 @@ Missing one will lead to inconsistent data.
 
 ---
 
-### 🔹 BCNF (Boyce-Codd Normal Form)
-- For every functional dependency **X → Y**, X must be a **superkey**.  
-- Here, `branch_name → branch_HOD` and `branch_code → branch_name` both hold.  
-  So to make sure all determinants are superkeys, we use unique identifiers.
+# 🧩 Boyce–Codd Normal Form (BCNF) — DBMS Notes
 
-✅ **Final BCNF Structure**
+## 🔹 Definition
+A relation (table) is in **BCNF** if for every **Functional Dependency (A → B)**,  
+**A must be a Super Key**.
 
-**Student Table**
+👉 It is a **stronger version of 3NF**, removing all redundancy caused by non-key determinants.
 
-| student_id | name | age | branch_code |
-|-------------|------|-----|--------------|
-| 1 | A | 18 | 1 |
-| 2 | B | 19 | 1 |
-| 3 | C | 18 | 1 |
-| 4 | D | 19 | 2 |
-| 5 | E | 20 | 2 |
-| 6 | F | 19 | 3 |
+---
 
-**Branch Table**
+## 🔹 Example: STUDENT_SUBJECT Table
 
-| branch_code | branch_name | HOD_ID |
-|--------------|--------------|---------|
-| 1 | CS | 101 |
-| 2 | ECE | 102 |
-| 3 | ME | 103 |
+| student_id | subject   | project_guide |
+|-------------|-----------|---------------|
+| S1          | DBMS      | Prof. A       |
+| S2          | DBMS      | Prof. A       |
+| S3          | Networks  | Prof. B       |
+| S4          | Networks  | Prof. B       |
 
-**HOD Table**
+### Functional Dependencies
+1. `student_id → subject`  
+2. `subject → project_guide`
 
-| HOD_ID | HOD_Name |
-|---------|-----------|
-| 101 | X |
-| 102 | Y |
-| 103 | Z |
+### Candidate Key
+- `student_id` is the **Primary Key**.
+
+---
+
+## 🔹 BCNF Check
+- `student_id → subject` ✅ (student_id is a key)  
+- `subject → project_guide` ❌ (subject is **not** a key → violates BCNF)
+
+Hence, the table is **not in BCNF**.
+
+---
+
+## 🔹 Decomposition
+
+### Table 1: SUBJECT_GUIDE
+| subject | project_guide |
+|----------|----------------|
+| DBMS     | Prof. A        |
+| Networks | Prof. B        |
+
+### Table 2: STUDENT_SUBJECTS
+| student_id | subject |
+|-------------|----------|
+| S1          | DBMS     |
+| S2          | DBMS     |
+| S3          | Networks |
+| S4          | Networks |
+
+✅ Now both tables satisfy BCNF.
+
+---
+
+## 🔹 Key Points
+- BCNF Rule: For every FD **A → B**, **A must be a super key**.  
+- Removes **redundancy** and **update anomalies**.  
+- **Stricter than 3NF** — every BCNF table is in 3NF, but not vice versa.
 
 
 🧠 **Interview Tip:**  
