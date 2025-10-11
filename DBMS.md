@@ -172,10 +172,14 @@ until all related students are removed or updated — ensuring data remains cons
 
 ---
 
-## 🧱 Step-by-Step Normalization Example
+### 🧱 Types of Normal Forms — Summary
 
-Let’s start with a single **Student table** and normalize it step by step.
-
+| **Normal Form** | **Requirement / Rule** | **What It Fixes / Ensures** |
+|------------------|------------------------|------------------------------|
+| **1NF (First Normal Form)** | Each table cell must contain a single, atomic value (no repeating groups). | Removes repeating groups or multivalued attributes. |
+| **2NF (Second Normal Form)** | Must be in 1NF, and every non-key attribute must depend on the whole primary key (not just part of it). | Removes partial dependency (for composite keys). |
+| **3NF (Third Normal Form)** | Must be in 2NF, and no transitive dependency(non prime attr is depeding on anth no prim attribut) is allowed for non-key attributes. | Removes transitive dependencies. |
+| **BCNF (Boyce-Codd Normal Form)** | A stronger version of 3NF — for every functional dependency X → Y, X must be a super key. | Solves anomalies not handled by 3NF. |
 ---
 
 ### 🧩 Unnormalized Table (UNF)
@@ -344,18 +348,7 @@ So, this violates BCNF.
 
 ✅ Now every dependency has a super key → satisfies BCNF.
 
----
 
-## 🧮 Summary Table
-
-| **Normal Form** | **Condition** | **Problem Solved** |
-|------------------|----------------|--------------------|
-| **1NF** | Atomic values only | Removes repeating groups |
-| **2NF** | No partial dependency | Removes partial dependency |
-| **3NF** | No transitive dependency | Removes transitive dependency |
-| **BCNF** | Every determinant is a super key | Removes advanced anomalies |
-
----
 
 ## 💬 Real-Life Analogy
 
