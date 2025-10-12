@@ -503,3 +503,6 @@ ACID ensures that transactions are **safe, accurate, and dependable** even with 
 - Essential for **banking, ticket booking, e-commerce**, and any system involving concurrent transactions.
 
 ---
+
+
+## SQl VS NO SQL , INDEXING , CONCURENCY CONTRL , ##
