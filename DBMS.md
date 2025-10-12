@@ -505,4 +505,103 @@ ACID ensures that transactions are **safe, accurate, and dependable** even with 
 ---
 
 
-## SQl VS NO SQL , INDEXING , CONCURENCY CONTRL , ##
+
+
+# 📘 Indexing in DBMS
+
+## 🔹 What is Indexing?
+Indexing is a technique used in databases to improve the **speed of data retrieval** by minimizing disk scans. Instead of searching through all rows, the DBMS uses index structures to quickly locate data using key values..  
+It works similar to an index in a book — instead of scanning every page, you can quickly jump to the required section.
+
+In a database, an **index** is a separate data structure (usually stored as a B-Tree or Hash table) that keeps track of **key values** and their corresponding **record locations** in the table.
+
+## 🔹 Index vs Indexing
+The term **Index** refers to the actual data structure (like a table of key-address pairs),  
+while **Indexing** refers to the **process or technique** of creating and managing such structures.
+
+### 🧱 Dense Index
+A **Dense Index** has an entry for **every record** in the table.  
+Each key value is mapped directly to the address of the record.  
+This makes searching very fast but increases storage size.
+
+**Example:**  
+If a STUDENT table has Roll_Nos 1, 2, and 3,  
+the index will contain entries for all three.  
+So searching for Roll_No = 3 goes directly to that record.  
+
+✅ Fast search  
+❌ Requires more space  
+👉 Common for **secondary indexes**
+
+---
+
+### 🌿 Sparse Index
+A **Sparse Index** keeps entries for **only some records**, usually the first record of each data block.  
+The data must be **sorted** on the key.  
+To find a record, DBMS finds the nearest smaller key in the index and scans forward in that block.
+
+**Example:**  
+If Block 1 has Roll_Nos 1–3, Block 2 has 4–6,  
+the index stores only (1 → Block1) and (4 → Block2).
+
+✅ Less space  
+⚠️ Slightly slower  
+👉 Common for **primary indexes**
+
+---
+
+## 🔹 Types of Indexing Techniques
+
+### 1️⃣ Primary Index
+- Built on the **primary key** of the table.  
+- Data is **physically sorted** on that key.  
+- Contains one index entry per data block → **Sparse Index**.  
+- Efficient for range and key-based queries.
+
+---
+
+### 2️⃣ Secondary Index
+- Built on a **non-primary attribute**.  
+- Data file is **not sorted** on this field.  
+- Contains entries for **every record** → **Dense Index**.  
+- Used to speed up queries on non-key columns (like name or department).
+
+---
+
+### 3️⃣ Clustering Index
+- Used when **multiple records share the same key value**.  
+- Records are **grouped physically** in the data file.  
+- Index stores one entry per key value, pointing to the block of all related records.  
+- Useful for grouped attributes like `Department` or `Category`.
+
+---
+
+### 4️⃣ Multi-level Index
+- When the index itself becomes large, another index is created **on the index**.  
+- Forms a hierarchy (like a **B+ tree**) for faster searching.  
+- Reduces disk I/O and improves efficiency in large databases.
+
+---
+
+## 🔹 When to Use
+| Type | Used For | Data Sorted? | Example |
+|------|-----------|--------------|----------|
+| **Primary Index** | Primary key | ✅ Yes | Roll_No |
+| **Secondary Index** | Non-key field | ❌ No | Name |
+| **Clustering Index** | Grouped records | ✅ Yes | Dept |
+| **Dense Index** | Small data, fast lookup | Doesn’t matter | Email |
+| **Sparse Index** | Large sorted data | ✅ Yes | Roll_No |
+
+---
+
+## 🔹 Summary
+- **Indexing** improves data retrieval by using key–address mappings.  
+- **Dense Index** → Fast but large.  
+- **Sparse Index** → Space-efficient but slower.  
+- **Primary, Secondary, and Clustering** are indexing strategies based on key type and data order.  
+- Large databases often combine these methods using **multi-level indexing** for better performance.
+
+
+
+
+
