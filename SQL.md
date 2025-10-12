@@ -70,6 +70,31 @@ Imagine a **banking system** transferring ₹1000 from Account A to Account B:
 
 ---
 
+# 🔹 SQL Constraints
+
+
+**Definition:**  
+Constraints are **rules applied to a table’s columns** to control what kind of data can be entered.  
+They help ensure the database **stays accurate and consistent**. Constraints can be defined **while creating a table** (`CREATE TABLE`) or **afterwards** (`ALTER TABLE`)
+
+---
+
+## 🔹 Types of Constraints
+
+| Constraint | Purpose / Use |
+|------------|---------------|
+| **PRIMARY KEY** | Uniquely identifies each row in a table; cannot be NULL. |
+| **FOREIGN KEY** | Maintains referential integrity between two tables. |
+| **UNIQUE** | Ensures all values in a column are unique; allows one NULL. |
+| **NOT NULL** | Ensures that a column cannot have NULL values. |
+| **CHECK** | Ensures values meet a specific condition (e.g., Age > 18). |
+| **DEFAULT** | Assigns a default value to a column if none is specified. |
+
+---
+
+
+
+
 ## 🔹 Syntax
 ```sql
 -- Start a transaction
