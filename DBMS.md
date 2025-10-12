@@ -595,6 +595,72 @@ If asked, say —
 > while NoSQL fits systems that need scalability and flexibility — like social networks or recommendation engines.”
 
 
+# 🧩 Entity-Relationship (ER) Diagram — Notes
+
+The **Entity-Relationship (ER) Diagram** is a **visual representation** of a database structure.  
+It helps in designing the database at a conceptual level by showing **entities**, their **attributes**, and the **relationships** between them.
+
+---
+
+## 🔹 Entity
+An **Entity** represents a real-world object or concept that can have data stored about it.  
+Each entity becomes a table in the database.
+
+**Example:**  
+Student, Teacher, Course, Department.
+
+**Types of Entities:**
+- **Strong Entity:** Can exist independently (e.g., Student).  
+- **Weak Entity:** Depends on another entity for existence (e.g., OrderItem depends on Order).
+
+---
+
+## 🔹 Attribute
+An **Attribute** describes a property or characteristic of an entity.  
+In a table, attributes become the **columns**.
+
+**Example:**  
+For entity *Student* → StudentID, Name, Email, Age.
+
+**Types of Attributes:**
+- **Simple Attribute:** Cannot be divided further (e.g., Age, ID).  
+- **Composite Attribute:** Can be broken into smaller parts (e.g., Name → FirstName, LastName).  
+- **Derived Attribute:** Derived from other attributes (e.g., Age from DateOfBirth).  
+- **Multivalued Attribute:** Can have multiple values (e.g., PhoneNumbers).
+
+---
+
+## 🔹 Relationship
+A **Relationship** shows how two or more entities are connected.  
+It represents an association between entities in the database.
+
+**Example:**  
+A *Student* **enrolls in** a *Course*.
+
+**Types of Relationships:**
+- **One-to-One (1:1):** One entity is related to only one of another type (e.g., Person ↔ Passport).  
+- **One-to-Many (1:N):** One entity can be related to many others (e.g., Teacher → Students).  
+- **Many-to-Many (M:N):** Many entities are related to many others (e.g., Students ↔ Courses).
+
+---
+
+## 🔹 ER Diagram Symbols
+| Symbol | Meaning |
+|--------|----------|
+| Rectangle | Entity |
+| Ellipse | Attribute |
+| Diamond | Relationship |
+| Underline | Primary key attribute |
+| Double Ellipse | Multivalued attribute |
+| Dashed Ellipse | Derived attribute |
+| Double Rectangle | Weak entity |
+
+---
+
+## 🧠 Summary
+- ER Diagram = Blueprint of the database.  
+- Entities → Tables, Attributes → Columns, Relationships → Links between tables.  
+- Helps convert real-world data into a structured database design.
 
 
 
