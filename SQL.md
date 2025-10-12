@@ -1,9 +1,93 @@
 # Dfii betw Alter Updat , | delete drop tuncate #
 # whats rool back #
 
-# SQL Functions and Clauses — Quick Reference Notes
+# 🧩 SQL: DELETE vs TRUNCATE vs DROP — Comparison Table
 
-This document summarizes the key SQL functions and clauses discussed.
+| Feature | DELETE | TRUNCATE | DROP |
+|---------|--------|----------|------|
+| **Command Type** | DML (Data Manipulation Language) | DDL (Data Definition Language) | DDL (Data Definition Language) |
+| **Purpose** | Removes **specific rows** from a table | Removes **all rows** from a table | Removes **entire table** or **database** |
+| **Syntax** | `DELETE FROM table_name WHERE condition;` | `TRUNCATE TABLE table_name;` | `DROP TABLE table_name;` <br> `DROP DATABASE db_name;` |
+| **WHERE Clause** | ✅ Yes | ❌ No | ❌ No |
+| **Rollback** | ✅ Yes, if using transactions | ❌ Often cannot rollback (depends on DBMS) | ❌ No rollback, permanent deletion |
+| **Speed** | Slower (logs each row deletion) | Fast (does not log each row) | Fast (drops structure and data) |
+| **Resets Identity / Auto-increment** | ❌ No | ✅ Yes | ✅ Table gone |
+| **Triggers Fired** | ✅ Yes | ❌ Usually no | ❌ No |
+| **Effect on Table Structure** | Table **remains intact** | Table **remains intact** | Table or DB **completely removed** |
+| **Use Case** | Remove some or all rows while keeping structure | Quickly clear all data but keep table for reuse | Completely remove table or database permanently |
+| **Example** | `DELETE FROM Students WHERE Age < 18;` | `TRUNCATE TABLE Students;` | `DROP TABLE Students;` |
+
+---
+
+💡 **Quick Interview Tip:**  
+- **DELETE:** Specific rows, rollback possible, slower.  
+- **TRUNCATE:** All rows, fast, resets counters, cannot filter.  
+- **DROP:** Removes table completely, irreversible.
+
+
+
+# 🧩 SQL: ALTER vs UPDATE — Comparison Table
+
+| Feature | UPDATE | ALTER |
+|---------|--------|-------|
+| **Command Type** | DML (Data Manipulation Language) | DDL (Data Definition Language) |
+| **Purpose** | Modifies **existing data** in one or more rows of a table | Modifies the **structure** of a table (add, drop, or change columns) |
+| **Syntax** | `UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;` | `ALTER TABLE table_name ADD column_name datatype;` <br> `ALTER TABLE table_name DROP COLUMN column_name;` <br> `ALTER TABLE table_name MODIFY column_name datatype;` |
+| **WHERE Clause** | ✅ Yes, can update specific rows | ❌ No, affects table structure |
+| **Rollback** | ✅ Yes, if using transactions | ❌ Usually cannot rollback (depends on DBMS) |
+| **Speed** | Depends on number of rows affected | Usually fast for structure changes |
+| **Effect on Table** | Only **data values** are modified | **Table structure** is changed (columns added, dropped, or modified) |
+| **Triggers Fired** | ✅ Yes (if row-level triggers exist) | ❌ No (structure changes do not fire row triggers) |
+| **Use Case** | Update values of specific records or all records | Change table schema without dropping the table |
+| **Example** | `UPDATE Students SET Age = 20 WHERE StudentID = 1;` | `ALTER TABLE Students ADD Email VARCHAR(50);` <br> `ALTER TABLE Students DROP COLUMN Age;` |
+| **Additional Notes** | Can affect multiple rows at once | Commonly used during database design or schema updates |
+
+
+# 🔄 Transaction Control in SQL: COMMIT & ROLLBACK
+
+**COMMIT** and **ROLLBACK** are **TCL (Transaction Control Language) commands** used to manage database transactions. They help ensure **data integrity** by controlling when changes become permanent or are undone.
+
+---
+
+## 🔹 Definition & Purpose
+- **COMMIT:** Permanently saves all changes made in the current transaction to the database.  
+- **ROLLBACK:** Undoes all changes in the current transaction, restoring the database to its last committed state.  
+
+**Purpose:**  
+- Maintain **ACID properties** (Atomicity & Durability).  
+- Prevent partial updates and ensure consistency in multi-step operations.
+
+---
+
+## 🔹 Single Example
+Imagine a **banking system** transferring ₹1000 from Account A to Account B:
+
+1. Deduct ₹1000 from Account A  
+2. Add ₹1000 to Account B  
+
+- If **both steps succeed**, we use **COMMIT** to save the changes permanently.  
+- If **any step fails** (e.g., system crash while adding to B), we use **ROLLBACK** to undo the deduction from A, keeping balances consistent.
+
+---
+
+## 🔹 Syntax
+```sql
+-- Start a transaction
+START TRANSACTION;
+
+-- Perform operations
+UPDATE Accounts SET Balance = Balance - 1000 WHERE AccountID = 'A';
+UPDATE Accounts SET Balance = Balance + 1000 WHERE AccountID = 'B';
+
+-- Commit if successful
+COMMIT;
+
+-- Or rollback in case of error
+ROLLBACK;
+````
+
+
+# SQL Functions and Clauses — Quick Reference Notes
 
 ---
 
