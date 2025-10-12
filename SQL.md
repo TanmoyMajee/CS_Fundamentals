@@ -1,3 +1,6 @@
+# Dfii betw Alter Updat , | delete drop tuncate #
+# whats rool back #
+
 # SQL Functions and Clauses — Quick Reference Notes
 
 This document summarizes the key SQL functions and clauses discussed.
