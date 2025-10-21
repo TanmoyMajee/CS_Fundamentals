@@ -38,6 +38,9 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 **Why should we hire you?**
 
 
+** What's ur Achivment **
+>"During my education, I maintained a strong academic record, securing 88.4% in my 12th grade. In my diploma, I achieved an 8.5 CGPA, and I currently hold around an 8.5 CGPA in my B.Tech as well. Additionally, I have hands-on experience with the MERN stack. I also actively participated in LeetCode weekly contests, where I ranked around 3,000 out of 5,000 participants. Moreover, I hold a 2-star rating on CodeChef
+
 
 ** What is Your Motivation**
 >I feel motivated when I build projects that can help people in the real world or provide useful solutions. Creating something that others can use and benefit from gives me satisfaction and inspires me to keep learning and improving.”
