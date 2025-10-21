@@ -110,6 +110,9 @@ This chunking and retrieval strategy lets the system handle very large documents
 *Streaming Responses:*
 >Currently, the LLM generates the full answer before sending it back. By streaming the response, users could see the answer as it’s being generated, making the system feel faster and more interactive.
 
+** Rag Application Example **
+>A real-life example of RAG in action is seen in AI-powered coding platforms like Cursor and GitHub Copilot. These tools use RAG to retrieve relevant code snippets and documentation provided by the user, and then generate context-aware explanations and solutions.
+
 17.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
 19.	Why k=3 chunks in retrieval? How did you decide?
 21.	How do you chunk PDF text? (chunk size and overlap)
