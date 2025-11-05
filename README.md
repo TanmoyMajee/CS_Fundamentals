@@ -171,9 +171,34 @@ ________________________________________
 10.	Why did you use Firebase in addition to JWT?
 11.	If many users are online at the same time, how does your app scale?
 12.	What challenges did you face while building this app?
-13.	How do you show the online/offline indicator?
-14.	How would you scale your chat app if thousands of users are online?
-15.	How would you add features like typing indicators or read receipts?
+    >“One issue I faced was when a single message was showing multiple times in the chat interface.
+This happened because I didn’t clean up my socket listener inside the useEffect, so every time the component re-rendered, a new listener was added.
+I fixed it by removing the old listener in the cleanup function, which stopped the duplicate messages and made the chat work smoothly.
+
+Another challenge was with authentication — sometimes the JWT token wasn’t syncing properly between the frontend and backend, so users couldn’t access protected routes after login.
+I solved it by verifying the token on every request in the backend middleware and storing it properly in local storage on the frontend
+
+````
+useEffect(() => {
+  socket.on("message received", handleMessage);
+
+  return () => {
+    socket.off("message received", handleMessage);
+  };
+}, []);
+````
+
+14.	How do you show the online/offline indicator?
+    >**“I implemented the online/offline indicator using Socket.IO.
+When a user logs in, the client connects to the Socket.IO server, and I emit an event like userConnected with the user’s ID.
+On the backend, I store that user ID in a list or map of active users.
+When a user disconnects or closes the tab, the socket triggers a disconnect event, and I remove that user from the active list.
+
+On the frontend, I use this active user data to show a green dot for online users and a grey one for offline.
+So basically, it’s done by listening to connection and disconnection events through Socket.IO
+
+16.	How would you scale your chat app if thousands of users are online?
+17.	How would you add features like typing indicators or read receipts?
 ________________________________________
 🔹 Project 3: Blog Application (MERN Blog Platform)
 1.	Can you explain your Blog App project?
