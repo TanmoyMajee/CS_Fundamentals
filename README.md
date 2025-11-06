@@ -268,20 +268,38 @@ ________________________________________
 
 10🎤 Why C++? (Interview Answer)
 
-“I prefer C++ because it is fast, efficient, and very close to the system hardware.
+>“I prefer C++ because it is fast, efficient, and very close to the system hardware.
 It gives me fine control over memory and performance, which is important in competitive programming and system-level development.
 It supports both procedural and object-oriented programming, so I can write optimized as well as structured code.
 Also, C++ has a powerful Standard Template Library (STL) which helps solve data structure and algorithm problems quickly.”
 
 ⭐ Key Points (Say in 1–2 lines each)
 
-Performance: Very fast → used in games, real-time systems, competitive programming.
-
+>Performance: Very fast → used in games, real-time systems, competitive programming.
 Control: Offers manual memory management → you can optimize deeply.
-
 OOP Support: Helps in writing scalable & reusable code.
-
 STL: Provides ready data structures like vector, map, set, priority_queue.
-
 Widely Used: Used in OS, browsers, DB engines, competitive coding.
 
+
+
+**🎤 Why Node.js?**
+
+>“I prefer Node.js for backend development because it uses JavaScript on the server side, so I don’t need to switch languages between frontend and backend.
+Node.js is asynchronous and non-blocking, which means it can handle many requests at the same time efficiently. This makes it very suitable for real-time applications like chat apps.”
+
+Key Points:
+>Uses JavaScript → same language throughout MERN
+Event-driven & Non-blocking I/O → handles high traffic
+Very fast → built on Chrome’s V8 engine
+Perfect for real-time applications (chat, notifications, live dashboards)
+
+🎤 Why Express.js?
+
+>“Express is a lightweight and minimal web framework built on top of Node.js.
+It simplifies handling routes, requests, and responses, and provides built-in middleware support.
+This helps me structure backend APIs in a clean and scalable way.”
+
+>Asynchronous means the program does not wait for one task to finish before moving to the next one.
+Instead, tasks that take time (like database calls, API calls, file reading) are handled in the background, and the program continues running.
+When the task is completed, it notifies the program via a callback, promise, or async/await.
