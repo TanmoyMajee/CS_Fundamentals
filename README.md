@@ -113,6 +113,74 @@ This chunking and retrieval strategy lets the system handle very large documents
 ** Rag Application Example **
 >A real-life example of RAG in action is seen in AI-powered coding platforms like Cursor and GitHub Copilot. These tools use RAG to retrieve relevant code snippets and documentation provided by the user, and then generate context-aware explanations and solutions.
 
+Final Answer (Say this in Interview)
+
+“In my project RAGit, I implemented a plan-based usage system with FREE and PREMIUM tiers.
+
+In the User table, I store:
+
+plan (FREE or PREMIUM)
+
+planExpiry (for premium end date)
+
+sessionCount (number of conversations started today)
+
+lastSessionDate (to reset counts daily)
+
+And in the Conversation table, I store:
+
+queryCount (how many AI messages were asked inside that conversation)
+
+How I Enforce Limits:
+
+I created two middleware functions:
+
+When user creates a new conversation (session)
+
+The middleware checks:
+
+If the date has changed → reset sessionCount to 0.
+
+If the user is on FREE plan and sessionCount >= daily limit → block and ask to upgrade.
+
+Otherwise, allow request → controller creates conversation and increments sessionCount.
+
+When user asks a query inside the conversation
+
+The middleware checks:
+
+If the user is FREE and the conversation’s queryCount has reached the daily free limit → block and ask to upgrade.
+
+Otherwise → allow request → increment queryCount.
+
+So with these two checks, I control usage at two levels:
+
+Sessions per day
+
+Queries per session
+
+This prevents misuse and helps me differentiate FREE vs PREMIUM experience.
+
+Premium Upgrade (Stripe Integration)
+
+For payments, I used Stripe Checkout.
+
+When the user clicks “Upgrade to Premium”:
+
+They are redirected to Stripe’s hosted checkout page.
+
+If the payment is successful, Stripe sends a Webhook to my backend.
+
+In the Webhook handler, I:
+
+Verify the event signature (security check)
+
+Update user’s plan = "PREMIUM"
+
+Set planExpiry = now() + 30 days
+
+This way the upgrade is fully automatic — no manual involvement.
+
 17.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
 19.	Why k=3 chunks in retrieval? How did you decide?
 21.	How do you chunk PDF text? (chunk size and overlap)
