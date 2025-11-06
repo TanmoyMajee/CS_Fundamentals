@@ -69,3 +69,102 @@ Default: Accessible only within the same package.
 Abstract class: Can have both abstract (unimplemented) and concrete (implemented) methods.
 
 Interface: Only contains abstract methods (Java 8+ can have default/static methods). A class can implement multiple interfaces.
+
+
+Yes, 100%. I’ll give one real-life example that covers All 4 OOPS Pillars clearly.
+Topic: ATM System (very common and easy to explain)
+
+✅ Code Implementing All 4 Pillars (C++)
+#include <iostream>
+using namespace std;
+
+//////////////////// 1. ENCAPSULATION ////////////////////
+// Data (balance) is private, accessed through setter/getter methods.
+class Account {
+private:
+    double balance;   // hidden data
+
+public:
+    Account(double bal) {
+        balance = bal;
+    }
+
+    void deposit(double amount) {
+        balance += amount;
+        cout << "Deposited: " << amount << endl;
+    }
+
+    bool withdraw(double amount) {
+        if (amount > balance) {
+            cout << "Insufficient Balance!" << endl;
+            return false;
+        }
+        balance -= amount;
+        cout << "Withdrawn: " << amount << endl;
+        return true;
+    }
+
+    double getBalance() {
+        return balance;
+    }
+};
+
+//////////////////// 2. ABSTRACTION ////////////////////
+// Abstract class → hiding implementation details.
+class ATM {
+public:
+    virtual void withdrawMoney(double amount) = 0; // pure virtual
+    virtual void depositMoney(double amount) = 0;  // pure virtual
+
+    virtual ~ATM() {} // virtual destructor
+};
+
+//////////////////// 3. INHERITANCE ////////////////////
+// BankATM inherits ATM and uses Account → code reusability.
+class BankATM : public ATM {
+private:
+    Account account; // HAS-A relationship
+
+public:
+    BankATM(double initialBalance) : account(initialBalance) {}
+
+    void withdrawMoney(double amount) override {
+        account.withdraw(amount);
+    }
+
+    void depositMoney(double amount) override {
+        account.deposit(amount);
+    }
+
+    void showBalance() {
+        cout << "Current Balance: " << account.getBalance() << endl;
+    }
+};
+
+//////////////////// 4. POLYMORPHISM ////////////////////
+// ATM pointer can refer to BankATM object.
+int main() {
+    ATM* userATM = new BankATM(1000); // runtime polymorphism
+    BankATM* realATM = (BankATM*)userATM;
+
+    userATM->depositMoney(500);
+    userATM->withdrawMoney(300);
+    realATM->showBalance();
+
+    delete userATM;
+    return 0;
+}
+How to Explain This in the Interview (Very Simple)
+
+Encapsulation:
+“We kept the balance private inside the Account class and accessed it through methods. So data is protected.”
+
+Inheritance:
+“The class BankATM inherits from the abstract class ATM, so it reuses the function structure.”
+
+Abstraction:
+“I used the abstract class ATM which only declares what operations exist, not how they work. The actual implementation happens in BankATM.”
+
+Polymorphism:
+“In main(), I used an ATM* pointer to refer to a BankATM object. This is runtime polymorphism.”
+
