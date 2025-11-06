@@ -439,3 +439,10 @@ This helps me structure backend APIs in a clean and scalable way.”
 >Asynchronous means the program does not wait for one task to finish before moving to the next one.
 Instead, tasks that take time (like database calls, API calls, file reading) are handled in the background, and the program continues running.
 When the task is completed, it notifies the program via a callback, promise, or async/await.
+
+“I used MongoDB for my Chat App and Blog App because both applications deal with data that is flexible, user-generated, and frequently updated.
+MongoDB stores data in JSON-like documents, which fits very well with chat messages and blog posts where the structure can vary.
+Also, reads and writes need to be fast, and MongoDB handles high-speed insert operations efficiently, which is important in real-time chat.”
+
+“However, in RAGit, I used PostgreSQL because the data needed to be more structured, relational, and consistent.
+For example, features like subscription plans, tracking session limits, conversations, file management, and strict foreign key relationships require strong ACID transactions. PostgreSQL is more suitable for that level of data integrity and relational querying.”
