@@ -266,3 +266,22 @@ ________________________________________
 8.	How do you ensure your projects are scalable and maintainable?
 9.	If you had more time, what improvements would you add to your projects?
 
+10🎤 Why C++? (Interview Answer)
+
+“I prefer C++ because it is fast, efficient, and very close to the system hardware.
+It gives me fine control over memory and performance, which is important in competitive programming and system-level development.
+It supports both procedural and object-oriented programming, so I can write optimized as well as structured code.
+Also, C++ has a powerful Standard Template Library (STL) which helps solve data structure and algorithm problems quickly.”
+
+⭐ Key Points (Say in 1–2 lines each)
+
+Performance: Very fast → used in games, real-time systems, competitive programming.
+
+Control: Offers manual memory management → you can optimize deeply.
+
+OOP Support: Helps in writing scalable & reusable code.
+
+STL: Provides ready data structures like vector, map, set, priority_queue.
+
+Widely Used: Used in OS, browsers, DB engines, competitive coding.
+
