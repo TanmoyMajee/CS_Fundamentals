@@ -299,6 +299,74 @@ The server then broadcasts this event to other users in that same chat room.
 
 >On the UI side, I just show a small message like ‘User is typing…’ based on these events.
 It’s simple, but it gives a smooth real-time experience.”*
+
+🎤 Interview Answer
+
+“In my chat application, I implemented two authentication flows:
+Email/Password Login using JWT and Google Login using Firebase Auth.
+
+1. Google Login (Frontend using Firebase)
+
+On the frontend, I used Firebase Authentication to handle Google login.
+When the user signs in using Google:
+
+Firebase returns a Google ID Token.
+
+I send that token to my backend.
+
+2. Verifying Google User on Backend
+
+On the backend, I verify the Google token using Firebase Admin SDK.
+If the token is valid:
+
+I check if the user already exists in my database.
+
+If not, I create a new user entry using the Google profile details.
+
+Then I generate a JWT for that user and send it back to the frontend.
+
+So even Google users also use our JWT for protected APIs.
+
+3. Normal Login (Email + Password)
+
+For email/password login:
+
+I stored hashed passwords using bcrypt.
+
+At login, I compare the entered password with the hash.
+
+On success, I generate a JWT and return it to the user.
+
+4. JWT Handling
+
+The JWT contains the user ID and is stored in HttpOnly cookies to protect against XSS attacks.
+
+Every protected route uses an auth middleware:
+
+The middleware verifies the JWT.
+
+If valid → request continues.
+
+If invalid → user is blocked.
+
+5. Session Persistence
+
+Because both login methods end in JWT, the rest of the app does not care whether the user logged in via:
+
+Google
+
+Email/Password
+
+This keeps the system consistent and easy to maintain.”
+
+✅ Key Points to Mention if They Ask More
+Feature	How You Implemented
+Password Security	Hashed using bcrypt
+Token Format	JWT with userId payload
+Storage	HttpOnly cookie (secure against JS access)
+Protected API	JWT middleware verifies token
+Google Login	Firebase Auth (client) + Firebase Admin (server)
+Single Auth System	All users use JWT after login
 ________________________________________
 🔹 Project 3: Blog Application (MERN Blog Platform)
 1.	Can you explain your Blog App project?
