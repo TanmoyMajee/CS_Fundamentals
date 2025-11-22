@@ -36,11 +36,19 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 >“In five years, I see myself as an experienced full-stack developer who can build /capable of building scalable and efficient applications. I also want to gain/ deepen/expand my expertise in generative AI and cloud computing. Ultimately, I aim to lead impactful projects, contribute meaningfully to real-world solutions, and help the company achieve its goals.”
 
 **Why should we hire you?**
->“You should hire me because I have strong practical experience in full-stack development, especially with the MERN stack, and I’ve built real projects like an AI-based document Q&A system and a real-time chat application, which shows I can convert ideas into working products.
+>You should hire me because I have both strong problem-solving skills and hands-on development experience. Solving more than 500 DSA problems has improved my analytical thinking, and I’ve applied those skills in building full-stack applications, including a RAG-based project and a real-time chat application. I’m confident that I can contribute from day one, help the team move forward, and ultimately support the company’s growth with the skills and experience I bring.
 
->Along with that, I have solved 500+ DSA problems on platforms like LeetCode and Codeforces, which has improved my problem-solving skills and made me comfortable with writing efficient code.
+**What makes you unique from other candidates?**
+>What makes me unique is my ability to learn quickly and adapt to new challenges. In my projects—especially when implementing complex features like plan-based structures and Stripe integration—I didn’t rely on shortcuts. I explored documentation, broke down the problems, and figured out solutions independently. This combination of deep problem-solving, self-learning, and the ability to implement features end-to-end helps me stand out from other candidates.
 
->I learn fast, I am consistent, and I take ownership of my work. I believe I can add value to the team from day one and grow further as I contribute.
+**Tell me about a time you faced a challenge and how you handled it.**
+>One of the biggest challenges I faced was while building my RAG-based application. Initially, I hadn’t planned for a plan-based structure or payment system, but later I decided to include them to make the project more meaningful.
+This required significant changes — updating multiple schemas, adding middleware, and integrating Stripe payments, which I had never used before.
+
+>Instead of depending on AI tools or copying solutions, I broke the entire problem into smaller parts, read the official documentation carefully, and implemented every step by myself.
+>It took time, but I learned a lot, and I was able to integrate the entire feature successfully.
+This experience strengthened my confidence in solving complex problems independently and adapting to new requirements.
+
 
 ** What's ur Achivment **
 >"During my education, I maintained a strong academic record, securing 88.4% in my 12th grade. In my diploma, I achieved an 8.5 CGPA, and I currently hold around an 8.5 CGPA in my B.Tech as well. Additionally, I have hands-on experience with the MERN stack. I also actively participated in LeetCode weekly contests, where I ranked around 3,000 out of 5,000 participants. Moreover, I hold a 2-star rating on CodeChef
@@ -80,7 +88,6 @@ What is your dream job?
 
 Situational & Behavioral
 
-Tell me about a time you faced a challenge and how you handled it.
 
 Tell me about a time you worked in a team.
 
