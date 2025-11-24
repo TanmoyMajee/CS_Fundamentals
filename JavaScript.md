@@ -46,6 +46,13 @@ console.log("3");
 ````
 >opt  1 , 3 2
 
+**Event Loop**
+>"The Event Loop is the mechanism in JavaScript that allows it to handle asynchronous operations even though it is single-threaded."
+>Call Stack → runs your normal code
+Web APIs → handle timers, API calls, DOM events
+Callback Queue / Microtask Queue → stores finished async tasks
+Event Loop → pushes tasks from queue to call stack when stack is empty
+
 **Call Back**
 >"A callback is a function that is passed as an argument to another function and gets executed later, usually after some operation is completed."
 "Callbacks are used to handle asynchronous tasks like API calls, timers, and events."  ( outdated  , we use async await inted of this )
