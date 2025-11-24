@@ -113,6 +113,17 @@ This chunking and retrieval strategy lets the system handle very large documents
 ** Rag Application Example **
 >A real-life example of RAG in action is seen in AI-powered coding platforms like Cursor and GitHub Copilot. These tools use RAG to retrieve relevant code snippets and documentation provided by the user, and then generate context-aware explanations and solutions.
 
+**Why did I use SQL (PostgreSQL) in my RAG-based project?**
+
+*Data Integrity and Relationships:*
+>In my project, we have a structured relationship between users, conversations, messages, and files. Each user can have multiple conversations, and each conversation can have multiple files and messages. We use SQL to maintain these foreign key relationships and ensure data integrity. This way, we can rely on features like cascade deleting, which automatically keeps our data consistent and clean.
+
+*Transaction Support:*
+>We need SQL’s transaction features to ensure that if any step fails (like file upload or message insertion), we can roll back changes and keep the database consistent. This helps us maintain reliability and data integrity throughout the entire process.
+
+
+
+
 Final Answer (Say this in Interview)
 
 “In my project RAGit, I implemented a plan-based usage system with FREE and PREMIUM tiers.
