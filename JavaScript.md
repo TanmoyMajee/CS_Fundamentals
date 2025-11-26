@@ -114,6 +114,26 @@ But it does NOT block the entire thread — only this function waits.
 This makes asynchronous API calls look like synchronous code, which is easier to understand and debug."
 
 
+**slice() Method**
 
+>slice() is used to extract a portion of an array.
+It does not modify the original array.
+Syntax: array.slice(start, end)
+Example:
+```
+let nums = [10, 20, 30, 40, 50];
+let result = nums.slice(1, 4);
+console.log(result);      // [20, 30, 40]
+console.log(nums);        // Original array unchanged
+````
+**splice() Method**
 
-
+>splice() is used to add, remove, or replace elements.
+It modifies the original array.
+Syntax: array.splice(start, deleteCount, items...)
+```
+let fruits = ["Apple", "Banana", "Mango", "Orange"];
+fruits.splice(1, 2, "Grapes");
+console.log(fruits);  
+// ["Apple", "Grapes", "Orange"]
+```
