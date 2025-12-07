@@ -80,12 +80,11 @@ If the probability is above a certain threshold (like 0.5), the model predicts c
 >We used logistic regression for heart disease prediction because it works very well for binary classification problems and it’s simple, fast, and easy to interpret."
 
 ** Random Forest Classifier? ** 
-"Random Forest is an ensemble machine learning algorithm that uses multiple decision trees, not just one.
-
+>"Random Forest is an ensemble machine learning algorithm that uses multiple decision trees, not just one.
 Each decision tree gives its own prediction, and the random forest combines all the predictions and takes the majority vote.
 Because it uses many trees instead of one, it reduces overfitting and gives more stable and accurate results.
 
-We used the random forest classifier for diabetes prediction because it performed better than a single decision tree and gave higher accuracy on our dataset."
+>We used the random forest classifier for diabetes prediction because it performed better than a single decision tree and gave higher accuracy on our dataset."
 
 ** Decision Tree **
 >"A Decision Tree is a simple model that works like a flowchart, making decisions step-by-step based on yes/no conditions. However, a single decision tree often overfits the data and becomes unstable, meaning even small changes in the dataset can change the entire tree and reduce accuracy. To overcome this, we switched to a Random Forest classifier, which uses many decision trees together and takes the majority vote. This makes the predictions much more accurate, stable, and reliable compared to using just one tree
