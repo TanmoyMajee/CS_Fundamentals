@@ -17,6 +17,7 @@ It may take 4 seconds for 20 inputs (just an example of growth).
 | **Big-Ω (Omega)** | **Lower bound** | **Best-case time**              | Minimum time algorithm will take; describes **best scenario**                    | Insertion Sort → **Ω(n)** (already sorted array)                   |
 
 
+** Time Com of Sorting algo **
 
 | Sorting Algorithm  | Best Time  | Average Time | Worst Time | Space Complexity | Notes                                       |
 | ------------------ | ---------- | ------------ | ---------- | ---------------- | ------------------------------------------- |
