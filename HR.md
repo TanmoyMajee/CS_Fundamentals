@@ -50,6 +50,19 @@ This required significant changes — updating multiple schemas, adding middlewa
 This experience strengthened my confidence in solving complex problems independently and adapting to new requirements.
 
 
+****Tell me about a time you faced a challenge in Group / Team Project and how you handled it.**
+>"In our final-year project on multi-disease prediction using machine learning, one of the main challenges we faced was selecting the best model for each disease. Initially, we started with a decision tree for predicting diabetes, but we quickly realized it wasn't performing well. I proposed switching to a random forest classifier and explained to the team how it could provide more robust and accurate predictions. After convincing the team, we made the switch, and it significantly improved our results.
+> This experience taught me a lot about effective teamwork, communication, and how to advocate for the best technical solutions."
+
+** What is your contibution in The Final yr project **
+>"In this project, my main contribution was developing the complete frontend using React and integrating it with our backend API that served the machine learning predictions. I designed the user interface where users can input their health parameters, and I ensured that the frontend communicates smoothly with the backend so that the model predictions are displayed instantly and clearly.
+
+>Apart from the frontend, I also contributed to the model-selection phase. I evaluated the performance of different models and proposed switching from a simple Decision Tree to a Random Forest classifier for diabetes prediction, as it gave significantly better accuracy. This helped improve the overall reliability of our system."
+
+** Over View of Final yr Project **
+>In my final-year project, we developed a multi-disease prediction system using machine learning. The main goal was to accurately predict the likelihood of diseases based on patient data. For diabetes prediction, we employed a random forest classifier, while for heart disease prediction, we used logistic regression. The system allowed users to input their health parameters and receive real-time, accurate predictions through an intuitive user interface.
+
+
 ** What's ur Achivment **
 >"During my education, I maintained a strong academic record, securing 88.4% in my 12th grade. In my diploma, I achieved an 8.5 CGPA, and I currently hold around an 8.5 CGPA in my B.Tech as well. Additionally, I have hands-on experience with the MERN stack. I also actively participated in LeetCode weekly contests, where I ranked around 3,000 out of 5,000 participants. Moreover, I hold a 2-star rating on CodeChef
 
