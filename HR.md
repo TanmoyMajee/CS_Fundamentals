@@ -41,6 +41,15 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 **What makes you unique from other candidates?**
 >What makes me unique is my ability to learn quickly and adapt to new challenges. In my projects—especially when implementing complex features like plan-based structures and Stripe integration—I didn’t rely on shortcuts. I explored documentation, broke down the problems, and figured out solutions independently. This combination of deep problem-solving, self-learning, and the ability to implement features end-to-end helps me stand out from other candidates.
 
+
+** What's ur Achivment **
+>"During my education, I maintained a strong academic record, securing 88.4% in my 12th grade. In my diploma, I achieved an 8.5 CGPA, and I currently hold around an 8.5 CGPA in my B.Tech as well. Additionally, I have hands-on experience with the MERN stack. I also actively participated in LeetCode weekly contests, where I ranked around 3,000 out of 5,000 participants. Moreover, I hold a 2-star rating on CodeChef
+
+
+** What is Your Motivation**
+>I feel motivated when I build projects that can help people in the real world or provide useful solutions. Creating something that others can use and benefit from gives me satisfaction and inspires me to keep learning and improving.”
+
+
 **Tell me about a time you faced a challenge and how you handled it.**
 >One of the biggest challenges I faced was while building my RAG-based application. Initially, I hadn’t planned for a plan-based structure or payment system, but later I decided to include them to make the project more meaningful.
 This required significant changes — updating multiple schemas, adding middleware, and integrating Stripe payments, which I had never used before.
@@ -62,14 +71,24 @@ This experience strengthened my confidence in solving complex problems independe
 ** Over View of Final yr Project **
 >In my final-year project, we developed a multi-disease prediction system using machine learning. The main goal was to accurately predict the likelihood of diseases based on patient data. For diabetes prediction, we employed a random forest classifier, while for heart disease prediction, we used logistic regression. The system allowed users to input their health parameters and receive real-time, accurate predictions through an intuitive user interface.
 
+** Logistic Regression **
+>"Logistic Regression is a classification algorithm that is used to predict whether something belongs to a particular class or not — basically a yes or no type prediction.
 
-** What's ur Achivment **
->"During my education, I maintained a strong academic record, securing 88.4% in my 12th grade. In my diploma, I achieved an 8.5 CGPA, and I currently hold around an 8.5 CGPA in my B.Tech as well. Additionally, I have hands-on experience with the MERN stack. I also actively participated in LeetCode weekly contests, where I ranked around 3,000 out of 5,000 participants. Moreover, I hold a 2-star rating on CodeChef
+>It works by using a mathematical function called the sigmoid function, which converts the input into a probability between 0 and 1.
+If the probability is above a certain threshold (like 0.5), the model predicts class 1; otherwise it predicts class 0.
 
+>We used logistic regression for heart disease prediction because it works very well for binary classification problems and it’s simple, fast, and easy to interpret."
 
-** What is Your Motivation**
->I feel motivated when I build projects that can help people in the real world or provide useful solutions. Creating something that others can use and benefit from gives me satisfaction and inspires me to keep learning and improving.”
+** Random Forest Classifier? ** 
+"Random Forest is an ensemble machine learning algorithm that uses multiple decision trees, not just one.
 
+Each decision tree gives its own prediction, and the random forest combines all the predictions and takes the majority vote.
+Because it uses many trees instead of one, it reduces overfitting and gives more stable and accurate results.
+
+We used the random forest classifier for diabetes prediction because it performed better than a single decision tree and gave higher accuracy on our dataset."
+
+** Decision Tree **
+>"A Decision Tree is a simple model that works like a flowchart, making decisions step-by-step based on yes/no conditions. However, a single decision tree often overfits the data and becomes unstable, meaning even small changes in the dataset can change the entire tree and reduce accuracy. To overcome this, we switched to a Random Forest classifier, which uses many decision trees together and takes the majority vote. This makes the predictions much more accurate, stable, and reliable compared to using just one tree
 
 
 Why do you want to work for our company?
