@@ -1,17 +1,11 @@
-** Sorting Algorithms – Time & Space Complexity**
 
-| Sorting Algorithm  | Best Time   | Average Time | Worst Time  | Space Complexity | Notes                                  |
-| ------------------ | ----------- | ------------ | ----------- | ---------------- | -------------------------------------- |
-| **Bubble Sort**    | O(n)        | O(n²)        | O(n²)       | O(1)             | Stable, simple, bad for large data     |
-| **Selection Sort** | O(n²)       | O(n²)        | O(n²)       | O(1)             | Not stable, always quadratic           |
-| **Insertion Sort** | O(n)        | O(n²)        | O(n²)       | O(1)             | Stable, good for nearly sorted data    |
-| **Merge Sort**     | O(n log n)  | O(n log n)   | O(n log n)  | O(n)             | Stable, used in external sorting       |
-| **Quick Sort**     | O(n log n)  | O(n log n)   | O(n²)       | O(log n)         | Very fast in practice, not stable      |
-| **Heap Sort**      | O(n log n)  | O(n log n)   | O(n log n)  | O(1)             | Not stable, used for priority tasks    |
-| **Counting Sort**  | O(n + k)    | O(n + k)     | O(n + k)    | O(k)             | Stable, only for integer ranges        |
-| **Radix Sort**     | O(nk)       | O(nk)        | O(nk)       | O(n + k)         | Stable, often uses counting internally |
-| **Bucket Sort**    | O(n + k)    | O(n + k)     | O(n²)       | O(n + k)         | Not always stable, depends on input    |
-| **Shell Sort**     | O(n log n)  | O(n^(3/2))   | O(n²)       | O(1)             | Not stable, improved insertion sort    |
-| **Tim Sort**       | O(n)        | O(n log n)   | O(n log n)  | O(n)             | Stable, used in Python & Java          |
-| **Tree Sort**      | O(n log n)  | O(n log n)   | O(n²)       | O(n)             | Depends on BST balance                 |
-| **Bitonic Sort**   | O(n log² n) | O(n log² n)  | O(n log² n) | O(log² n)        | Parallel sorting algorithm             |
+| Sorting Algorithm  | Best Time  | Average Time | Worst Time | Space Complexity | Notes                                       |
+| ------------------ | ---------- | ------------ | ---------- | ---------------- | ------------------------------------------- |
+| **Bubble Sort**    | O(n)       | O(n²)        | O(n²)      | O(1)             | Stable, simple, rarely used in real apps    |
+| **Selection Sort** | O(n²)      | O(n²)        | O(n²)      | O(1)             | Not stable, always quadratic                |
+| **Insertion Sort** | O(n)       | O(n²)        | O(n²)      | O(1)             | Stable, good for nearly sorted arrays       |
+| **Merge Sort**     | O(n log n) | O(n log n)   | O(n log n) | O(n)             | Stable, used in real-world libraries        |
+| **Quick Sort**     | O(n log n) | O(n log n)   | O(n²)      | O(log n)         | Fastest in practice, not stable             |
+| **Heap Sort**      | O(n log n) | O(n log n)   | O(n log n) | O(1)             | Not stable, used in priority queues         |
+| **Counting Sort**  | O(n + k)   | O(n + k)     | O(n + k)   | O(k)             | Stable, works only for small integer ranges |
+| **Tim Sort**       | O(n)       | O(n log n)   | O(n log n) | O(n)             | Stable, used in Python & Java sorting       |
