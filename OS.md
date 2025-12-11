@@ -348,8 +348,15 @@ After detecting a deadlock, the system removes it by:
 
 Interviewers usually expect only these two points.
 
-
 ---
+## Safe State (Important for Deadlock Avoidance)
 
+A system is in a **safe state** when there exists at least one sequence of process execution in which *every process can get the resources it needs*, complete its execution, and release the resources safely.
+
+- In a safe state → **No deadlock will occur**.
+- In an unsafe state → Deadlock *may* occur (not guaranteed, but possible).
+
+  ---
+  
 
 
