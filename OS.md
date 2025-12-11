@@ -179,6 +179,13 @@ Multithreading is the ability of a CPU or operating system to run multiple threa
 
 ---
 
+## Disadvantages of Multithreading
+- Risk of race conditions  
+- Deadlocks possible  
+- More complex program design  
+
+---
+
 ## Thread vs Process (Short Interview Difference)
 
 | Aspect | Process | Thread |
@@ -227,7 +234,7 @@ Two threads updating the same bank balance → inconsistent output.
 
 ---
 ### What is a Critical Section?
-A *critical section* is a part of the code where a shared resource (like shared data, variable, or file) is accessed by multiple threads or processes.
+A *critical section* is a part of the code where a critical section / shared resource (like shared data, variable, or file) is accessed by multiple threads or processes.
 
 - Only **one thread** should execute inside the critical section at a time.
 - If two threads enter at the same time → **race condition** happens.
@@ -238,37 +245,111 @@ A *critical section* is a part of the code where a shared resource (like shared 
 When multiple threads access shared data, synchronization prevents problems like **race conditions**.
 
 Common synchronization tools:
-- **Mutex (Mutual Exclusion)**
-- **Semaphore**
-- **Lock/Unlock mechanisms**
-- **Monitors**
+### 1. Mutex (Mutual Exclusion)
+- **Purpose**: Ensures that only one thread can access the critical section at a time.
+- **How it works**: A thread locks the mutex before entering the critical section and unlocks it when it leaves.
+- **Key point**: If another thread tries to lock the mutex while it's already locked, it will have to wait.
 
 ---
 
-## What is Deadlock in Multithreading?
-Deadlock happens when two or more threads wait forever for each other’s resources.
-
-Conditions for deadlock:
-1. Mutual exclusion  
-2. Hold and wait  
-3. No preemption  
-4. Circular wait  
-
-All four must be present.
+### 2. Semaphore
+- **Purpose**: Similar to a mutex but can allow a fixed number of threads to access the critical section at once.
+- **How it works**: A semaphore has a counter. When a thread enters, it decreases the counter. When it leaves, it increases the counter.
+- **Key point**: If the counter is zero, other threads must wait until it's non-zero again.
 
 ---
 
-## Advantages of Multithreading
-- Faster execution  
-- Less memory usage than multiple processes  
-- Improved responsiveness  
-- Better CPU utilization  
+### 3. Monitor
+- **Purpose**: A higher-level synchronization construct that combines locks and condition variables.
+- **How it works**: A monitor is basically an object or module that has both the data (shared resources) and the procedures (methods) that synchronize access to the data.
+- **Key point**: Monitors make it easier to write thread-safe code because they handle locking and unlocking automatically when you enter or leave the monitor's methods.
 
-## Disadvantages of Multithreading
-- Difficulty debugging  
-- Risk of race conditions  
-- Deadlocks possible  
-- More complex program design  
+
+---
+
+### 4. Lock and Unlock Mechanism (not imp)
+- **Purpose**: A generic term often used for any mechanism that locks a resource and then unlocks it.
+- **How it works**: A thread acquires a lock before entering the critical section and releases the lock when done.
+- **Key point**: Very similar concept to a mutex, often used interchangeably in casual conversation.
+
+---
+
+## Starvation 
+Starvation happens when a process keeps waiting indefinitely because it never gets the required resource, often due to unfair scheduling (e.g., continuous arrival of higher-priority processes). The process remains stuck in the waiting state and makes no progress. It can be prevented using fair scheduling techniques like aging.
+
+---
+
+## Livelock 
+ Livelock occurs when two or more processes continuously change states in response to each other, preventing any progress. The processes are running, not blocked, but stuck in a loop. It can be prevented by adding randomness to retries or using stronger synchronization methods.
+
+---
+
+## Livelock vs. Deadlock
+- **Deadlock:** In deadlock, processes are stuck because each one holds a resource and waits for another resource held by another process, forming a cycle of dependency. Resources are locked and not released.
+- **Livelock:** In livelock, processes keep changing states and attempting to avoid blocking each other, but they remain stuck in a loop and never make progress.
+
+---
+
+
+# Deadlock – Important Interview Notes
+
+## 1. What is a Deadlock?
+A deadlock is a situation where two or more processes are stuck forever because each process is waiting for a resource held by another process, and none of them can continue.
+
+---
+
+## 2. Four Necessary Conditions for Deadlock
+Deadlock can occur **only if all four conditions hold simultaneously**:
+
+1. **Mutual Exclusion** – Only one process can use a resource at a time.  
+2. **Hold and Wait** – A process is holding one resource and waiting for another.  
+3. **No Preemption** – Resources cannot be forcibly taken away from a process.  
+4. **Circular Wait** – A circular chain exists where each process waits for a resource held by the next process.
+
+If even one condition is removed, deadlock cannot occur.
+
+---
+
+## 3. Deadlock Prevention (Breaking one of the four conditions)
+Deadlocks can be prevented by ensuring at least one of the necessary conditions never holds:
+
+- **Avoid Hold and Wait** → Request all resources at once.  
+- **Allow Preemption** → If a process is waiting, take back resources and give to others.  
+- **Break Circular Wait** → Impose a fixed order on resource allocation.
+
+---
+
+## 4. Deadlock Avoidance
+Deadlock avoidance ensures the system never enters an unsafe state.
+
+- **Banker's Algorithm**  
+  - Used to check if allocating a resource keeps the system in a safe state.  
+  - Name only is enough for interviews.
+
+---
+
+## 5. Deadlock Detection
+Deadlocks can be detected by:
+
+- **Using a Resource Allocation Graph**  
+  - A cycle in the graph indicates deadlock.  
+- **Deadlock Detection Algorithms**  
+  - The OS periodically checks for circular wait.
+
+Once detected, the OS must recover.
+
+---
+
+## 6. Deadlock Recovery
+After detecting a deadlock, the system removes it by:
+
+- **Killing a process** (terminate one or more processes involved in the deadlock)  
+- **Resource Preemption** (take resources away and give to other processes)
+
+Interviewers usually expect only these two points.
+
+
+---
 
 
 
