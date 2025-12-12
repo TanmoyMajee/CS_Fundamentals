@@ -136,6 +136,8 @@ So a **system call = a message from user space to kernel → “Please do this f
 - **Waiting (Blocked)**: The process is waiting for some event, like I/O completion.
 - **Terminated**: The process has finished execution.
 
+## What is Interrept ? 
+
 ## Process Control Block (PCB)
 - The PCB is a data structure that stores all the information about a process.
 - It includes the process ID, state, CPU registers, memory limits, and pointers to resources.
