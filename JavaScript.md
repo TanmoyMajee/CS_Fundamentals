@@ -137,3 +137,83 @@ fruits.splice(1, 2, "Grapes");
 console.log(fruits);  
 // ["Apple", "Grapes", "Orange"]
 ```
+
+# 📘 JavaScript Closures – Complete Notes (with Real-World Example)
+
+---
+
+## 🔹 What is a Closure?
+
+A **closure** is formed when an inner function remembers and can access variables from its outer function **even after the outer function has finished executing**.
+
+
+## 🔹 What Pattern Is This? (Factory + Module Pattern)
+
+The code example uses two patterns together:
+
+### ✅ **Factory Function**
+A function that *creates and returns* an object.
+
+### ✅ **Module Pattern**
+A way to:
+- Expose **public methods**
+- Hide **private variables**  
+(using closures)
+
+This pattern is widely used in real-world JavaScript apps (Node.js, backend services, authentication modules).
+
+---
+
+
+### ✔️ YES — closures + module pattern give **encapsulation**.
+
+
+# 💻 Real-World Closure Example (User Profile – Private Password)
+
+```javascript
+// Factory + Module Pattern using Closure
+function createUser(name, email, password) {
+  let userPassword = password;  // ❗ private variable (encapsulated)
+
+  return {
+    getName: function () {
+      return name;  // public method
+    },
+
+    getEmail: function () {
+      return email;  // public method
+    },
+
+    checkPassword: function (inputPassword) {
+      // Only accessible due to closure
+      return inputPassword === userPassword;
+    },
+
+    updatePassword: function (newPass) {
+      userPassword = newPass; // secure update
+      console.log("Password updated");
+    }
+  };
+}
+
+// -------------------------------------------
+// USAGE
+// -------------------------------------------
+
+const user = createUser("Tanmoy", "tanmoy@example.com", "secret123");
+
+// Public methods
+console.log(user.getName());    // Tanmoy
+console.log(user.getEmail());   // tanmoy@example.com
+
+// Direct access to password is blocked ❌
+console.log(user.userPassword); // undefined
+
+// Secure password check
+console.log(user.checkPassword("wrong"));      // false
+console.log(user.checkPassword("secret123"));  // true
+
+// Update password securely
+user.updatePassword("newPass456");
+console.log(user.checkPassword("newPass456")); // true
+````
