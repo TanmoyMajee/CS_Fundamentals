@@ -1,3 +1,5 @@
+## What is Trigger ,  Diff of DBMS vs RDBMS
+
 ### 🧠 Denormalization
 
 **Definition:**  
