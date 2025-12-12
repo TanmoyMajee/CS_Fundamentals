@@ -218,3 +218,45 @@ console.log(user.checkPassword("secret123"));  // true
 user.updatePassword("newPass456");
 console.log(user.checkPassword("newPass456")); // true
 ````
+
+# 📘 forEach vs map vs filter — Short Interview Notes
+
+## 🔹 forEach()
+**Definition:**  
+Used to *iterate* over an array and perform actions.  
+Does **not** return a new array.
+
+**Use case:** Logging, API calls, updating external variables.
+
+```javascript
+const nums = [1, 2, 3];
+nums.forEach(n => console.log(n));
+// 1 2 3
+```
+## 🔹 map()
+
+**Definition:**  
+Creates a new array by transforming each element.
+
+Use case: Modify data → return new array.
+```javascript
+const nums = [1, 2, 3];
+const doubled = nums.map(n => n * 2);
+console.log(doubled); // [2, 4, 6]
+```
+
+##🔹 filter()
+
+**Definition:**  
+Returns a new array with elements that pass a condition.
+
+Use case: Select or remove items.
+```javascript
+const nums = [1, 2, 3, 4, 5];
+const evens = nums.filter(n => n % 2 === 0);
+console.log(evens); // [2, 4]
+```
+
+
+
+
