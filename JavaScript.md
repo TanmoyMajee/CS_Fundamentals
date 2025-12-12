@@ -35,7 +35,7 @@ function sayHi() { console.log("Hello"); }
 >"When an async task (like setTimeout or fetch) runs, the browser handles it in Web APIs.
 Once it finishes, the callback goes to a queue.
 The event loop waits for the call stack to be empty, then pushes the queued callback or promise into the stack to execute."
-```
+```javascript
 console.log("1");
 
 setTimeout(() => {
@@ -66,7 +66,7 @@ It can be in three states: pending, fulfilled, or rejected."
 fulfilled – operation succeeded
 rejected – operation failed
 
-```
+```javascript
 const myPromise = new Promise((resolve, reject) => {
   const success = true;
 
@@ -91,7 +91,7 @@ It makes asynchronous code look synchronous, which makes it easier to read and u
 Inside it, await pauses the execution until the API Promise resolves.
 So the code looks like it is running line-by-line, just like synchronous code, but it’s still non-blocking."
 
-````
+```javascript
 async function fetchUser() {
   try {
     // This line waits until the API gives a response
@@ -120,9 +120,9 @@ This makes asynchronous API calls look like synchronous code, which is easier to
 It does not modify the original array.
 Syntax: array.slice(start, end)
 Example:
-```
+```javascript
 let nums = [10, 20, 30, 40, 50];
-let result = nums.slice(1, 4);
+let result = nums.slice(1, 4); ( string indx , ending indx )
 console.log(result);      // [20, 30, 40]
 console.log(nums);        // Original array unchanged
 ````
@@ -131,9 +131,10 @@ console.log(nums);        // Original array unchanged
 >splice() is used to add, remove, or replace elements.
 It modifies the original array.
 Syntax: array.splice(start, deleteCount, items...)
-```
+
+```javascript
 let fruits = ["Apple", "Banana", "Mango", "Orange"];
-fruits.splice(1, 2, "Grapes");
+fruits.splice(1, 2, "Grapes"); // ( string indx , length , replaced val )
 console.log(fruits);  
 // ["Apple", "Grapes", "Orange"]
 ```
