@@ -458,3 +458,66 @@ WHERE rn = N;
 * `COUNT(DISTINCT)` is portable to DBs without window functions.
 
 
+# 📘 Triggers in SQL — Interview Notes
+
+---
+
+## 🔹 Definition of a Trigger
+
+A **trigger** is a special kind of stored procedure in a SQL database that **automatically executes** or **fires** when a specific event occurs on a table or view. Triggers help in **automating tasks**, maintaining **data integrity**, and enforcing **business rules** without manual intervention.
+
+---
+
+## 🔹 Purpose of Triggers
+
+- **Automate tasks:** Triggers can perform automatic actions in response to data changes.
+- **Enforce business rules:** Ensure data meets certain conditions before it is updated or inserted.
+- **Maintain data integrity:** Automatically validate or modify data to keep it consistent.
+- **Audit and logging:** Track changes to data for security and compliance.
+
+---
+
+## 🔹 Types of Triggers
+
+1. **BEFORE Trigger:**  
+   Executes **before** the triggering event (e.g., before an insert, update, or delete).  
+   **Purpose:** Validate or modify data before it is saved to the database.
+
+2. **AFTER Trigger:**  
+   Executes **after** the triggering event (e.g., after an insert, update, or delete).  
+   **Purpose:** Perform actions such as logging, auditing, or updating related tables after the change has been made.
+
+3. **INSTEAD OF Trigger:**  
+   Replaces the standard action of the triggering event (often used with views).  
+   **Purpose:** Customize how data is inserted, updated, or deleted.
+
+---
+
+## 🔹 Examples
+
+### 🟢 BEFORE Trigger Example
+
+```sql
+CREATE TRIGGER trg_before_insert
+BEFORE INSERT ON employees
+FOR EACH ROW
+BEGIN
+    -- Ensure the employee’s age is at least 18
+    IF :NEW.age < 18 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Age must be at least 18');
+    END IF;
+END;
+```
+### 🟢 AFTER Trigger Example
+
+```sql
+CREATE TRIGGER trg_after_update
+AFTER UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    -- Log the update action into the employee_log table
+    INSERT INTO employee_log (employee_id, action, action_time)
+    VALUES (:NEW.id, 'UPDATE', SYSDATE);
+END;
+```
+
