@@ -258,5 +258,33 @@ console.log(evens); // [2, 4]
 ```
 
 
+## What Are HTTP Status Codes?
+
+HTTP status codes are standard response codes given by web servers to indicate the outcome of a client's request. They are grouped into ranges to indicate the general type of response.
+
+- **200s**: Success – The request was received, understood, and accepted.
+- **400s**: Client Errors – The request had bad syntax or cannot be fulfilled by the server.
+- **500s**: Server Errors – The server failed to fulfill an apparently valid request.
+
+## Common HTTP Status Codes
+
+| Status Code | Description                             |
+|--------------|----------------------------------|
+| 200          | OK – The request has succeeded.     |
+| 201          | Created – The request has been fulfilled and resulted in a new resource being created. |
+| 204          | No Content – The server successfully processed the request and is not returning any content. |
+| 400          | Bad Request – The server could not understand the request due to invalid syntax. |
+| 401          | Unauthorized – The request requires user authentication. |
+| 403          | Forbidden – The server understood the request, but it refuses to authorize it. |
+| 404          | Not Found – The server cannot find the requested resource. |
+| 500          | Internal Server Error – A generic error message when the server encounters an unexpected condition. |
+| 502          | Bad Gateway – The server, while acting as a gateway or proxy, received an invalid response from the upstream server. |
+| 503          | Service Unavailable – The server is not ready to handle the request, often due to being overloaded or down for maintenance. |
+
+---
+
+There you go! This should be a handy Markdown note with the important status codes and their meanings.
+
+
 
 
