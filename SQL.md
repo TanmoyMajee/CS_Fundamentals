@@ -521,3 +521,162 @@ BEGIN
 END;
 ```
 
+## 1. SQL Query Execution Order (VERY IMPORTANT)
+```sql
+SELECT column_name, AGG_FUNCTION(column)
+FROM table_name
+JOIN table_name ON condition
+WHERE condition
+GROUP BY column_name
+HAVING condition_on_aggregate
+ORDER BY column_name ASC | DESC;
+```
+# SQL Interview Guide: Joins, Grouping, and Filtering
+
+## 1. Sample Data (for Context)
+Assume the following data for all queries below.
+
+### **Employee Table** (`employee`)
+| emp_id | emp_name | dept_id | salary |
+| :--- | :--- | :--- | :--- |
+| 101 | Alice | 1 | 60000 |
+| 102 | Bob | 1 | 80000 |
+| 103 | Charlie | 2 | 55000 |
+| 104 | David | 3 | 90000 |
+| 105 | Eve | 1 | 45000 |
+
+### **Department Table** (`department`)
+| dept_id | dept_name |
+| :--- | :--- |
+| 1 | IT |
+| 2 | HR |
+| 3 | Sales |
+| 4 | Marketing |
+
+### **Project Table** (`project`)
+| project_id | emp_id | project_name |
+| :--- | :--- | :--- |
+| P100 | 101 | Cloud Migration |
+| P200 | 102 | Security Audit |
+| P300 | 102 | Backend Refactor |
+| P400 | 103 | Recruitment Drive|
+
+---
+
+## 2. JOIN + GROUP BY (Basic Aggregations)
+
+### Q1. Find total salary of each department
+*Goal: Join tables to get department names and sum salaries.*
+```sql
+SELECT d.dept_name, SUM(e.salary) AS total_salary
+FROM employee e
+JOIN department d ON e.dept_id = d.dept_id
+GROUP BY d.dept_name;
+```
+### Q2. Find departments whose total salary is greater than 100,000
+*Goal: Filter based on an aggregated value (sum of salary).*
+```sql
+SELECT d.dept_name, SUM(e.salary) AS total_salary
+FROM employee e
+JOIN department d ON e.dept_id = d.dept_id
+GROUP BY d.dept_name
+HAVING SUM(e.salary) > 100000;
+```
+### Q3. Count number of employees in each department
+
+*Goal: Use LEFT JOIN to ensure departments with 0 employees (like 'Marketing') are still listed with a count of 0.
+
+```sql
+SELECT d.dept_name, COUNT(e.emp_id) AS emp_count
+FROM department d
+LEFT JOIN employee e ON d.dept_id = e.dept_id
+GROUP BY d.dept_name;
+```
+
+### Q4. Find departments having more than 2 employees earning above 50,000
+
+*Goal: Filter rows first (WHERE), then group, then filter groups (HAVING).
+```sql
+SELECT dept_id, COUNT(*) AS emp_count
+FROM employee
+WHERE salary > 50000  -- 1. Filters individual rows (Before Grouping)
+GROUP BY dept_id      -- 2. Groups the remaining rows
+HAVING COUNT(*) > 2;  -- 3. Filters the groups (After Grouping)
+```
+
+Key Differences
+Clause	Used For	Execution Order
+WHERE	Filtering Rows	Before Grouping
+HAVING	Filtering Groups (Aggregates)	After Grouping
+
+
+### Q5. List departments ordered by total salary (highest first)
+```sql
+SELECT dept_id, SUM(salary) AS total_salary
+FROM employee
+GROUP BY dept_id
+ORDER BY total_salary DESC;
+```
+
+
+### Q6. Find the department with the highest total salary
+
+Strategy: Order by sum descending and take the top 1.
+
+```sql
+SELECT dept_id
+FROM employee
+GROUP BY dept_id
+ORDER BY SUM(salary) DESC
+LIMIT 1;
+```
+
+### Q7.  Find employees who are not assigned to any project
+
+Strategy: Use LEFT JOIN and check for NULLs in the right table (Project).
+```sql
+
+SELECT e.emp_name
+FROM employee e
+LEFT JOIN project p ON e.emp_id = p.emp_id
+WHERE p.emp_id IS NULL;
+```
+
+### Q8. Find employees working on more than one project
+
+Strategy: Group by employee and count the number of project_ids.
+
+```sql
+SELECT emp_id
+FROM project
+GROUP BY emp_id
+HAVING COUNT(project_id) > 1;
+```
+
+### Q9. Find departments with no employees
+
+Strategy: Similar to Q7, using LEFT JOIN from Department to Employee.
+```sql
+SELECT d.dept_name
+FROM department d
+LEFT JOIN employee e ON d.dept_id = e.dept_id
+WHERE e.emp_id IS NULL;
+```
+
+### 6. Common Interview Mistakes
+❌ The "WHERE Aggregate" Mistake
+
+Wrong:
+```sql
+SELECT dept_id FROM employee WHERE SUM(salary) > 50000
+```
+
+Why: You cannot use aggregate functions (SUM, COUNT, AVG) in a WHERE clause because the groups haven't been formed yet.
+✅ The Correct Way
+
+Correct:
+```sql
+SELECT dept_id FROM employee GROUP BY dept_id HAVING SUM(salary) > 50000
+```
+
+
