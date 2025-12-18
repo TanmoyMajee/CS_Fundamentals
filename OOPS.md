@@ -75,6 +75,7 @@ Yes, 100%. I’ll give one real-life example that covers All 4 OOPS Pillars clea
 Topic: ATM System (very common and easy to explain)
 
 ✅ Code Implementing All 4 Pillars (C++)
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -154,6 +155,7 @@ int main() {
     delete userATM;
     return 0;
 }
+````
 How to Explain This in the Interview (Very Simple)
 
 Encapsulation:
