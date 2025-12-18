@@ -14,7 +14,7 @@
 ## Core Git Concepts
 
 ### Branching
-- **Branching** allows you to create separate lines of development in your repository. This way, you can work on new features or fixes without affecting the main codebase.
+- Branching is essentially creating a copy of the main project. This lets you work on new features or bug fixes separately without altering the main codebase. Once you're done, you can merge your branch back into the main branch using a git merge. This keeps the development organized and the main codebase stable
 
 ### Merging
 - **Merging** is the process of combining changes from one branch into another. It often creates a merge commit to tie the histories together.
