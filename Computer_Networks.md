@@ -122,3 +122,13 @@ Handles **raw bit transmission** over physical media.
 | **Network** | **Internet Layer** |
 | **Data Link + Physical** | **Network Access Layer** |
 
+# tcp vs udp 
+# Ip -> v4 ,v6
+# subnet
+# public vs private IP
+# MAC
+# Diff device
+# types - LAN , MAN , WAN  , PAN
+# NAT / DHCP 
+# vpn / dns
+
