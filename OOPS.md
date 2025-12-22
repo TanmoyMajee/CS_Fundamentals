@@ -170,3 +170,235 @@ Abstraction:
 Polymorphism:
 “In main(), I used an ATM* pointer to refer to a BankATM object. This is runtime polymorphism.”
 
+
+
+# C++ vs Java – OOPS Differences (Interview Notes)
+
+This document covers the **most important OOPS differences between C++ and Java**
+from a **service-based company interview perspective**, with examples and scripts.
+
+---
+
+## 1️⃣ Inheritance & Interfaces (Multiple Inheritance)
+
+### Concept
+Inheritance allows a class to acquire properties and behavior of another class.
+
+- **C++**: Supports multiple inheritance using classes
+- **Java**: Does NOT support multiple inheritance with classes  
+  → Achieved using **interfaces**
+
+---
+
+### E-commerce Example (Discount Feature)
+
+### ✅ C++ Example
+```cpp
+class Product {
+public:
+    virtual void show() {
+        cout << "Product" << endl;
+    }
+};
+
+class Discountable {
+public:
+    virtual double getDiscount() = 0; // pure virtual
+};
+
+class DigitalProduct : public Product, public Discountable {
+public:
+    double getDiscount() override {
+        return 0.10;
+    }
+};
+```
+    Multiple inheritance allowed
+
+    Abstract class achieved using pure virtual function
+
+✅ Java Example
+```java
+interface Discountable {
+    double getDiscount();
+}
+
+class Product {
+    void show() {
+        System.out.println("Product");
+    }
+}
+
+class DigitalProduct extends Product implements Discountable {
+    @Override
+    public double getDiscount() {
+        return 0.10;
+    }
+}
+```
+    Can extend only one class
+
+    Can implement multiple interfaces
+
+🎤 Interview Script
+
+    “C++ supports multiple inheritance using classes, which can cause ambiguity.
+    Java avoids this by allowing a class to extend only one class and implement
+    multiple interfaces, which makes the design safer and cleaner.”
+
+2️⃣ Abstract Class vs Interface
+Key Idea
+
+Both are used to achieve abstraction, but they differ in structure.
+C++ (Abstract Class)
+
+    No abstract keyword
+
+    A class becomes abstract if it has at least one pure virtual function
+
+    Can contain normal methods + data members
+```cpp
+class Payment {
+public:
+    virtual void pay() = 0; // pure virtual
+    void log() {
+        cout << "Payment logged" << endl;
+    }
+};
+
+Java (Abstract Class & Interface)
+
+abstract class Payment {
+    abstract void pay();
+    void log() {
+        System.out.println("Payment logged");
+    }
+}
+````
+
+    abstract keyword is mandatory
+
+    Abstract class may or may not contain abstract methods
+
+    Interface mainly defines a contract
+
+🎤 Interview Script
+
+    “In Java, we explicitly use the abstract keyword, whereas in C++, a class
+    becomes abstract automatically if it has a pure virtual function.”
+
+3️⃣ Memory Management
+Concept
+
+How memory is allocated and released.
+C++ (Manual Memory Management)
+```cpp
+Order* order = new Order(101);
+// use order
+delete order; // manual cleanup
+
+    Programmer is responsible
+
+    Uses new and delete
+
+    Destructor is used for cleanup
+
+~Order() {
+    // cleanup logic
+}
+```
+Java (Automatic Garbage Collection)
+```java
+Order order = new Order(101);
+// no delete needed
+```
+    Memory managed by Garbage Collector
+
+    No destructors
+
+    Cleaner and safer, but less control
+
+🎤 Interview Script
+
+    “C++ uses manual memory management with destructors, while Java uses automatic
+    garbage collection, which reduces memory leaks and makes development safer.”
+
+4️⃣ Polymorphism (Overloading vs Overriding)
+A. Method Overloading (Compile-time Polymorphism)
+
+✔ Same in both C++ and Java
+
+void pay(int amount) {}
+void pay(int amount, String mode) {}
+
+void pay(int amount);
+void pay(int amount, string mode);
+
+B. Method Overriding (Runtime Polymorphism)
+C++ (Needs virtual)
+```cpp
+class Product {
+public:
+    virtual string getType() {
+        return "Product";
+    }
+};
+
+class DigitalProduct : public Product {
+public:
+    string getType() override {
+        return "Digital Product";
+    }
+};
+```
+    virtual keyword is mandatory
+
+    Enables runtime binding
+
+Java (Virtual by Default)
+```java
+class Product {
+    String getType() {
+        return "Product";
+    }
+}
+
+class DigitalProduct extends Product {
+    @Override
+    String getType() {
+        return "Digital Product";
+    }
+}
+```
+
+    No virtual keyword needed
+
+    All non-static methods are virtual by default
+
+🎤 Interview Script
+
+    “Method overloading is the same in both languages. For method overriding,
+    C++ requires the virtual keyword, while Java methods are virtual by default,
+    making runtime polymorphism simpler.”
+
+5️⃣ (Brief) Exception Handling
+
+    Java: Has checked & unchecked exceptions (compiler enforces handling)
+
+    C++: All exceptions are unchecked
+
+    This topic can be kept short in service-based interviews.
+
+## 🔥 Quick Revision Table (VERY IMPORTANT)
+
+| Feature                | C++                     | Java                    |
+|------------------------|--------------------------|-------------------------|
+| Multiple inheritance   | Supported with classes   | Not supported           |
+| Alternative to MI      | —                        | Interfaces              |
+| Abstract class keyword | ❌ Not needed            | ✅ Required             |
+| Pure virtual method    | `= 0`                    | `abstract`              |
+| Memory management      | Manual (`new/delete`)    | Automatic (GC)          |
+| Destructor             | Yes                      | No                      |
+| Method overloading     | Same                     | Same                    |
+| Method overriding      | Needs `virtual`          | Virtual by default      |
+| Interfaces             | Not explicit             | Explicit keyword        |
