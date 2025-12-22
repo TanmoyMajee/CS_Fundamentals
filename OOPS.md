@@ -402,3 +402,45 @@ class DigitalProduct extends Product {
 | Method overloading     | Same                     | Same                    |
 | Method overriding      | Needs `virtual`          | Virtual by default      |
 | Interfaces             | Not explicit             | Explicit keyword        |
+
+
+# Overall Difference Between C++ and Java (Interview Notes)
+
+---
+
+## 🎤 Interview Script (Brief & Clear)
+
+> “Both C++ and Java are powerful programming languages, but they differ mainly in their design goals.  
+C++ gives more control to the programmer, especially over memory management, which makes it faster and suitable for system-level and performance-critical applications like game development. However, memory management in C++ is manual, so the programmer has to handle it carefully.
+
+>Java, on the other hand, focuses on simplicity, safety, and portability. It uses the Java Virtual Machine (JVM), which makes Java platform independent. Java also provides automatic memory management through garbage collection, which reduces memory-related errors. Because of this, Java is widely used in enterprise applications, web development, and Android development.”
+
+---
+
+
+## 🔥 C++ vs Java – Important Differences (Interview Focused)
+
+| Aspect (Important for Interview) | C++ | Java |
+|---------------------------------|----|----|
+| Level of control | Low-level, closer to hardware | Higher-level, JVM-based |
+| Memory management | Manual (`new`, `delete`, destructors) | Automatic (Garbage Collector) |
+| Performance | Faster | Slightly slower than C++ |
+| Platform dependency | Platform dependent | Platform independent (JVM) |
+| Programming style | Procedural + Object-Oriented | Primarily Object-Oriented |
+| Multiple inheritance | Supported with classes | Not supported with classes (uses interfaces) |
+| Safety | More control but error-prone | Safer due to GC and no pointers |
+| Common use cases | OS, game engines, system software | Web apps, enterprise apps, Android |
+
+---
+
+## ✅ What to Emphasize in Interview
+- Memory management difference  
+- Platform independence (JVM)  
+- Performance vs safety  
+- Typical use cases  
+
+Avoid going too deep into theory unless asked.
+
+---
+
+
