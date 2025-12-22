@@ -496,5 +496,202 @@ This note should give you a solid foundation for each of these topics. Just revi
 Avoid going too deep into theory unless asked.
 
 ---
+# OOPS 4 Pillars – Java (E-commerce Example)
 
+This document explains all **four pillars of Object-Oriented Programming**
+using a **real-world e-commerce example**, suitable for **service-based company interviews**.
+
+---
+
+## 1️⃣ Encapsulation
+
+### Definition
+**Encapsulation** means wrapping data (variables) and methods (functions)
+into a single unit (class) and **restricting direct access** to the data.
+
+This is done by:
+- Making variables `private`
+- Providing `public` getter and setter methods
+
+---
+
+### E-commerce Example
+We create a `Product` class where product details are protected.
+
+```java
+public class Product {
+    private String name;
+    private double price;
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    // Getters and setters (controlled access)
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getProductType() {
+        return "General Product";
+    }
+}
+
+Interview Explanation
+
+    “Encapsulation protects data by making variables private and exposing them
+    through public methods. This improves security and maintainability.”
+
+2️⃣ Inheritance
+Definition
+
+Inheritance allows a class to acquire properties and behavior of another class.
+It promotes code reusability.
+E-commerce Example
+
+We create specific product types by inheriting from Product.
+
+public class ElectronicProduct extends Product {
+    private int warrantyPeriod;
+
+    public ElectronicProduct(String name, double price, int warrantyPeriod) {
+        super(name, price);
+        this.warrantyPeriod = warrantyPeriod;
+    }
+
+    @Override
+    public String getProductType() {
+        return "Electronic Product";
+    }
+
+    public int getWarrantyPeriod() {
+        return warrantyPeriod;
+    }
+}
+
+public class ClothingProduct extends Product {
+    private String size;
+
+    public ClothingProduct(String name, double price, String size) {
+        super(name, price);
+        this.size = size;
+    }
+
+    @Override
+    public String getProductType() {
+        return "Clothing Product";
+    }
+
+    public String getSize() {
+        return size;
+    }
+}
+
+Interview Explanation
+
+    “Inheritance allows us to reuse the Product class and create specialized
+    products like ElectronicProduct and ClothingProduct.”
+
+3️⃣ Polymorphism
+Definition
+
+Polymorphism means one method behaving differently based on the object.
+
+There are two types:
+
+    Compile-time polymorphism → Method Overloading
+
+    Runtime polymorphism → Method Overriding
+
+A. Runtime Polymorphism (Method Overriding)
+
+Product p1 = new ElectronicProduct("Laptop", 80000, 2);
+Product p2 = new ClothingProduct("T-Shirt", 1500, "M");
+
+System.out.println(p1.getProductType()); // Electronic Product
+System.out.println(p2.getProductType()); // Clothing Product
+
+Same method → different output → runtime decision.
+B. Compile-time Polymorphism (Method Overloading)
+
+public class Order {
+    public void placeOrder(Product product) {
+        System.out.println("Order placed for " + product.getName());
+    }
+
+    public void placeOrder(Product product, int quantity) {
+        System.out.println(
+            "Order placed for " + quantity + " x " + product.getName()
+        );
+    }
+}
+
+Interview Explanation
+
+    “Polymorphism allows the same method to behave differently.
+    Overriding gives runtime polymorphism, and overloading gives compile-time polymorphism.”
+
+4️⃣ Abstraction
+Definition
+
+Abstraction hides implementation details and shows only essential behavior.
+It is achieved using interfaces or abstract classes.
+E-commerce Example (Payment Abstraction)
+
+public interface Payment {
+    boolean processPayment(double amount);
+}
+
+public class CreditCardPayment implements Payment {
+    private double balance;
+
+    public CreditCardPayment(double balance) {
+        this.balance = balance;
+    }
+
+    @Override
+    public boolean processPayment(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Payment successful: " + amount);
+            System.out.println("Remaining balance: " + balance);
+            return true;
+        } else {
+            System.out.println("Payment failed: Insufficient balance");
+            return false;
+        }
+    }
+}
+
+Interview Explanation
+
+    “Abstraction hides payment implementation details.
+    The user only knows that payment is processed, not how it happens internally.”
+
+🔁 Main Class (Demo)
+
+public class ECommerceApp {
+    public static void main(String[] args) {
+        Product product = new ElectronicProduct("Laptop", 80000, 2);
+
+        Order order = new Order();
+        order.placeOrder(product, 1);
+
+        Payment payment = new CreditCardPayment(100000);
+        payment.processPayment(product.getPrice());
+    }
+}
 
