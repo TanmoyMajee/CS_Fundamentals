@@ -209,9 +209,26 @@ int partition(vector<int>& arr, int low, int high) {
     swap(arr[i + 1], arr[high]);
     return i + 1;
 }
+int partition(vector<int>& arr, int low, int high) {
+    int pivt = low;
+    int st = low + 1;
+    int end = high;
+
+    while (st <= end) {
+        while (st <= high && arr[st] <= arr[pivt])
+            st++;
+        while (arr[end] > arr[pivt])
+            end--;
+
+        if (st < end)
+            swap(arr[st], arr[end]);
+    }
+    swap(arr[pivt], arr[end]);
+    return end;
+}
 
 void quickSort(vector<int>& arr, int low, int high) {
-    if(low < high) {
+    if(low < high) {   // or if(l>=h) return
         int pi = partition(arr, low, high);
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
