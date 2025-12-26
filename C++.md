@@ -92,6 +92,21 @@ int main() {
 }
 ```
 
+## 🔹 What is a `stringstream`?
+
+A **`std::stringstream`** is a C++ class that allows you to treat a string as a stream. It is commonly used to split a string into tokens based on a delimiter.
+
+### How to Use It
+```cpp
+while (ss >> word) {
+        tokens.push_back(word);
+    }
+
+    while (getline(ss, word, ' ')) {
+        tokens.push_back(word);
+    }
+
+````
 
 ## 🔹 Pointer vs Reference in C++
 
