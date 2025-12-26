@@ -66,6 +66,33 @@ void callByReference(int &y) {
 | Examples: local variables, params    | Examples: dynamic arrays, linked lists    |
 
 
+## 🔹 What is a Lambda Function in C++?
+
+### Definition
+A **lambda function** in C++ is an anonymous, inline function that you can define right where you need it. It’s typically used for short operations like custom sorting or passing a small function to an algorithm.
+
+### Lambda Syntax
+```cpp
+[capture](parameters) -> return_type {
+    // function body
+};
+int main() {
+    vector<pair<int, int>> vec = {{1, 4}, {2, 3}, {3, 2}, {4, 1}};
+
+    // Sort by the second element of the pair using a lambda function
+    sort(vec.begin(), vec.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+        return a.second < b.second;
+    });
+
+    for (const auto &p : vec) {
+        cout << p.first << ", " << p.second << endl;
+    }
+
+    return 0;
+}
+```
+
+
 ## 🔹 Pointer vs Reference in C++
 
 ### ✅ Pointer — Definition
@@ -236,15 +263,94 @@ public:
     }
 };
 ````
+## ✅ Static data members & static member functions (C++)
+
+Static is a keyword in C++ that means a variable or function belongs to the class itself, not to any specific object. Basically, it makes sure there's only one copy of that variable for the whole class, shared by all objects
+
+### 🔹 Static Data Member (static variable inside class)
+A **static data member** is shared by **all objects of a class** — only **one common copy** exists for the entire class.
+
+### 🔹 Static Member Function
+A **static member function** can be **called without creating an object** and it can access **only static members** of the class.
+````cpp
+#include <iostream>
+using namespace std;
+
+class Student {
+public:
+    static int count;   // static data member
+
+    Student() {
+        count++;        // increases for every object
+    }
+
+    static void showCount() {   // static member function
+        cout << "Total students: " << count << endl;
+    }
+};
+
+// definition of static data member
+int Student::count = 0;
+
+int main() {
+    Student s1;
+    Student s2;
+    Student s3;
+
+    Student::showCount();   // called without object
+    return 0;
+}
+````
+
+# ✅ C++ Exception Handling — Complete Interview Notes
+
+## ⭐ What is Exception Handling?
+An exception is basically an unexpected situation or error that happens at runtime and can interrupt the normal flow of the program. To handle it, we use a try-catch block. We put any code that might cause an exception inside the try block. If something goes wrong, we throw an exception, and then we catch it in the catch block to handle it gracefully
 
 
+
+---
+
+
+
+## 🧩 Basic Example
+
+```cpp
+#include <iostream>
+#include <exception>
+using namespace std;
+
+class NegativeNumberException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Number cannot be negative";
+    }
+};
+
+int main() {
+    try {
+        int n = -5;
+
+        if (n == 0)
+            throw "Number is zero";               // caught as const char*
+
+        if (n < 0)
+            throw NegativeNumberException();      // caught as std::exception
+    }
+    catch (const char* msg) {  //const char* in the catch block because the thrown error message is a constant C-style string, which is just a sequence of characters
+        cout << "String exception: " << msg << endl;
+    }
+    catch (const exception& e) { // exception type is object
+        cout << "Exception object: " << e.what();
+    }
+}
+
+```
 
 
 Shalow & deep copy
 
 copy constructor
-
- What are the static members and static member functions?
 
 
 OOPS Concepts: Encapsulation, Inheritance, Polymorphism, Abstraction in C++
