@@ -61,7 +61,10 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 >To do this, I built middleware to keep track of how many conversations a user creates each day and how many queries they make in each session. I also modified the database schema to include fields for the user’s plan type, plan expiration date, and conversation and query counts.
 
 >Finally, I integrated Stripe webhooks to manage the subscription updates. When a user completes a payment, the webhook updates the user’s plan in the database, switching them to premium and setting the expiration date. This made the subscription process smooth and reliable.
->Another challenge was keeping every conversation’s data isolated. To prevent embeddings from different sessions from mixing, I created session-based collections in Qdrant, so each conversation stores its own vectors and can be retrieved independently.
+
+>Another potential challenge I considered was handling PDFs that contain text in image format. The standard PDF loader I used can’t extract text from images, so I looked into using an OCR tool like Tesseract.js to handle that scenario.(Optical Character Recognition>
+
+>While I haven’t implemented it yet, I know that adding an OCR step would allow the system to read text from images and make the RAG pipeline more robust. It’s something I’m aware of and plan to explore furthe
 
 ## ✅ Why I chose the RAG approach Insted of notmal api LLM call 
 
