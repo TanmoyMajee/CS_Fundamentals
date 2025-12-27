@@ -362,10 +362,159 @@ int main() {
 
 ```
 
+ ## Operator Overloading?
+Operator overloading means giving a new meaning to an operator (like +, -, *, []) when it is used with objects.  // it is used to perform secipif task with 2 diff objects
+```cpp
+#include <iostream>
+using namespace std;
 
-Shalow & deep copy
+class Point {
+private:
+    int x, y;
 
-copy constructor
+public:
+    Point(int a, int b) : x(a), y(b) {}
+
+    bool operator==(const Point& p) const {
+        return (x == p.x && y == p.y);
+    }
+};
+
+int main() {
+    Point p1(2, 3);
+    Point p2(2, 5);
+
+    if (p1 == p2)
+        cout << "Both points are equal";
+    else
+        cout << "Points are not equal";
+
+    return 0;
+}
+
+```
+
+## copy constructor
+ A Copy constructor is an overloaded
+constructor used to declare and initialize an object from another
+object. It is of two types - default copy constructor and user
+defined copy constructor  , it take a ref of an object in the paramets , then copy from it 
+
+## Shallow Copy vs Deep Copy
+
+### Shallow Copy
+- A shallow copy duplicates the object, but both the original and the copied object share the same memory for any referenced fields (e.g., pointers).
+- Changes made to one object will reflect in the other because they both point to the same memory location.
+
+### Deep Copy
+- A deep copy creates a completely independent copy of the original object.
+- Both objects have their own separate memory, so changes in one object do not affect the other.
+
+# Virtual Functions, Pure Virtual Functions, Abstract Class – C++
+
+## 1. What is a Virtual Function?
+A virtual function is a function in a base class that is declared using the `virtual` keyword and is meant to be overridden in the derived class.
+
+### Key Points
+- Enables **run-time polymorphism**
+- Function call is resolved at **runtime** (dynamic binding)
+- Declared with `virtual` in the base class
+- Overridden in the derived class
+
+### Interview Line
+A virtual function allows a derived class to provide its own implementation, and the correct function is called based on the object type at runtime.
+
+---
+
+## 2. What is a Pure Virtual Function?
+A pure virtual function is a virtual function that has **no definition in the base class** and is assigned `= 0`.
+
+### Key Points
+- Only declared, not defined in base class
+- Must be overridden in derived class
+- Makes the class **abstract**
+- Syntax: `virtual void func() = 0;`
+
+### Interview Line
+A pure virtual function forces derived classes to implement that function.
+
+---
+
+## 3. What is an Abstract Class?
+An abstract class is a class that contains at least **one pure virtual function**.
+
+### Key Points
+- Cannot be instantiated (no objects allowed)
+- Used as a **base class**
+- Derived class must implement pure virtual functions
+- Supports **polymorphism**
+
+### Interview Line
+An abstract class works as a blueprint for other classes.
+
+---
+
+## 4. Difference: Virtual vs Pure Virtual Function
+
+| Virtual Function | Pure Virtual Function |
+|------------------|-----------------------|
+| Can have body/definition | No body in base class |
+| Optional to override | Must be overridden |
+| Does not make class abstract | Makes class abstract |
+| Object of class can be created | Object cannot be created |
+
+---
+
+## 5. How Polymorphism is Achieved Using Virtual Functions?
+- Base class pointer points to derived class object
+- Function call resolves at runtime
+- Ensures correct overridden method is executed
+
+### Interview Line
+Virtual functions enable runtime polymorphism by deciding which function to call during execution instead of compile time.
+
+---
+
+## 6. Can We Instantiate an Abstract Class?
+No, we **cannot create objects** of an abstract class.
+
+### Why?
+Because implementation is incomplete (pure virtual function not defined).
+
+### What we can do?
+- Use pointer/reference of abstract class
+- Create objects of derived class instead
+
+---
+
+## 7. What is a Virtual Destructor and Why is it Needed?
+A virtual destructor ensures the **derived class destructor is called** when deleting an object through a base class pointer.
+
+### Interview Line
+A virtual destructor prevents memory leaks in polymorphic base classes.
+
+---
+
+## 8. How is Interface Implemented in C++?
+C++ does not have a separate `interface` keyword like Java.
+
+### Interface in C++ is implemented using:
+- **Abstract class**
+- **All pure virtual functions**
+
+### Key Points
+- No data members usually
+- Only function declarations
+- Derived class must implement all methods
+
+### Interview Line
+In C++, an interface is implemented using an abstract class with all pure virtual functions.
+
+---
+
+
+
+
 
 
 OOPS Concepts: Encapsulation, Inheritance, Polymorphism, Abstraction in C++
