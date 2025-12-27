@@ -8,6 +8,8 @@ I am passionate about software development, especially in areas like full stack 
 
 >“Over the last five years of my journey in computer science, I have worked with multiple technology stacks and explored different domains. I have built some impactful projects, mainly using the MERN stack, such as a RAG-based application and a real-time chat application.”
 
+>I'm passionate about full-stack development. During my computer science journey, I've built projects using the MERN stack—for example, a RAG-based PDF Q&A platform and a real-time chat application.I am also very comfortable with relational databases like MySQL.
+
 >Alongside development, I have solved more than 600 coding problems,  on platfrom like LeetCode , codeforces , which has improved my problem-solving skills.Outside academics, I enjoy watching football and playing chess.
 
 ** Internship Details **
