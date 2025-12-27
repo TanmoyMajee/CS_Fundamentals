@@ -55,11 +55,29 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 >    “HuggingFace is a platform that provides pre-trained NLP models. In my project, I used their embedding model Xenova/all-MiniLM-L6-v2 (a sentence transformer) to convert document chunks and user queries into vectors, and their LLM (DeepSeek) to generate natural language answers. So, HuggingFace powered both the embedding generation and the answer generation parts of my RAG pipeline
    	
 **13.	What challenges did you face while building RagIt?**
->    One major challenge was setting up the retrieval chain, which is the main augmentation step. Fetching the right chunks, combining them with a custom prompt, and then passing everything to the LLM was tricky to understand at first. To tackle this, I first built a small demo project to test the retrieval chain separately before integrating it into the main app.
 
+>One of the major challenges I faced in my RAG application was implementing a plan-based subscription system. Initially, I hadn’t planned on having multiple plans, but I later decided to introduce both free and premium tiers.
+
+>To do this, I built middleware to keep track of how many conversations a user creates each day and how many queries they make in each session. I also modified the database schema to include fields for the user’s plan type, plan expiration date, and conversation and query counts.
+
+>Finally, I integrated Stripe webhooks to manage the subscription updates. When a user completes a payment, the webhook updates the user’s plan in the database, switching them to premium and setting the expiration date. This made the subscription process smooth and reliable.
 >Another challenge was keeping every conversation’s data isolated. To prevent embeddings from different sessions from mixing, I created session-based collections in Qdrant, so each conversation stores its own vectors and can be retrieved independently.
 
->Finally, while implementing a plan-based payment system with Stripe, I had to build middleware to track how many sessions a user can create and how many queries are allowed per plan. Integrating these checks with Prisma and Stripe’s APIs required careful backend logic
+## ✅ Why I chose the RAG approach Insted of notmal api LLM call 
+
+>I chose the **RAG (Retrieval-Augmented Generation)** approach because it provides answers directly from the document’s content, ensuring the information is **accurate and relevant**.
+
+>If I had used a normal API call with a general LLM like Gemini without the RAG method, there’s a chance the model could generate answers based on its own broad training data rather than the specific PDF. This could lead to **less accurate or unrelated answers**.
+
+>With RAG, we avoid that problem because the model only uses the **retrieved information from the document**. This means the answers are specifically tied to the PDF content, making them **more reliable and accurate**.
+
+### 🔹 Key Points for the Comparison
+
+- Without RAG, a general LLM might pull in **unrelated or hallucinated information**
+- RAG ensures the answer is **strictly based on the provided PDF**
+- Improves **accuracy, relevance, and trustworthiness**
+- Best suited for **document-specific question answering**
+
 
 **How I Implemented the Retrieval Chain:**
 
