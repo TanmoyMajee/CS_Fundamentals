@@ -258,6 +258,33 @@ console.log(evens); // [2, 4]
 ```
 
 
+# Local Storage vs Session Storage vs Cookies
+
+## 🔹 One-line explanations
+
+- **Local Storage:** Stores data in the browser **without expiration**, persists even after closing the browser.
+- **Session Storage:** Stores data in the browser **for a single tab session** and is cleared when the tab is closed.
+- **Cookies:** Small pieces of data that are **automatically sent to the server with each request** and can have an expiration time.
+
+---
+
+## 📊 Comparison Table
+
+| Feature | Local Storage | Session Storage | Cookies |
+|--------|----------------|-----------------|---------|
+| Basic Idea | Persistent browser storage | Tab-based temporary storage | Small data sent to server |
+| Expiry | No automatic expiry | Cleared on tab close | Can be set manually |
+| Size Limit | ~5–10 MB | ~5 MB | ~4 KB |
+| Accessible from JavaScript | Yes | Yes | Yes (except HttpOnly) |
+| Automatically Sent to Server | No | No | Yes |
+| Storage Location | Browser | Browser | Browser + HTTP headers |
+| Security Risk | XSS | XSS | XSS + CSRF |
+| Typical Use | Preferences, cached data | Temporary form data | Authentication/session tokens |
+
+---
+
+
+
 ## What Are HTTP Status Codes?
 
 HTTP status codes are standard response codes given by web servers to indicate the outcome of a client's request. They are grouped into ranges to indicate the general type of response.
