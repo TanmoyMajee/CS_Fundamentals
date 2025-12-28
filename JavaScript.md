@@ -279,7 +279,7 @@ console.log(evens); // [2, 4]
 | Automatically Sent to Server | No | No | Yes |
 | Storage Location | Browser | Browser | Browser + HTTP headers |
 | Security Risk | XSS | XSS | XSS + CSRF |
-| Typical Use | Preferences, cached data | Temporary form data | Authentication/session tokens |
+| Typical Use | dark/lght mode , cached data | otp ver , | Authentication/session tokens |
 
 ---
 
