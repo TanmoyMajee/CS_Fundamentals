@@ -283,6 +283,25 @@ console.log(evens); // [2, 4]
 
 ---
 
+## What is REST?
+
+REST stands for Representational State Transfer. It is an architectural style for designing networked applications. RESTful APIs allow communication between client and server using standard HTTP methods like GET, POST, PUT, DELETE, and PATCH. Data is typically transferred in JSON or XML format.
+
+## Key points to mention:
+
+-REST is stateless Independent , meaning each request from the client to the server must contain all the information the server needs to fulfill that request.
+
+-RESTful services are resource-based, and each resource is identified by a URL.
+
+-The use of standard HTTP methods makes REST simple and widely adopted.
+
+## HTTP
+
+HTTP is indeed the protocol that facilitates data exchange between the client and the server.
+
+It’s stateless, meaning each request is independent and doesn’t rely on any previous requests.
+
+It uses standard methods like GET, POST, PUT, and DELETE to perform different operations.
 
 
 ## What Are HTTP Status Codes?
@@ -292,6 +311,23 @@ HTTP status codes are standard response codes given by web servers to indicate t
 - **200s**: Success – The request was received, understood, and accepted.
 - **400s**: Client Errors – The request had bad syntax or cannot be fulfilled by the server.
 - **500s**: Server Errors – The server failed to fulfill an apparently valid request.
+
+## HTTP vs HTTPS
+
+HTTP (Hypertext Transfer Protocol) is the standard protocol for transferring data between a web browser and a server.
+
+HTTPS (Hypertext Transfer Protocol Secure) is the secure version of HTTP. It uses encryption (SSL/TLS) to protect the data being transferred.
+
+## Key Differences:
+
+Security: HTTPS encrypts the data, making it secure from eavesdropping and tampering, while HTTP does not.
+
+Port: HTTP typically uses port 80, whereas HTTPS uses port 443.
+
+----
+
+SSL stands for Secure Sockets Layer.
+TLS stands for Transport Layer Security.
 
 ## Common HTTP Status Codes
 
