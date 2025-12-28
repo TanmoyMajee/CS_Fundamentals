@@ -41,6 +41,8 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 **Why should we hire you?**
 >You should hire me because I have both strong problem-solving skills and hands-on development experience. Solving more than 500 DSA problems has improved my analytical thinking, and I’ve applied those skills in building full-stack applications, including a RAG-based project and a real-time chat application. I’m confident that I can contribute from day one, help the team move forward, and ultimately support the company’s growth with the skills and experience I bring.
 
+>You should hire me because I have a strong foundation in problem-solving and full-stack development, as shown by my projects and coding practice. I’ve solved over 600 coding problems regularly, which has improved my logical thinking, and I’ve built real applications that demonstrate my ability to design, implement, and maintain software. I am eager to learn new technologies and adapt quickly, which fits well with TCS’s focus on continuous learning and innovation. I’m confident I can contribute to the team and grow with the organization.
+
 **What makes you unique from other candidates?**
 >What makes me unique is my ability to learn quickly and adapt to new challenges. In my projects—especially when implementing complex features like plan-based structures and Stripe integration—I didn’t rely on shortcuts. I explored documentation, broke down the problems, and figured out solutions independently. This combination of deep problem-solving, self-learning, and the ability to implement features end-to-end helps me stand out from other candidates.
 
@@ -93,12 +95,94 @@ Because it uses many trees instead of one, it reduces overfitting and gives more
 >"A Decision Tree is a simple model that works like a flowchart, making decisions step-by-step based on yes/no conditions. However, a single decision tree often overfits the data and becomes unstable, meaning even small changes in the dataset can change the entire tree and reduce accuracy. To overcome this, we switched to a Random Forest classifier, which uses many decision trees together and takes the majority vote. This makes the predictions much more accurate, stable, and reliable compared to using just one tree
 
 
-Why do you want to work for our company?
+# What do you know about TCS?
+>Tata Consultancy Services (TCS) is an Indian multinational IT services and consulting company headquartered in Mumbai . TCS operates in over 50 countries with around 600,000 employees worldwide. They work in various domains like cloud, AI, and software development, providing solutions to clients across the world."
 
+
+Founded in 1968   Tata Consultancy Services ,  First CEO F.C. Kohli ( "Father of the Indian IT Industry, )
+
+Headquartered in Mumbai, Maharashtra, India. 
+
+Operates in 55+ countries with 500+ offices. 
+
+600,000+ employees globally. 
+
+Known for IT services, consulting, digital transformation, and innovation. 
+
+Part of the Tata Group, a leading Indian business group. 
+
+Current CEO: K. Krithivasan (2023–present). 
+Chariman : Natrajan chandrasekhar
+
+## Why TCS
+>
 
 
 **Tell me about your family background.**
 >We are a family of four. My father is a private driver, my mother is a homemaker, and my younger sister is an artist and beautician. We are a close-knit family and always support each other.
+
+## Are you planning for higher studies? Are you willing to relocate anywhere in India? 
+## What is your expected salary? 
+## Who is your role model and why?
+
+
+
+
+Tell me about yourself.
+
+Why do you want to join TCS?
+
+What do you know about TCS?
+
+Why should we hire you?
+
+What are your strengths and weaknesses?
+
+Where do you see yourself in 5 years?
+
+Are you willing to relocate anywhere in India?
+
+Are you comfortable working night shifts?
+
+What is your expected salary?
+
+
+
+🧠 Behavioral / Situation Questions
+
+Tell me about a time when you worked under pressure.
+
+Describe a conflict you had in a team and how you handled it.
+
+Tell me about a failure and what you learned from it.
+
+Have you ever taken leadership responsibility?
+
+How do you handle criticism?
+
+
+
+👤 Personal Questions
+
+Tell me about your family background.
+
+What are your hobbies?
+
+Who is your role model and why?
+
+What motivates you?
+
+What do you do in your free time?
+
+
+
+
+
+
+
+
+
+
 
 Why are you interested in this role?
 
