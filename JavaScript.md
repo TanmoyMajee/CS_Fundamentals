@@ -1,10 +1,7 @@
 | Feature   | var                              | let               | const            |
 | --------- | -------------------------------- | ----------------- | ---------------- |
 | Scope     | Function                         | Block             | Block            |
-| Hoisting  | Yes (initialized as `undefined`) | Yes (TDZ)         | Yes (TDZ)        |
-| Redeclare | ✔ Yes                            | ❌ No              | ❌ No             |
-| Reassign  | ✔ Yes                            | ✔ Yes             | ❌ No             |
-| Best Use  | Avoid                            | Mutable variables | Fixed references |
+
 
 >"Sure! So basically, we usually prefer let and const over var. The reason is that let and const are block-scoped,
 meaning they're confined to the block they're defined in. On the other hand, var is function-scoped, which can lead to unintended access outside of the block.
@@ -346,7 +343,14 @@ TLS stands for Transport Layer Security.
 
 ---
 
-There you go! This should be a handy Markdown note with the important status codes and their meanings.
+## HTML and HTML5
+
+✔️ Semantic tags — <header>, <footer>, <section>, <article>
+✔️ Multimedia support — <video>, <audio>, <canvas>
+✔️ Web storage — localStorage, sessionStorage
+✔️ APIs — Geolocation, Offline storage
+✔️ Form enhancements — new input types like email, date, tel
+✔️ Better performance & mobile support
 
 
 
