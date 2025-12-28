@@ -12,6 +12,9 @@ I am passionate about software development, especially in areas like full stack 
 
 >Alongside development, I have solved more than 600 coding problems,  on platfrom like LeetCode , codeforces , which has improved my problem-solving skills.Outside academics, I enjoy watching football and playing chess.
 
+** Not mention in resuem **
+>“Something not mentioned in my resume is that I’m very disciplined about self-learning. I maintain a small daily learning routine, and recently I’ve started learning the basics of Java and OOP concepts along with my other subjects. I also completed an industrial training related to AI, which gave me exposure to how AI can be used in real applications. Apart from academics, I casually enjoy playing chess — I’m not an expert, but I like it because it helps me think strategically and stay focused.”
+
 ** Internship Details **
 >I haven’t completed any formal global certifications yet, but I did undergo an industrial training program during my summer vacation in 2025 with AIwala. This program focused on itegrating ai in MERN stack and it provided me with hands-on experience in building RAG-based applications."
  >I built a chatbot using the Gemini API. Through this experience, I gained valuable insights into building RAG applications, which helped me develop my own projects.
