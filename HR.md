@@ -13,7 +13,8 @@ I am passionate about software development, especially in areas like full stack 
 >Alongside development, I have solved more than 600 coding problems,  on platfrom like LeetCode , codeforces , which has improved my problem-solving skills.Outside academics, I enjoy watching football and playing chess.
 
 ** Internship Details **
->"I completed a remote internship with AIwala, focusing on full-stack development and generative AI. During this internship, I built a chatbot using the Gemini API. Through this experience, I gained valuable insights into building RAG applications, which helped me develop my own projects.
+>I haven’t completed any formal global certifications yet, but I did undergo an industrial training program during my summer vacation in 2025 with AIwala. This program focused on itegrating ai in MERN stack and it provided me with hands-on experience in building RAG-based applications."
+ >I built a chatbot using the Gemini API. Through this experience, I gained valuable insights into building RAG applications, which helped me develop my own projects.
 
 ** Internship Challanges **
 >During my internship, one of the main challenges I faced was transitioning from JavaScript to TypeScript. Since I didn’t have prior experience with TypeScript, it took me a few days to get comfortable with its type system and syntax. However, this challenge ultimately helped me improve the quality and maintainability of my code, making it more robust. In the end, this experience significantly contributed to my growth as a develope
