@@ -75,6 +75,9 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 ## Stripe 
 >can say: “I create a Stripe account and set up a checkout link. I give Stripe my backend’s webhook URL so they know where to send events. On the frontend, I redirect the user to the Stripe checkout. The user completes the payment and enters their email there. Stripe sends a webhook to my backend with that email, and I use it to find and upgrade the user in my database.”
 
+## Web Hook
+>A webhook is basically a message that one application sends automatically to another when a certain event happens. In my project, after a user successfully completes a payment on Stripe, the Stripe application automatically sends an HTTP request to my backend. That automatic notification is what we call a webhook.
+
 Create a Stripe Account:
 First, I set up my Stripe account to access the dashboard.
 
@@ -221,9 +224,10 @@ Update user’s plan = "PREMIUM"
 Set planExpiry = now() + 30 days
 This way the upgrade is fully automatic — no manual involvement.
 
-General Project Questions:
+## Real-world use cases:
+>imagine a researcher or a student who has a large collection of PDF research papers. Instead of spending hours flipping through each page to find a specific piece of information, they can just upload the document into the platform, ask their question in plain English, and get an immediate, context-aware answer drawn directly from that PDF
 
-Real-world use cases: Be prepared to discuss how RAGIT can be applied in various industries, like legal, academic, or corporate settings
+Be prepared to discuss how RAGIT can be applied in various industries, like legal, academic, or corporate settings
 Performance and scalability: Be prepared to discuss how your project can scale and handle larger documents or more users.
 
 Can you walk me through how RAGIT works?
