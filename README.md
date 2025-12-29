@@ -8,13 +8,20 @@
 >For the tech stack, I used React for the frontend and Node.js with Express for the backend, and PostgreSQL as the database. For the AI model, I used DeepSeek to generate answers from the PDF content.
 
 
-
-
 **2.	Why did you choose this project idea? // Motivation**
 
 >“I chose this idea because going through long documents is time-consuming. This project makes it easier to quickly extract answers — for example, from research papers or e-books — without reading every page.”
 
 **3. Can you explain how your RAG application works? Flow**
+>"Starting from the landing page, when a user clicks on the 'Try RAGIT for Free' button, if they’re already logged in, they’ll be taken directly to the chat interface. If not, they’ll be prompted to sign up or log in first. Once they complete that step, they’ll enter the chat interface.
+
+>In the chat interface, the user can upload a PDF document. Once the document is uploaded, it’s split into smaller chunks and stored in a vector database, and a conversation record is created. After this processing is complete, the user will see a toast notification confirming that the document has been successfully processed.
+
+>At that point, the user can begin asking queries related to the content of the PDF. The system will then retrieve the relevant chunks from the database and use DeepSeek to generate accurate answers, which are then sent back to the user.
+
+>Regarding usage limits, free plan users can only ask up to 10 queries per conversation per day, whereas premium plan users can ask unlimited queries. Additionally, the uploaded PDF is also stored in Firebase, and users can view the content of the document by clicking on it in the conversation tab.
+
+>Finally, if a free user reaches the query limit, they’ll be prompted with an option to upgrade their plan, making it easy for them to unlock unlimited access.
 
 **How does the system work step by step when a user uploads a PDF and asks a question?**
 
@@ -23,6 +30,9 @@
 > When the user asks a question, we create an embedding for that query and use Qdrant to fetch the most relevant chunks. Then I built a retrieval chain in LangChain, where those chunks are combined with a custom prompt. The prompt makes sure the model only answers from the given context. Finally, a HuggingFace LLM generates the response, and both the user’s question and the AI’s answer are stored in the database to maintain chat history.
 
 
+## Why I Chose DeepSeek:
+
+>"I chose DeepSeek because it’s an open-source language model hosted on Hugging Face, which makes it easy to access and integrate without the need for any credit card information. This accessibility is crucial for development, especially since I don’t have a credit card. Additionally, DeepSeek provides reliable and accurate answers, making it a perfect fit for my RAG-based project. Compared to other models like OpenAI or Gemini, DeepSeek is more accessible and cost-effective, which is why it was the best choice for my needs."
 
 
 **4.	What is an embedding? Why do you need it?**
@@ -38,7 +48,7 @@ For example, I used classes like PDFLoader to read documents, RecursiveCharacter
 So overall, LangChain made it easy to orchestrate the whole flow — from loading the document, splitting it, generating embeddings, storing them, and finally retrieving the right chunks to pass into the LLM for answering.”
   	
 **10.	what is HuggingFace , what is the role in yr project?**
->    “HuggingFace is a platform that provides pre-trained NLP models. In my project, I used their embedding model Xenova/all-MiniLM-L6-v2 (a sentence transformer) to convert document chunks and user queries into vectors, and their LLM (DeepSeek) to generate natural language answers. So, HuggingFace powered both the embedding generation and the answer generation parts of my RAG pipeline
+>  Hugging Face is a popular platform for hosting and sharing machine learning mode In my project, I used their embedding model Xenova/all-MiniLM-L6-v2 (a sentence transformer) to convert document chunks and user queries into vectors, and their LLM (DeepSeek) to generate natural language answers. So, HuggingFace powered both the embedding generation and the answer generation parts of my RAG pipeline
    	
 **13.	What challenges did you face while building RagIt?**
 
@@ -169,6 +179,43 @@ Verify the event signature (security check)
 Update user’s plan = "PREMIUM"
 Set planExpiry = now() + 30 days
 This way the upgrade is fully automatic — no manual involvement.
+
+General Project Questions:
+
+Real-world use cases: Be prepared to discuss how RAGIT can be applied in various industries, like legal, academic, or corporate settings
+Performance and scalability: Be prepared to discuss how your project can scale and handle larger documents or more users.
+
+Can you walk me through how RAGIT works?
+
+What motivated you to build this project?
+
+DeepSeek and AI Model Questions:
+
+How does the DeepSeek model generate answers from the PDF?
+
+Why did you choose DeepSeek over other language models?
+
+Can you explain how the retrieval-based system works in your project?
+
+Authentication and Payment:
+
+How did you implement JWT-based authentication, and what security measures did you consider?
+
+Can you explain how the Stripe integration works for handling payments?
+
+What were the challenges you faced while implementing the plan-based structure?
+
+Data Management and Storage:
+
+How do you ensure that the chat history is securely stored in PostgreSQL?
+
+Can you describe how you manage file storage using Firebase?
+
+General Technical Questions:
+
+Why did you choose React for the frontend and Node.js for the backend?
+
+How did you handle the integration between the frontend and backend components?
 
 17.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
 19.	Why k=3 chunks in retrieval? How did you decide?
