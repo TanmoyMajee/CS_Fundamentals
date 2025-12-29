@@ -358,7 +358,128 @@ A system is in a **safe state** when there exists at least one sequence of proce
 - In a safe state → **No deadlock will occur**.
 - In an unsafe state → Deadlock *may* occur (not guaranteed, but possible).
 
-  ---
+  ---# Virtual Memory – Simple Notes
+
+## What is Virtual Memory?
+Virtual Memory is a memory management technique that creates an **illusion of very large main memory (RAM)** to the user.  
+It uses a part of **secondary storage (disk)** as an extension of RAM, allowing very large programs to run even if physical RAM is small.
+
+The OS achieves this by **swapping required parts of a process (pages) between Disk and RAM when needed.**
+
+---
+
+## Why Do We Need Virtual Memory?
+- Programs may be larger than physical RAM
+- Allows multiple programs to run at the same time
+- Better memory utilization
+- Supports multiprogramming
+
+---
+
+## How Virtual Memory is Implemented?
+Virtual memory is mainly implemented using:
+
+- **Paging**
+- **Segmentation**
+- or a combination of both
+
+---
+
+## Paging
+In paging:
+- A process is divided into **fixed-size blocks** called **Pages**
+- RAM is divided into equal-size blocks called **Frames**
+- A page is loaded into any available frame
+
+### Fragmentation in Paging
+- Solves **external fragmentation**
+- Suffers from **internal fragmentation**
+  - Last page may not fully fill its frame → small memory waste inside the frame
+
+---
+
+## Segmentation
+In segmentation:
+- Memory is divided into **variable-sized logical units**
+  - like functions, array, stack, code, data section etc.
+- Each segment has different size
+
+### Fragmentation in Segmentation
+- Suffers from **external fragmentation**
+  - free spaces scattered in between segments
+
+---
+
+## One-Line Summary
+Virtual Memory makes the system **act like it has more RAM than it actually has** by using disk space and loading only required parts of programs into RAM when needed.
+
   
+# Memory Management – Important Interview Topics
+
+## 🧩 Fragmentation
+
+### 1. Internal Fragmentation
+Internal fragmentation occurs when **fixed-size memory blocks are allocated** and some part of the block remains unused.
+
+- Happens in **paging / fixed partitions**
+- Wastage is **inside** allocated block
+
+Example:  
+If frame = 4 KB and page uses 3.6 KB → 0.4 KB wasted.
+
+---
+
+### 2. External Fragmentation
+External fragmentation occurs when **free memory is available but in small non-contiguous pieces**, so large processes cannot be allocated.
+
+- Happens in **segmentation / variable partitions**
+- Wastage is **between blocks**
+
+---
+
+### Internal vs External Fragmentation (Short Table)
+
+| Internal Fragmentation | External Fragmentation |
+|------------------------|------------------------|
+| Wastage inside block   | Wastage between blocks |
+| Fixed-size allocation  | Variable-size allocation |
+| Happens in paging      | Happens in segmentation |
+
+---
+## 📦 Paging vs Segmentation (Very Important)
+
+| Paging | Segmentation |
+|--------|--------------|
+| Divides process into **fixed-size pages** | Divides process into **variable-size segments** |
+| Based on **physical memory** | Based on **logical divisions** (code, stack, data) |
+| Suffers from **internal fragmentation** | Suffers from **external fragmentation** |
+| Size is fixed | Size varies |
+
+## ⚠️ Page Fault
+
+A page fault occurs when a process tries to access a page that is **not present in RAM**.
+
+### Steps
+1. Trap to OS
+2. Page loaded from disk to RAM
+3. Page table updated
+4. Process resumes
+
+Too many page faults → thrashing.
+
+## 🔁 Page Replacement Algorithms (Short Notes)
+
+### FIFO (First-In-First-Out)
+- Oldest page removed first
+- Simple but may cause **Belady's anomaly**
+
+### LRU (Least Recently Used)
+- Removes page **not used for longest time**
+- Good performance
+
+### Optimal
+- Removes page **not needed in future**
+- Best but **not practical**
+
 
 
