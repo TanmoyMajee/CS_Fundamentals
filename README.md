@@ -454,6 +454,23 @@ ________________________________________
 **Why did you choose MongoDB?**
 >I chose MongoDB because it’s a NoSQL database that stores data in flexible, JSON-like documents. This makes it easy to handle dynamic or unstructured data like blog posts, chats, and PDFs, which fits well with my MERN stack app. It also scales easily and integrates smoothly with Node.js, making development faster compared to traditional SQL databases.
 
+## JWT
+>“In my project I implemented authentication using JWT. When a user logs in successfully, the backend generates a JSON Web Token that contains the user ID and some basic information. This token is then sent to the frontend and stored securely.
+
+>For every protected request after login, like accessing chat history or asking questions, the frontend sends this token in the request header. On the backend, I verify the token using a secret key. If the token is valid, the user is allowed to access the API; if not, the request is rejected.
+
+>So JWT basically helps me identify the user without storing session data on the server, and it keeps the APIs secure
+````js
+const token = jwt.sign({id : id },process.env.JWT_SECRET,{expiresIn:'10d'}).toString();
+token = req.headers.authorization.split(' ')[1];
+const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
+// Req
+const response = await axios.post(`${backendURL}/file`, formData,{   // { api url ,  {req body },{header : Auth:'bar ${tkn}'  
+          headers:{
+               'Authorization': `Bearer ${token}` 
+          }
+````
+
 ** Diff WebSocke vs HTTP**
 
 7.	How did you debug issues when something wasn’t working?
