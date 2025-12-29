@@ -254,6 +254,21 @@ const evens = nums.filter(n => n % 2 === 0);
 console.log(evens); // [2, 4]
 ```
 
+```js
+async function readFileExample() {
+  try {
+    const data = await fs.readFile('example.txt', 'utf8');  //UTF-8 is a character encoding that converts text into bytes and supports all Unicode characters, commonly used to correctly read and write text files.
+    console.log('File content:', data);
+  } catch (err) {
+    console.error('Error reading file:', err);
+  }
+}
+
+readFileExample();
+
+
+```
+
 
 # Local Storage vs Session Storage vs Cookies
 
@@ -344,7 +359,6 @@ TLS stands for Transport Layer Security.
 ---
 
 ## HTML and HTML5
-
 ✔️ Semantic tags — <header>, <footer>, <section>, <article>
 ✔️ Multimedia support — <video>, <audio>, <canvas>
 ✔️ Web storage — localStorage, sessionStorage
@@ -352,20 +366,7 @@ TLS stands for Transport Layer Security.
 ✔️ Form enhancements — new input types like email, date, tel
 ✔️ Better performance & mobile support
 
-```js
-async function readFileExample() {
-  try {
-    const data = await fs.readFile('example.txt', 'utf8');  //UTF-8 is a character encoding that converts text into bytes and supports all Unicode characters, commonly used to correctly read and write text files.
-    console.log('File content:', data);
-  } catch (err) {
-    console.error('Error reading file:', err);
-  }
-}
 
-readFileExample();
-
-
-````
 
 
 
