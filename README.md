@@ -1,26 +1,12 @@
 # Project_Q-A
 
 🔹 **Project 1: RagIt (PDF Chat Application)**
+>“My project is called RAGIT. It is an AI-powered PDF Q&A platform. In this platform, a user can upload a PDF and then ask questions in normal natural language. The system gives answers based only on the content of that PDF, and not from outside sources. The main goal of this project is to help users quickly find information without reading the entire document page by page.
 
-**1. Can you explain your project RagIt in simple words?**
+>In this project, I implemented JWT-based authentication. I also added a plan-based structure with free and premium plans, and I handled the payments using the Stripe payment gateway. All the chat history and conversations are stored properly in the PostgreSQL database so that users can view their past chats.
 
-> “Sure, I’ll explain. RagIt is an **AI-powered Document Q&A platform** that allows users to upload a document and ask natural language questions to get context-aware answers.”
+>For the tech stack, I used React for the frontend and Node.js with Express for the backend, and PostgreSQL as the database. For the AI model, I used DeepSeek to generate answers from the PDF content.
 
-**Transition to Motivation**
-
-- 👉 _“The idea behind building this was…”_
-- 👉 _“…to help users quickly get answers from research papers or make notes from long e-books without reading every page”_
-
-**Transition to Technical Highlights**
-
-- 👉 “From the technical side, I implemented a RAG pipeline…”
-- 👉 “…where the document is split into chunks, converted into embeddings, stored in Qdrant for vector similarity search, and then LangChain with a HuggingFace LLM generates accurate, context-aware responses.
-- The platform also keeps chat history and even supports free and premium usage plans.”
-
-**Transition to Tech Stack**
-
-- 👉 “For the tech stack, I used React on the frontend, Node.js with Express on the backend, Prisma ORM for database management, Qdrant as the vector database, and Firebase for storage and authentication.
-- Both the frontend and backend are built with TypeScript instead of plain JavaScript, which gave me better type safety and fewer runtime errors.”
 
 
 
