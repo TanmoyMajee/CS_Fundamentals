@@ -357,6 +357,11 @@ TLS stands for Transport Layer Security.
 | 503          | Service Unavailable – The server is not ready to handle the request, often due to being overloaded or down for maintenance. |
 
 ---
+CommonJS uses require and module.exports
+✔️ common in older Node.js apps
+
+ES Modules (ESM) use import and export
+✔️ standard in modern JavaScript & React
 
 ## HTML and HTML5
 ✔️ Semantic tags — <header>, <footer>, <section>, <article>
