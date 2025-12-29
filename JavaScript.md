@@ -352,6 +352,20 @@ TLS stands for Transport Layer Security.
 ✔️ Form enhancements — new input types like email, date, tel
 ✔️ Better performance & mobile support
 
+```js
+async function readFileExample() {
+  try {
+    const data = await fs.readFile('example.txt', 'utf8');  //UTF-8 is a character encoding that converts text into bytes and supports all Unicode characters, commonly used to correctly read and write text files.
+    console.log('File content:', data);
+  } catch (err) {
+    console.error('Error reading file:', err);
+  }
+}
+
+readFileExample();
+
+
+````
 
 
 
