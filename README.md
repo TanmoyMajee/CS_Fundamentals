@@ -62,6 +62,16 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 
 >While I haven’t implemented it yet, I know that adding an OCR step would allow the system to read text from images and make the RAG pipeline more robust. It’s something I’m aware of and plan to explore furthe
 
+## File Upload (fronted to  backend ) 
+>“On the frontend, the user selects the PDF file using a file input. Instead of sending it as JSON, we use a FormData object to upload it. This makes it easier for the backend to handle the file properly.
+
+>On the backend, we use a tool called multer to receive and temporarily store the file in memory. We then check that the file is indeed a PDF. Once validated, we upload it to Firebase storage so it’s safely stored and can be accessed later
+>“Multer is a Node.js middleware that helps the backend receive files uploaded from the frontend. It reads files sent through FormData and makes them available in the backend so we can process them.”
+
+>“I used memory storage because it keeps the uploaded file directly in RAM as a buffer. This is faster for short-term processing and avoids unnecessary read/write operations on disk. Since I quickly upload the file to Firebase and process it, I don’t need to store it on my server’s disk.”
+
+>“On the backend, I configure Multer with a file size limit of 10 MB. This means that if the uploaded file exceeds 10 MB, it will be rejected right away and won’t be processed. This ensures that our server remains stable and efficient, and that we don’t run into memory issues.”
+
 ## ✅ Why I chose the RAG approach Insted of notmal api LLM call 
 
 >I chose the **RAG (Retrieval-Augmented Generation)** approach because it provides answers directly from the document’s content, ensuring the information is **accurate and relevant**.
