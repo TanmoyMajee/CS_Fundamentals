@@ -72,6 +72,37 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 
 >“On the backend, I configure Multer with a file size limit of 10 MB. This means that if the uploaded file exceeds 10 MB, it will be rejected right away and won’t be processed. This ensures that our server remains stable and efficient, and that we don’t run into memory issues.”
 
+## Stripe 
+>can say: “I create a Stripe account and set up a checkout link. I give Stripe my backend’s webhook URL so they know where to send events. On the frontend, I redirect the user to the Stripe checkout. The user completes the payment and enters their email there. Stripe sends a webhook to my backend with that email, and I use it to find and upgrade the user in my database.”
+
+Create a Stripe Account:
+First, I set up my Stripe account to access the dashboard.
+
+Set Up a Checkout Link:
+In the Stripe dashboard, I create a hosted checkout link for my product or plan.
+
+Add the Webhook Endpoint URL in Stripe Dashboard:
+This is the step you mentioned. In the Stripe dashboard, I provide my backend’s webhook URL. This tells Stripe exactly where to send the payment completion events.
+
+Add the Checkout Link to the Frontend:
+On the frontend, when the user clicks “Upgrade,” I redirect them to the Stripe checkout link.
+
+User Completes Payment:
+The user enters their email and payment info on the Stripe page and completes the payment.
+
+Stripe Sends a Webhook to My Backend:
+Because I set the webhook URL in the dashboard, Stripe knows where to send the event once the payment is done.
+
+Handle the Webhook on the Backend:
+My backend receives the webhook, verifies it’s from Stripe, and reads the user’s email from the event.
+
+Identify and Upgrade the User:
+I find the user in my database using that email and upgrade their plan to premium.
+
+Send a Response to Stripe:
+Finally, I send a quick “received” response back to Stripe just to confirm that I got the webhook.
+
+
 ## ✅ Why I chose the RAG approach Insted of notmal api LLM call 
 
 >I chose the **RAG (Retrieval-Augmented Generation)** approach because it provides answers directly from the document’s content, ensuring the information is **accurate and relevant**.
