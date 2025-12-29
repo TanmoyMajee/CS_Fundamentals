@@ -482,4 +482,36 @@ Too many page faults → thrashing.
 - Best but **not practical**
 
 
+## 🚨 Belady’s Anomaly
+
+In FIFO page replacement, increasing number of frames **increases page faults** sometimes.  
+This unexpected condition is called **Belady’s Anomaly**.
+
+
+## 🔁 Swapping
+
+Swapping is a technique where **entire processes are moved between RAM and disk** to free memory.
+
+- Process swapped out → disk
+- Brought back → RAM when needed
+
+## 🔥 Thrashing
+
+Thrashing happens when:
+
+- Too many page faults occur
+- CPU spends most time **swapping pages**
+- Very little real execution happens
+
+### Causes
+- Too many processes
+- Too small RAM
+- Poor memory allocation
+
+### Solution
+- Reduce degree of multiprogramming
+- Increase RAM
+
+
+
 
