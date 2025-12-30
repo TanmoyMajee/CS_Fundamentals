@@ -122,80 +122,93 @@ Finally, I send a quick “received” response back to Stripe just to confirm t
 - Best suited for **document-specific question answering**
 
 
-## Database Connection and Querying with
 ```js
 1. Setting Up the Database Connection
 
-To connect to PostgreSQL using the pg library, we create a connection pool. This allows our application to handle multiple queries at the same time without manually managing each connection.
+To connect to MySQL using the mysql2 library, we create a connection pool. This allows our application to handle multiple queries at the same time without manually managing each connection.
 
 Code: db.ts
-import { Pool } from 'pg';
-import dotenv from 'dotenv';
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
 dotenv.config();
 
-export const pool = new Pool({
-  connectionString: process.env.PG_CONNECTION_URL
+export const pool = mysql.createPool({
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+  port: Number(process.env.MYSQL_PORT) || 3306,
 });
 
-pool.on("connect", () => {
-  console.log("Database Connected");
-});
+console.log("Database Pool Created");
 
-pool.on('error', (error: any) => {
+pool.on?.("error", (error: any) => {
   console.log("Database error:", error);
 });
 
 2. Why We Use a Pool
 
-Pool: A Pool manages multiple database connections. It lets us run multiple queries concurrently without manually opening and closing connections each time.
+Pool:
+A Pool manages multiple database connections. It lets us run multiple queries concurrently without manually opening and closing connections each time.
 
-No await needed at startup: We don’t need to explicitly await the connection when the server starts. The pool will handle connections on demand whenever we run a query.
+No await needed at startup:
+We don’t need to explicitly await the connection when the server starts. The pool will handle connections on demand whenever we run a query.
 
 3. Running a Query in a Controller
 
-In our controller, we can now use pool.query to interact with the database. Here’s the relevant part of the code:
+In our controller, we can now use pool.query to interact with the database.
+Here’s the relevant part of the code:
 
-Example Query in the Controller:
-// Inside your register controller
-const existing = await pool.query(
-  `SELECT id FROM "user" WHERE email = $1`,
+Example Query in the Controller
+// Check if user exists
+const [existing] = await pool.query(
+  "SELECT id FROM user WHERE email = ?",
   [email]
 );
 
-// If user doesn't exist, insert a new user
-const result = await pool.query(
-  `INSERT INTO "user" (name, email, password, plan) 
-   VALUES ($1, $2, $3, $4) RETURNING id, name, email, plan`,
+If user doesn’t exist, insert a new one
+
+MySQL does not use RETURNING, so we insert first, then read back.
+
+// Insert new user
+const [insertResult]: any = await pool.query(
+  `INSERT INTO user (name, email, password, plan)
+   VALUES (?, ?, ?, ?)`,
   [name, email, hashedPassword, "FREE"]
 );
 
+// get inserted user id
+const userId = insertResult.insertId;
+
+// fetch full user
+const [rows]: any = await pool.query(
+  `SELECT id, name, email, plan FROM user WHERE id = ?`,
+  [userId]
+);
+
+const newUser = rows[0];
+
 4. Summary Explanation
+Connecting to MySQL Using mysql2
 
-In the .md file, you can summarize it like this:
-
-Connecting to PostgreSQL Using pg
-
-Pool Creation: We use a connection pool from the pg library to manage database connections.
+Pool Creation: We use a connection pool from the mysql2 library to manage database connections.
 
 Why a Pool: It allows multiple simultaneous queries and handles connections efficiently.
 
 No Initial Await Needed: The pool establishes connections on demand when queries are run, so we don’t need to await a connection at server startup.
 
-```
-
-## Server Start
-```js
 Ensuring the Table Exists at Startup
 
-You can run a simple query to check if the table exists and create it if it doesn’t. This is typically done once when the application starts. You can use an async function that you call at the beginning of your main server file.
+You can run a simple query to check if the table exists and create it if it doesn’t.
+This is typically done once when the application starts.
 
 Code Example: Checking and Creating a Table
-import { pool } from './db'; // assuming this is your db connection file
+import { pool } from "./db";
 
 async function ensureTables() {
   await pool.query(`
-    CREATE TABLE IF NOT EXISTS "user" (
-      id SERIAL PRIMARY KEY,
+    CREATE TABLE IF NOT EXISTS user (
+      id INT AUTO_INCREMENT PRIMARY KEY,
       name VARCHAR(100),
       email VARCHAR(100) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
@@ -208,17 +221,17 @@ async function ensureTables() {
 
 🟢 Calling This at Server Startup
 
-In your main server file (like app.ts or index.ts), you just call this function before your server starts listening for requests:
+In your main server file (app.ts or index.ts), you just call this function before your server starts listening for requests:
 
-import express from 'express';
-import { ensureTables } from './path/to/your/file';
+import express from "express";
+import { ensureTables } from "./path/to/file";
 
 const app = express();
 
 async function startServer() {
   await ensureTables(); // Make sure the table is ready
   app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+    console.log("Server is running on port 3000");
   });
 }
 
@@ -229,12 +242,7 @@ startServer().catch(console.error);
 You can say:
 
 “At server startup, I run an initialization function that ensures the required database tables exist. I use a simple CREATE TABLE IF NOT EXISTS query. This ensures that before any requests come in, the database structure is ready. Once that’s done, the server can start handling requests normally.”
-
-How the Pool Knows the Same Database
-
-The connectionString in your Pool configuration is the key. This string includes the database host, port, user, password, and the database name. As long as that connection string stays the same, the pool will always connect to the same database whenever the server restarts.
-
-````
+```
 
 ## Simple explanation (you can speak exactly like this)
 
@@ -243,7 +251,7 @@ The connectionString in your Pool configuration is the key. This string includes
 >When a user uploads a file, I don’t store it directly in my backend. Instead, I upload it to Firebase Storage. I first get the storage bucket, then I create a path like uploads/userId/timestamp_filename so that every user’s files stay organized.
 
 >I save the file buffer into Firebase, set the correct MIME type, then make the file public and generate a public URL. That URL is stored in my database and used later when the user wants to access the document.So the backend never keeps large files locally; they are stored securely in Firebase, and I only keep the link.”
-
+ss
 
 **How I Implemented the Retrieval Chain:**
 
