@@ -122,6 +122,121 @@ Finally, I send a quick “received” response back to Stripe just to confirm t
 - Best suited for **document-specific question answering**
 
 
+## Database Connection and Querying with
+```js
+1. Setting Up the Database Connection
+
+To connect to PostgreSQL using the pg library, we create a connection pool. This allows our application to handle multiple queries at the same time without manually managing each connection.
+
+Code: db.ts
+import { Pool } from 'pg';
+import dotenv from 'dotenv';
+dotenv.config();
+
+export const pool = new Pool({
+  connectionString: process.env.PG_CONNECTION_URL
+});
+
+pool.on("connect", () => {
+  console.log("Database Connected");
+});
+
+pool.on('error', (error: any) => {
+  console.log("Database error:", error);
+});
+
+2. Why We Use a Pool
+
+Pool: A Pool manages multiple database connections. It lets us run multiple queries concurrently without manually opening and closing connections each time.
+
+No await needed at startup: We don’t need to explicitly await the connection when the server starts. The pool will handle connections on demand whenever we run a query.
+
+3. Running a Query in a Controller
+
+In our controller, we can now use pool.query to interact with the database. Here’s the relevant part of the code:
+
+Example Query in the Controller:
+// Inside your register controller
+const existing = await pool.query(
+  `SELECT id FROM "user" WHERE email = $1`,
+  [email]
+);
+
+// If user doesn't exist, insert a new user
+const result = await pool.query(
+  `INSERT INTO "user" (name, email, password, plan) 
+   VALUES ($1, $2, $3, $4) RETURNING id, name, email, plan`,
+  [name, email, hashedPassword, "FREE"]
+);
+
+4. Summary Explanation
+
+In the .md file, you can summarize it like this:
+
+Connecting to PostgreSQL Using pg
+
+Pool Creation: We use a connection pool from the pg library to manage database connections.
+
+Why a Pool: It allows multiple simultaneous queries and handles connections efficiently.
+
+No Initial Await Needed: The pool establishes connections on demand when queries are run, so we don’t need to await a connection at server startup.
+
+```
+
+## Server Start
+```js
+Ensuring the Table Exists at Startup
+
+You can run a simple query to check if the table exists and create it if it doesn’t. This is typically done once when the application starts. You can use an async function that you call at the beginning of your main server file.
+
+Code Example: Checking and Creating a Table
+import { pool } from './db'; // assuming this is your db connection file
+
+async function ensureTables() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS "user" (
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(100),
+      email VARCHAR(100) UNIQUE NOT NULL,
+      password VARCHAR(255) NOT NULL,
+      plan VARCHAR(50) DEFAULT 'FREE'
+    );
+  `);
+
+  console.log("Table checked/created successfully.");
+}
+
+🟢 Calling This at Server Startup
+
+In your main server file (like app.ts or index.ts), you just call this function before your server starts listening for requests:
+
+import express from 'express';
+import { ensureTables } from './path/to/your/file';
+
+const app = express();
+
+async function startServer() {
+  await ensureTables(); // Make sure the table is ready
+  app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+  });
+}
+
+startServer().catch(console.error);
+
+🟢 How to Explain This to the Interviewer
+
+You can say:
+
+“At server startup, I run an initialization function that ensures the required database tables exist. I use a simple CREATE TABLE IF NOT EXISTS query. This ensures that before any requests come in, the database structure is ready. Once that’s done, the server can start handling requests normally.”
+
+How the Pool Knows the Same Database
+
+The connectionString in your Pool configuration is the key. This string includes the database host, port, user, password, and the database name. As long as that connection string stays the same, the pool will always connect to the same database whenever the server restarts.
+
+````
+
+
 **How I Implemented the Retrieval Chain:**
 
 *Initialization:*
@@ -142,6 +257,10 @@ Finally, I send a quick “received” response back to Stripe just to confirm t
 >In my project, I first used LangChain’s default HuggingFaceInference class. Later, Hugging Face updated their system to use something called “Inference Providers,” where you have to mention the provider name (like novita or together) in the API request. The default class didn’t allow adding a custom provider name, so it stopped working properly with the new setup.
 
 >To solve this, I built my own custom LLM class where I could set the provider, endpoint, headers, and retry logic manually. This made the integration work smoothly with Hugging Face’s updated policy.
+
+
+
+
 
 
 **What is Prisma & Why did u use it **
