@@ -193,6 +193,10 @@ until all related students are removed or updated — ensuring data remains cons
 | **BCNF (Boyce-Codd Normal Form)** | A stronger version of 3NF — for every functional dependency X → Y, X must be a super key. | Solves anomalies not handled by 3NF. |
 ---
 
+## Prime and Non-Prime Attributes
+
+Attributes which are parts of any candidate key of relation are called as prime attribute, others are non-prime attributes. For Example, STUD_NO in STUDENT relation is prime attribute, others are non-prime attribute.
+
 # 🧠 Normalization Example — Student & Branch Table
 
 ---
