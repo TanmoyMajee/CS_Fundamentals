@@ -123,6 +123,10 @@ Generative AI is a type of AI that can generate new content such as text, images
 
 ---
 
+## Prompt engineering 
+is the process of designing and refining the instructions (prompts) you give to an AI model so that it produces better, more accurate, and more useful answers.
+
+
 ## 8. What is Agentic AI?
 Agentic AI refers to AI systems that can act autonomously as an agent to achieve a goal.
 
