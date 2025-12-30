@@ -92,6 +92,43 @@ They help ensure the database **stays accurate and consistent**. Constraints can
 
 ---
 
+## Add Remove con
+```sql
+
+
+-- Step A: Remove the existing foreign key constraint
+ALTER TABLE Student 
+DROP FOREIGN KEY fk_branch; 
+
+-- Step B: Add the foreign key back with the CASCADE property
+ALTER TABLE Student 
+ADD CONSTRAINT fk_branch 
+FOREIGN KEY (branch_id) 
+REFERENCES Branch(branch_id) 
+ON DELETE CASCADE 
+ON UPDATE CASCADE;
+
+
+-- Normal way
+CREATE TABLE Branch (
+    branch_id INT PRIMARY KEY,         -- Primary Key
+    branch_name VARCHAR(50) NOT NULL
+);
+
+-- 2. Create the Child Table with CASCADE
+CREATE TABLE Student (
+    student_id INT PRIMARY KEY,        -- Primary Key
+    student_name VARCHAR(50),
+    branch_id INT,                     -- Foreign Key Column
+    
+    -- Defining the Foreign Key Relationship
+    CONSTRAINT fk_branch 
+    FOREIGN KEY (branch_id) 
+    REFERENCES Branch(branch_id) 
+    ON DELETE CASCADE                  -- The Magic Line
+    ON UPDATE CASCADE                  -- Also updates if branch_id changes
+);
+```
 
 
 
