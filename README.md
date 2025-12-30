@@ -236,6 +236,14 @@ The connectionString in your Pool configuration is the key. This string includes
 
 ````
 
+## Simple explanation (you can speak exactly like this)
+
+>“In my project I used Firebase Cloud Storage to store uploaded files such as PDFs.
+
+>When a user uploads a file, I don’t store it directly in my backend. Instead, I upload it to Firebase Storage. I first get the storage bucket, then I create a path like uploads/userId/timestamp_filename so that every user’s files stay organized.
+
+>I save the file buffer into Firebase, set the correct MIME type, then make the file public and generate a public URL. That URL is stored in my database and used later when the user wants to access the document.So the backend never keeps large files locally; they are stored securely in Firebase, and I only keep the link.”
+
 
 **How I Implemented the Retrieval Chain:**
 
