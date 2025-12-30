@@ -146,7 +146,32 @@ COMMIT;
 
 -- Or rollback in case of error
 ROLLBACK;
+
+START TRANSACTION;
+
+-- 1. Deduct Money
+UPDATE Wallet SET Balance = Balance - 500 WHERE UserID = 'User1';
+
+-- Create a Checkpoint after payment is successful
+SAVEPOINT payment_done;
+
+-- 2. Try to Apply a Promo Code (This might fail)
+UPDATE Orders SET Discount = 50 WHERE OrderID = 'ORD123';
+
+-- Logic Check: If the promo code is invalid, we go back to 'payment_done'
+ROLLBACK TO SAVEPOINT payment_done;
+
+-- 3. Update Inventory (This happens even if promo failed)
+UPDATE Inventory SET Stock = Stock - 1 WHERE ProductID = 'P1';
+
+-- Make everything permanent
+COMMIT;
+
+
 ````
+"A Savepoint is a way to break a large transaction into smaller, manageable sections. It allows for a Partial Rollback.
+
+For example, in an e-commerce system, if a customer’s payment is successful but the 'Email Notification' service fails, I don't want to roll back the entire payment. I can set a savepoint right after the payment. If the email fails, I roll back to that specific savepoint and continue with the rest of the transaction. This ensures that the core business operation (the sale) is completed even if a non-critical step fails."
 
 
 # SQL Functions and Clauses — Quick Reference Notes
@@ -208,6 +233,7 @@ SUBSTR(string, start_position [, length])
 SELECT SUBSTR('HELLO WORLD', 1, 5) FROM dual;   -- HELLO
 SELECT SUBSTR('HELLO WORLD', 7) FROM dual;      -- WORLD
 SELECT SUBSTR('HELLO WORLD', -5, 3) FROM dual;  -- WOR
+SELECT UPPER(SUBSTR('hello world', 7)) FROM dual; -- LOWER()
 ```
 
 **Common Uses:**
@@ -229,6 +255,24 @@ REPLACE(string, search_string, replacement_string)
 ```sql
 SELECT REPLACE('Hello World', 'World', 'Tanmoy') FROM dual;
 SELECT REPLACE('123-456-7890', '-', '') FROM dual;  -- 1234567890
+
+UPDATE Employees
+SET Email = REPLACE(Email, '.net', '.com')
+WHERE Email LIKE '%.net';
+
+UPDATE Employees
+SET Name = TRIM(Name);
+
+--TRANSLATE(string, from_set, to_set)
+-- How it works: It replaces the 1st character of from_set with the 1st character of to_set, the 2nd with the 2nd, and so on.
+-- Result: ABC-DEF Explanation: 1 → A, 2 → B, 3 → C, and so on.
+SELECT TRANSLATE('123-456', '123456', 'ABCDEF') FROM dual;
+
+
+-- Translates '.', '-', and '/' all into '_'
+UPDATE Products
+SET Product_Code = TRANSLATE(Product_Code, '.-/', '___');
+
 ```
 
 ## 🔁 Concat || Double pipe
@@ -568,6 +612,56 @@ GROUP BY column_name
 HAVING condition_on_aggregate
 ORDER BY column_name ASC | DESC;
 ```
+
+# SQL Interview Question: Find Employees in at least one Department
+
+### 1. Problem Statement
+**Question:** Given two tables, `emp` and `dept`, write a query to fetch the details of all employees who work in **at least one** department.
+
+---
+
+### 2. Table Structure
+
+**Table: `emp` (Employee Master)**
+| Column Name | Data Type | Description |
+| :--- | :--- | :--- |
+| **eid** | Integer | Primary Key (Unique ID) |
+| **nm** | Varchar | Employee Name |
+
+**Table: `dept` (Department Mapping)**
+| Column Name | Data Type | Description |
+| :--- | :--- | :--- |
+| **did** | Varchar | Department ID |
+| **eid** | Integer | Foreign Key (Link to emp table) |
+| **dnm** | Varchar | Department Name |
+
+---
+
+### 3. Different Approaches
+
+
+
+#### Approach A: Using INNER JOIN (Most Common)
+This approach joins both tables. We use `DISTINCT` to avoid duplicate employee names if they belong to multiple departments.
+
+```sql
+SELECT DISTINCT e.eid, e.nm
+FROM emp e
+INNER JOIN dept d ON e.eid = d.eid;
+
+SELECT eid, nm
+FROM emp e
+WHERE EXISTS (
+    SELECT 1 
+    FROM dept d 
+    WHERE d.eid = e.eid
+);
+
+SELECT eid, nm
+FROM emp
+WHERE eid IN (SELECT eid FROM dept);
+````
+
 # SQL Interview Guide: Joins, Grouping, and Filtering
 
 ## 1. Sample Data (for Context)
