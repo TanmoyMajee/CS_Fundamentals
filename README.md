@@ -242,6 +242,66 @@ startServer().catch(console.error);
 You can say:
 
 “At server startup, I run an initialization function that ensures the required database tables exist. I use a simple CREATE TABLE IF NOT EXISTS query. This ensures that before any requests come in, the database structure is ready. Once that’s done, the server can start handling requests normally.”
+
+
+“In my file-upload flow, multiple things happen together—conversation creation, file record creation, Firebase upload, temporary file writing, chunking, and vector-store updates.
+If any one step fails, I didn’t want the database to be left in a partially updated state.
+So I implemented manual rollback logic.
+
+For example, if file upload succeeded but chunk creation failed, I deleted the file entry, temporary file, and newly created conversation.
+
+This way the system behaves atomically from the user’s point of view: either everything succeeds or everything is rolled back.”
+
+import mysql from "mysql2/promise";
+
+const pool = mysql.createPool({...});
+
+export async function uploadHandler(req, res) {
+  const connection = await pool.getConnection();
+
+  try {
+    await connection.beginTransaction();
+
+    // 1. create conversation
+    const [convResult] = await connection.query(
+      `INSERT INTO conversation (title, userId) VALUES (?, ?)`,
+      [req.file.originalname, req.user.id]
+    );
+    const conversationId = convResult.insertId;
+
+    // 2. upload file to Firebase
+    const url = await FirebaseFileUpload(...);
+
+    // 3. save file entry in DB
+    const [fileResult] = await connection.query(
+      `INSERT INTO file (filename, userId, conversationId, downloadUrl)
+       VALUES (?, ?, ?, ?)`,
+      [req.file.originalname, req.user.id, conversationId, url]
+    );
+    const fileId = fileResult.insertId;
+
+    // 4. process chunks + vector DB etc.
+    // (if any error happens here, we rollback)
+
+    await connection.commit();
+
+    res.json({ msg: "Success" });
+
+  } catch (err) {
+
+    // rollback DB changes
+    await connection.rollback();
+
+    // delete firebase file if already uploaded
+    // delete tmp file if created
+    // delete vector data if created
+
+    res.status(500).json({ msg: "failed", error: err });
+  } finally {
+    connection.release();
+  }
+}
+
 ```
 
 ## Simple explanation (you can speak exactly like this)
