@@ -157,6 +157,44 @@ Reinforcement Learning is a type of ML where an agent learns by interacting with
 - Training an AI to play chess
 ---
 
+Accuracy is calculated as the ratio of correctly predicted instances (both true positives and true negatives) to the total instances. The formula is:
+
+Accuracy=TP+TNTP+TN+FP+FN
+Accuracy=
+TP+TN+FP+FN
+TP+TN
+	​
+
+
+where TP is True Positives, TN is True Negatives, FP is False Positives, and FN is False Negatives.
+
+Precision is the ratio of correctly predicted positive observations to the total predicted positive observations. Its formula is:
+
+Precision=TPTP+FP
+Precision=
+TP+FP
+TP
+	​
+
+
+Recall (or Sensitivity) is the ratio of correctly predicted positive observations to all actual positives. Its formula is:
+
+Recall=TPTP+FN
+Recall=
+TP+FN
+TP
+	​
+
+
+F1-Score is the harmonic mean of precision and recall, providing a balance between the two. Its formula is:
+
+F1=2×Precision×RecallPrecision+Recall
+F1=2×
+Precision+Recall
+Precision×Recall
+	​
+
+
 ## TCS INTERVIEW PERFECT 1-LINERS
 
 - **AI:** Machines that mimic human intelligence  
