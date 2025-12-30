@@ -1,4 +1,13 @@
-## What is Trigger ,  Diff of DBMS vs RDBMS
+  ## DBMS
+  
+  A DBMS (Database Management System) is software that acts as an interface between the database and the end-users. It allows users to create, read, update, and delete data while managing the data's structure
+
+Dbms Types  - RDBMS , Non Rdbms/NoSQL , Grsp , Network
+
+## RDBMS
+An RDBMS (Relational Database Management System) is type of  DBMS based on the Relational Model (introduced by E.F. Codd). In this system, data is organized into tables (relations) that are linked to one another using common fields
+
+
 
 ### 🧠 Denormalization
 
