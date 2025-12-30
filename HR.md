@@ -14,6 +14,12 @@ I am passionate about software development, especially in areas like full stack 
 
 ** Not mention in resuem **
 >“Something not mentioned in my resume is that I’m very disciplined about self-learning. I maintain a small daily learning routine, and recently I’ve started learning the basics of Java and OOP concepts along with my other subjects. I also completed an industrial training related to AI, which gave me exposure to how AI can be used in real applications. Apart from academics, I casually enjoy playing chess — I’m not an expert, but I like it because it helps me think strategically and stay focused.”
+ 
+## Why diploma after 12
+>Yes, after my 12th, I didn't appear for the entrance examinations due to some health reasons at that time. My family and I decided that instead of taking a gap year, it would be better for me to join a diploma program. This way, I could continue my education and keep preparing for future opportunities. The diploma curriculum, especially after the first semester, aligned well with the kind of preparation needed for entrance exams anyway, so it was a productive choice.
+
+## Why CSBS
+>Sir, I chose the CSBS department because I wanted to be in a computer science-related branch. Initially, my entrance exam score didn’t allow me to get into the pure CS branch, so I opted for CSBS. Once I got into the program, I realized it was a great fit because it not only covered computer science fundamentals but also gave me insights into how businesses operate and how technology can solve organizational challenges
 
 ** Internship Details **
 >I haven’t completed any formal global certifications yet, but I did undergo an industrial training program during my summer vacation in 2025 with AIwala. This program focused on itegrating ai in MERN stack and it provided me with hands-on experience in building RAG-based applications."
