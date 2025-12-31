@@ -118,4 +118,12 @@ Capturing: event flows grandparent → parent → child (top down )
 </html>
 
 ```
+##Window , Document
 
+“window is the global object in the browser. It represents the browser tab or window and contains everything like the DOM, history, localStorage, timers, and global variables and functions.”
+
+“document represents the web page loaded inside the window. It is the root of the DOM and is used to access and manipulate HTML elements.
+
+window.alert("Hello");
+
+## This bind ,aply , Call Back , Promise , 
