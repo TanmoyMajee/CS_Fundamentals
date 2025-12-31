@@ -61,3 +61,61 @@ for (let key in user) {   //it over object  , arr same
 }
  
 ````
+
+## Event Definition (script)
+Events are actions that happen in the browser, like clicking, typing, or submitting a form. JavaScript listens to these actions and runs functions in response
+
+When we click the child element, the event first goes top-down in the capturing phase, then reaches the target, and then bubbles back bottom-up to ancestor elements. We can stop this using stopPropagation().”
+
+Bubbling (default): event flows child → parent → grandparent (btm up)
+Capturing: event flows grandparent → parent → child (top down ) 
+
+```jsx
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Bubbling & Capturing</title>
+  <style>
+    .grandparent { padding: 40px; background: lightcoral; }
+    .parent { padding: 30px; background: lightgreen; }
+    .child { padding: 20px; background: lightskyblue; }
+  </style>
+</head>
+<body>
+
+  <div class="grandparent">
+    Grandparent
+    <div class="parent">
+      Parent
+      <div class="child">
+        Child
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const grand = document.querySelector('.grandparent');
+    const parent = document.querySelector('.parent');
+    const child = document.querySelector('.child');
+
+    // Bubbling (default)
+    grand.addEventListener('click', () => console.log('Grandparent Bubbling'));
+    parent.addEventListener('click', () => console.log('Parent Bubbling'));
+    child.addEventListener('click', () => console.log('Child Bubbling'));
+
+    // Capturing
+    grand.addEventListener('click', () => console.log('Grandparent Capturing'), true);
+    parent.addEventListener('click', () => console.log('Parent Capturing'), true);
+    child.addEventListener('click', () => console.log('Child Capturing'), true);
+
+    //child.addEventListener("click", (event) => {
+    //event.stopPropagation(); // ✋ stops bubbling here
+    //console.log("Child clicked");
+  });
+  </script>
+
+</body>
+</html>
+
+```
+
