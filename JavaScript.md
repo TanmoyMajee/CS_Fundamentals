@@ -27,6 +27,32 @@ let x = 5;
 sayHi(); // works
 function sayHi() { console.log("Hello"); }
 
+
+# JavaScript Types Summary
+
+| Type      | Meaning                      | Category   | Key Notes                          |
+|-----------|------------------------------|------------|------------------------------------|
+| undefined | declared but not assigned    | undefined  | default value of uninitialized vars |
+| null      | intentional empty value      | object     | historical bug in JS               |
+| number    | integers & decimals          | number     | includes NaN, Infinity             |
+| string    | text data                    | string     | immutable                          |
+| boolean   | true or false                | boolean    | comparisons                        |
+| object    | non-primitive (arrays, functions) | object | arrays & null are objects     |
+| array     | ordered list                 | object     | check with Array.isArray()         |
+| function  | callable object              | function   | special object                     |
+| NaN       | Not-a-Number                 | number     | weird but common MCQ               |
+
+## Destructuring
+“Destructuring is a syntax that allows us to extract values from arrays or properties from objects into separate variables in a clean and concise way.
+```js
+const user = { name: "Tanmoy", age: 22 };
+
+const { name, age } = user;
+
+// name = "Tanmoy", age = 22
+
+```
+
 **JavaScript: Synchronous or Asynchronous?**
 >"JavaScript is single-threaded and synchronous by default, but it can behave asynchronously because of the event loop
 >"When an async task (like setTimeout or fetch) runs, the browser handles it in Web APIs.
