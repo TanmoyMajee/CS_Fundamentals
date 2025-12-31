@@ -136,6 +136,17 @@ console.log(fruits);
 // ["Apple", "Grapes", "Orange"]
 ```
 
+## spread operator 
+“The spread operator ... expands arrays or objects. We use it to copy, merge, and update data without mutating the original value. It creates a shallow copy and is widely used in React state updates.”
+```js
+const a = [1, 2, 3];
+const b = [...a]; // copy
+
+const cart = [{ id: 1, name: "Laptop" }];
+const newItem = { id: 2, name: "Mouse" };
+
+const updatedCart = [...cart, newItem];
+````
 # 📘 JavaScript Closures – Complete Notes (with Real-World Example)
 
 ---
