@@ -394,6 +394,24 @@ const frequency = letters.reduce((acc, curr) => {
 }, {});
 
 // frequency = { a: 3, b: 2, c: 1 }
+
+const employees = [
+  { id: 1, name: "A", dept: "IT", salary: 30000 },
+  { id: 2, name: "B", dept: "HR", salary: 25000 },
+  { id: 3, name: "C", dept: "IT", salary: 40000 },
+  { id: 4, name: "D", dept: "Sales", salary: 20000 }
+];
+
+✅ Question-style Example (Perfect for interview)
+
+👉 Find the total salary of all IT employees
+⛓️ Chaining solution
+
+const totalITSalary = employees
+  .filter(emp => emp.dept === "IT")        // step 1: keep only IT employees
+  .map(emp => emp.salary)                  // step 2: take only salary
+  .reduce((acc, cur) => acc + cur, 0);     // step 3: sum the salary values
+
 ```
 
 ```js
