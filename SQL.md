@@ -95,6 +95,19 @@ They help ensure the database **stays accurate and consistent**. Constraints can
 ## Add Remove con
 ```sql
 
+CREATE TABLE Orders (
+  order_id INT,
+  product_id INT,
+  PRIMARY KEY (order_id, product_id)   -- composite primary key
+);
+
+CREATE TABLE OrderDetails (
+  order_id INT,
+  product_id INT,
+  FOREIGN KEY (order_id, product_id)
+    REFERENCES Orders(order_id, product_id)  --(More than one column together → composite key) composite foreign key
+);
+
 
 -- Step A: Remove the existing foreign key constraint
 ALTER TABLE Student 
