@@ -206,51 +206,35 @@ This pattern is widely used in real-world JavaScript apps (Node.js, backend serv
 # 💻 Real-World Closure Example (User Profile – Private Password)
 
 ```javascript
-// Factory + Module Pattern using Closure
-function createUser(name, email, password) {
-  let userPassword = password;  // ❗ private variable (encapsulated)
+function createAccount() {
+  let balance = 0; // private
 
   return {
-    getName: function () {
-      return name;  // public method
+    deposit(amount) {
+      balance += amount;
+      return balance;
     },
-
-    getEmail: function () {
-      return email;  // public method
+    withdraw(amount) {
+      balance -= amount;
+      return balance;
     },
-
-    checkPassword: function (inputPassword) {
-      // Only accessible due to closure
-      return inputPassword === userPassword;
-    },
-
-    updatePassword: function (newPass) {
-      userPassword = newPass; // secure update
-      console.log("Password updated");
+    getBalance() {
+      return balance;
     }
   };
 }
 
-// -------------------------------------------
-// USAGE
-// -------------------------------------------
+const myAcc = createAccount();
 
-const user = createUser("Tanmoy", "tanmoy@example.com", "secret123");
+myAcc.deposit(1000);
+console.log(myAcc.getBalance()); // 1000
+myAcc.withdraw(300);
+console.log(myAcc.getBalance()); // 700
 
-// Public methods
-console.log(user.getName());    // Tanmoy
-console.log(user.getEmail());   // tanmoy@example.com
+console.log(balance);          // ❌ Error: balance is not defined
+console.log(myAcc.balance);    // ❌ undefined
+myAcc.balance = 9999;          // ❌ creates new property, does NOT change real bala
 
-// Direct access to password is blocked ❌
-console.log(user.userPassword); // undefined
-
-// Secure password check
-console.log(user.checkPassword("wrong"));      // false
-console.log(user.checkPassword("secret123"));  // true
-
-// Update password securely
-user.updatePassword("newPass456");
-console.log(user.checkPassword("newPass456")); // true
 ````
 
 # 📘 forEach vs map vs filter — Short Interview Notes
