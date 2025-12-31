@@ -472,3 +472,28 @@ Next best step 👉 **AI / ML + Generative AI rapid revision**
 
 Just say **“Next AI notes”** 👍
 
+## SDLC Interview Answer (Concise)
+
+"Sure! SDLC stands for Software Development Life Cycle. It’s basically a structured process that helps us develop software efficiently within a given time. It includes several stages:
+
+Requirement Gathering & Analysis – We figure out what the software should do and check if it’s feasible.
+
+Design – We plan the software’s architecture before we start coding.
+
+Implementation (Coding) – We write the actual code.
+
+Testing – We test the software (like unit, integration, and system testing) to catch and fix issues.
+
+Deployment – We release the software to users.
+
+Maintenance – We monitor and update it after release.
+
+## Testing (Quick Mention)
+ unit testing is testing individual parts, integration testing is making sure those parts work together, and system testing is testing the whole application."
+
+##  The Agile model
+is a flexible and iterative approach to software development. Instead of working in one big sequence like Waterfall, we break the work into small, manageable chunks called sprints. Each sprint usually lasts about 2 to 4 weeks.
+
+In Agile, we continuously collaborate with the customer, get their feedback early and often, and adjust the plan as we go. This means we can handle changes better and deliver a working product faster.
+
+
