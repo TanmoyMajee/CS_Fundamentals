@@ -279,6 +279,14 @@ for Loop
 6. some
 
 "Use some to check if at least one element in the array meets the condition, returning a boolean value."
+
+7. Reduce
+"reduce() is used to convert an array into a single value like a sum, object, or another array using an accumulator
+
+array.reduce((accumulator, currentValue) => {
+  // combine and return
+}, initialValue);
+
 Sample Array of Objects
 const employees = [
   { empId: 101, name: "Alice" },
@@ -369,6 +377,23 @@ Features:
 Early exit: Stops as soon as a match is found.
 
 Returns a boolean: true if a match is found, otherwise false.
+
+Example 1 — Sum of array elements
+const numbers = [1, 2, 3, 4];
+
+const sum = numbers.reduce((acc, curr) => acc + curr, 0);  // arr.reduce((acc,c)=> {return acc = acc+cur},0)
+
+// sum = 10
+
+Example 2 — Frequency of each element
+const letters = ["a", "b", "a", "c", "b", "a"];
+
+const frequency = letters.reduce((acc, curr) => {
+  acc[curr] = (acc[curr] || 0) + 1;
+  return acc;
+}, {});
+
+// frequency = { a: 3, b: 2, c: 1 }
 ```
 
 ```js
