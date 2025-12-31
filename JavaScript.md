@@ -254,6 +254,123 @@ const evens = nums.filter(n => n % 2 === 0);
 console.log(evens); // [2, 4]
 ```
 
+
+```js
+for Loop
+
+"Use the for loop for maximum control and early exit when you need to break out of the loop as soon as a condition is met."
+
+2. forEach
+
+"Use forEach when you want to perform side effects on each element but cannot break early, and you don’t need a return value."
+
+3. map
+
+"Use map to transform each element of an array and return a new array with the transformed values."
+
+4. filter
+
+"Use filter to create a new array of elements that match a specific condition, returning all matching items."
+
+5. find
+
+"Use find to get the first element that matches a condition, stopping as soon as it finds a match."
+
+6. some
+
+"Use some to check if at least one element in the array meets the condition, returning a boolean value."
+Sample Array of Objects
+const employees = [
+  { empId: 101, name: "Alice" },
+  { empId: 123, name: "Bob" },
+  { empId: 150, name: "Charlie" }
+];
+
+1. for Loop
+// Using for loop to find employee with empId = 123
+let foundEmployee = null;
+for (let i = 0; i < employees.length; i++) {
+  if (employees[i].empId === 123) {
+    foundEmployee = employees[i];
+    break; // Can exit early
+  }
+}
+// foundEmployee will be { empId: 123, name: "Bob" }
+
+
+Features:
+
+Early exit: Can stop the loop as soon as the condition is met.
+
+Flexible: Can perform complex logic.
+
+2. forEach
+// Using forEach to find employee with empId = 123
+let foundEmployee = null;
+employees.forEach(emp => {
+  if (emp.empId === 123) {
+    foundEmployee = emp;
+    // Cannot break early, so it will continue to iterate over all elements
+  }
+});
+// foundEmployee will be { empId: 123, name: "Bob" }
+
+
+Features:
+
+No early exit: Will iterate over every element.
+
+No return value: Used mainly for side effects.
+
+3. map
+// Using map to create a new array of employee names
+const namesArray = employees.map(emp => emp.name);
+// namesArray will be ["Alice", "Bob", "Charlie"]
+
+
+Features:
+
+Returns a new array: Transforms each element.
+
+No early exit: Always processes every element.
+
+4. filter
+// Using filter to get employees with empId = 123
+const filteredEmployees = employees.filter(emp => emp.empId === 123);
+// filteredEmployees will be [{ empId: 123, name: "Bob" }]
+
+
+Features:
+
+Returns a new array: All matching elements.
+
+No early exit: Checks every element.
+
+5. find
+// Using find to get the first employee with empId = 123
+const found = employees.find(emp => emp.empId === 123);
+// found will be { empId: 123, name: "Bob" }
+
+
+Features:
+
+Early exit: Stops as soon as a match is found.
+
+Returns the first matching element or undefined.
+
+6. some
+// Using some to check if any employee has empId = 123
+const has123 = employees.some(emp => emp.empId === 123);
+// has123 will be true
+
+
+Features:
+
+Early exit: Stops as soon as a match is found.
+
+Returns a boolean: true if a match is found, otherwise false.
+```
+
 ```js
 async function readFileExample() {
   try {
