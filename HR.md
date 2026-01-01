@@ -21,15 +21,6 @@ I am passionate about software development, especially in areas like full stack 
 ## Why CSBS
 >Sir, I chose the CSBS department because I wanted to be in a computer science-related branch. Initially, my entrance exam score didn’t allow me to get into the pure CS branch, so I opted for CSBS. Once I got into the program, I realized it was a great fit because it not only covered computer science fundamentals but also gave me insights into how businesses operate and how technology can solve organizational challenges
 
-** Internship Details **
->I haven’t completed any formal global certifications yet, but I did undergo an industrial training program during my summer vacation in 2025 with AIwala. This program focused on itegrating ai in MERN stack and it provided me with hands-on experience in building RAG-based applications."
- >I built a chatbot using the Gemini API. Through this experience, I gained valuable insights into building RAG applications, which helped me develop my own projects.
-
-** Internship Challanges **
->During my internship, one of the main challenges I faced was transitioning from JavaScript to TypeScript. Since I didn’t have prior experience with TypeScript, it took me a few days to get comfortable with its type system and syntax. However, this challenge ultimately helped me improve the quality and maintainability of my code, making it more robust. In the end, this experience significantly contributed to my growth as a develope
-
-** Internship Key TakeWay ** 
->During my internship, I had access to valuable video resources on generative AI and RAG applications. These materials greatly deepened my understanding of how to build RAG pipelines, which, in turn, helped me develop my own project. Additionally, I also gained experience working with TypeScript, which improved my coding skills and the quality of my code
 
 
 **2. What are your strengths?**
@@ -52,6 +43,43 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 **Where do you see yourself in 5 years? / Career & Goals**
 
 >“In five years, I see myself as an experienced full-stack developer who can build /capable of building scalable and efficient applications. I also want to gain/ deepen/expand my expertise in generative AI and cloud computing. Ultimately, I aim to lead impactful projects, contribute meaningfully to real-world solutions, and help the company achieve its goals.”
+
+## Handling Team Conflicts: 
+
+>"To resolve a conflict in a team, first I would listen to both parties to understand the main reason behind the conflict. I’d stay calm and neutral to make sure everyone feels heard. Then I’d try to find a solution that works for both sides. If I still can’t find a resolution, I’d definitely seek help from a senior to find a fair solution.
+
+- Listen to both sides.
+- understand the main issue which causing the conflict 
+- Stay calm and neutral.
+- Find a mutually agreeable solution.
+- Escalate to a senior if needed.
+
+#  Meeting Deadlines Under Pressure:
+
+## Individual
+>"During my industrial training program, I had to deliver a project within a strict deadline. In that situation, I stayed calm and broke the project into smaller parts, focusing on the most important features first. I also created a daily to-do list and reviewed my progress at the end of each day to make sure I stayed on track and met the deadline.
+
+- Stay Calm: Mention that you remain calm under pressure.
+
+- Break Tasks into Smaller Parts: Explain that you divide the project into manageable tasks.
+
+- Prioritize the Important Features First: Emphasize that you focus on the most critical parts before anything else.
+
+- Create a Daily To-Do List: Say that you use a to-do list to track daily goals.
+
+- Review Progress Each Day: Mention that you check your progress at the end of the day to stay on track.
+
+# Team 
+
+>First, I stay calm and assess the situation. Then I distribute the workload among team members based on their strengths. I keep track of our progress with regular check-ins and make sure to communicate clearly with the team. This way, everyone stays on the same page and we meet our deadlines together."
+
+- Distribute the Workload: Explain that you delegate tasks based on team members’ strengths.
+- Clear Communication: Mention that you keep everyone informed and aligned.
+- Monitor Progress: Say that you regularly check in on the team’s progress to ensure everyone is on track.
+- Stay Calm and Supportive: Even for team questions, it’s good to mention that you remain calm and supportive to keep the team motivated.
+
+
+## Staying Calm in Intense Situations:
 
 **Why should we hire you?**
 >You should hire me because I have both strong problem-solving skills and hands-on development experience. Solving more than 500 DSA problems has improved my analytical thinking, and I’ve applied those skills in building full-stack applications, including a RAG-based project and a real-time chat application. I’m confident that I can contribute from day one, help the team move forward, and ultimately support the company’s growth with the skills and experience I bring.
@@ -120,6 +148,17 @@ Because it uses many trees instead of one, it reduces overfitting and gives more
 
 # What do you know about TCS?
 >Tata Consultancy Services (TCS) is an Indian multinational IT services and consulting company headquartered in Mumbai . TCS operates in over 50 countries with around 600,000 employees worldwide. They work in various domains like cloud, AI, and software development, providing solutions to clients across the world."
+
+** Internship Details **
+>I haven’t completed any formal global certifications yet, but I did undergo an industrial training program during my summer vacation in 2025 with AIwala. This program focused on itegrating ai in MERN stack and it provided me with hands-on experience in building RAG-based applications."
+ >I built a chatbot using the Gemini API. Through this experience, I gained valuable insights into building RAG applications, which helped me develop my own projects.
+
+** Internship Challanges **
+>During my internship, one of the main challenges I faced was transitioning from JavaScript to TypeScript. Since I didn’t have prior experience with TypeScript, it took me a few days to get comfortable with its type system and syntax. However, this challenge ultimately helped me improve the quality and maintainability of my code, making it more robust. In the end, this experience significantly contributed to my growth as a develope
+
+** Internship Key TakeWay ** 
+>During my internship, I had access to valuable video resources on generative AI and RAG applications. These materials greatly deepened my understanding of how to build RAG pipelines, which, in turn, helped me develop my own project. Additionally, I also gained experience working with TypeScript, which improved my coding skills and the quality of my code
+
 
 
 Founded in 1968   Tata Consultancy Services ,  First CEO F.C. Kohli ( "Father of the Indian IT Industry, )
