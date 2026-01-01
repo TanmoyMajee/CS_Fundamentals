@@ -83,68 +83,106 @@ CREATE TABLE IF NOT EXISTS messages (
 ````
 
 ```js
-multer (buffer)
-pdf-parse (extract text)
-Firebase upload (your existing code)
-mysql2 (pool)
-
 import { Request, Response } from "express";
+import mysql from "mysql2/promise";
 import pdfParse from "pdf-parse";
+import { FirebaseFileUpload } from "../config/firebaseUpload";
 import { pool } from "../db";
-import { FirebaseFileUpload } from "../config/firebase";
 
-export const uploadPdf = async (req: Request, res: Response) => {
+export async function uploadPdfHandler(req: Request, res: Response) {
+  const connection = await pool.getConnection();
+  let firebaseUrl: string | null = null;
+
   try {
+    // ------------------------
+    // START TRANSACTION
+    // ------------------------
+    await connection.beginTransaction();
+
     if (!req.file) {
       return res.status(400).json({ msg: "No file uploaded" });
     }
 
     const userId = req.user.id;
-    const { conversationId } = req.body;
     const { buffer, originalname, mimetype } = req.file;
 
-    // Upload to Firebase
-    const fileUrl = await FirebaseFileUpload(
+    // ------------------------
+    // 1) Create conversation if not sent
+    // ------------------------
+    let conversationId = req.body.conversationId;
+
+    if (!conversationId) {
+      const [convResult]: any = await connection.query(
+        `INSERT INTO conversations (title, userId) VALUES (?, ?)`,
+        [originalname, userId]
+      );
+
+      conversationId = convResult.insertId;
+    }
+
+    // ------------------------
+    // 2) Upload file to Firebase
+    // ------------------------
+    firebaseUrl = await FirebaseFileUpload(
       buffer,
       originalname,
       mimetype,
       userId
     );
 
-    // Extract text from pdf
+    // ------------------------
+    // 3) Extract text from PDF
+    // ------------------------
     const parsed = await pdfParse(buffer);
     const extractedText = parsed.text;
 
-    let convId = conversationId;
-
-    // create conversation if not exists
-    if (!convId) {
-      const [insertConv]: any = await pool.query(
-        `INSERT INTO conversations (userId, title) VALUES (?, ?)`,
-        [userId, originalname]
-      );
-
-      convId = insertConv.insertId;
-    }
-
-    // save file
-    await pool.query(
-      `INSERT INTO files 
+    // ------------------------
+    // 4) Save file + extracted text in DB
+    // ------------------------
+    await connection.query(
+      `
+      INSERT INTO files 
       (userId, conversationId, originalName, filetype, downloadUrl, extractedText)
-      VALUES (?, ?, ?, ?, ?, ?)`,
-      [userId, convId, originalname, mimetype, fileUrl, extractedText]
+      VALUES (?, ?, ?, ?, ?, ?)
+      `,
+      [
+        userId,
+        conversationId,
+        originalname,
+        mimetype,
+        firebaseUrl,
+        extractedText,
+      ]
     );
 
-    return res.status(200).json({
-      msg: "File uploaded and text extracted successfully",
-      conversationId: convId,
-    });
+    // ------------------------
+    // 5) Commit transaction
+    // ------------------------
+    await connection.commit();
 
+    return res.status(200).json({
+      msg: "File uploaded successfully",
+      conversationId,
+    });
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ msg: "Upload failed" });
+    console.error("Upload failed:", err);
+
+    // rollback DB changes
+    await connection.rollback();
+
+    // optional cleanup
+    // delete Firebase file if uploaded already
+    // delete temp files if used
+
+    return res.status(500).json({
+      msg: "Upload failed",
+      error: (err as any).message || err,
+    });
+  } finally {
+    connection.release();
   }
-};
+}
+
 
 
 import { Request, Response } from "express";
@@ -153,73 +191,90 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
-export const askQuestion = async (req: Request, res: Response) => {
+export async function getAnswerHandler(req: Request, res: Response) {
+  const connection = await pool.getConnection();
+
   try {
+    await connection.beginTransaction();
+
     const { query, conversationId } = req.body;
     const userId = req.user.id;
 
-    // Check conversation ownership
-    const [convRows]: any = await pool.query(
+    // 1) ownership check
+    const [convRows]: any = await connection.query(
       `SELECT userId FROM conversations WHERE id = ?`,
       [conversationId]
     );
 
     if (!convRows.length || convRows[0].userId !== userId) {
-      return res.status(403).json({ msg: "Unauthorized" });
+      return res.status(403).json({ msg: "Not authorized" });
     }
 
-    // Get latest file text
-    const [files]: any = await pool.query(
+    // 2) get extracted PDF text
+    const [fileRows]: any = await connection.query(
       `SELECT extractedText FROM files WHERE conversationId = ? ORDER BY id DESC LIMIT 1`,
       [conversationId]
     );
 
-    if (!files.length) {
-      return res.status(400).json({ msg: "No file for this conversation" });
+    if (!fileRows.length) {
+      return res.status(400).json({ msg: "No PDF uploaded for conversation" });
     }
 
-    const pdfText = files[0].extractedText;
+    const documentText = fileRows[0].extractedText;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    // 3) call Gemini API
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash",
+    });
 
     const prompt = `
-Answer ONLY using the following content. 
-If answer is not present, say exactly: "Information not found in document."
+Answer ONLY using the following document content. 
+If answer not present, reply exactly:
+"Information not found in document."
 
-Document Content:
-${pdfText}
+Document:
+${documentText}
 
-User Question:
+Question:
 ${query}
 `;
 
     const result = await model.generateContent(prompt);
     const answer = result.response.text();
 
-    // save human message
-    await pool.query(
-      `INSERT INTO messages (conversationId, sender, content) VALUES (?, 'HUMAN', ?)`,
+    // 4) save user message
+    await connection.query(
+      `INSERT INTO messages (conversationId, sender, content)
+       VALUES (?, 'HUMAN', ?)`,
       [conversationId, query]
     );
 
-    // save AI message
-    await pool.query(
-      `INSERT INTO messages (conversationId, sender, content) VALUES (?, 'AI', ?)`,
+    // 5) save AI response
+    await connection.query(
+      `INSERT INTO messages (conversationId, sender, content)
+       VALUES (?, 'AI', ?)`,
       [conversationId, answer]
     );
 
-    await pool.query(
+    // 6) update query count
+    await connection.query(
       `UPDATE conversations SET queryCount = queryCount + 1 WHERE id = ?`,
       [conversationId]
     );
 
-    return res.status(200).json({ answer });
+    await connection.commit();
 
+    res.status(200).json({ answer });
   } catch (err) {
+    await connection.rollback();
     console.error(err);
-    return res.status(500).json({ msg: "Query failed" });
+    res.status(500).json({ msg: "Query failed" });
+  } finally {
+    connection.release();
   }
-};
+}
+
+
 In my project, when the user uploads a PDF, I extract the text using pdf-parse and store it in MySQL.
 
 When they ask a question, I fetch the stored text and send both the user question and the document text in a single prompt to Gemini API.
