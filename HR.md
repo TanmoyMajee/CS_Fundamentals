@@ -36,7 +36,10 @@ I am passionate about software development, especially in areas like full stack 
 >“My primary strengths are problem-solving and consistent learning.
 When it comes to problem-solving, I like breaking down complex problems into smaller, manageable parts. For example, while developing my real-time chat application, I faced an issue with message duplication in group chats. I carefully debugged the code and refined the socket connections to make sure messages were delivered correctly.
 
->I’m also very consistent in learning. I regularly solve DSA problems on platforms like LeetCode, which keeps me sharp and helps me keep improving my skills. Even when the problems are tough, I keep practicing and learn from every attempt, which shows my dedication and resilience.
+>“One of my key strengths is proactive and consistent learning. Whenever I encounter a challenge, such as a complex LeetCode problem, I first explore various resources, like documentation and community insights, before turning to AI-based solutions. This approach not only helps me understand the problem better but also ensures continuous improvement in my skills.”
+
+>Strength (Taking Criticism Positively):
+“One of my strengths is my ability to take constructive criticism positively. For example, when I received feedback on my code from online communities, I used it to refine my skills and improve the overall quality of my projects. This shows my openness to learning and growth.”
 
 ** 3. What are your weakness?**
 >>“My main weakness is that I sometimes spend too much time trying to perfect my work./perfectionict
@@ -84,6 +87,14 @@ This experience strengthened my confidence in solving complex problems independe
 
 ** Over View of Final yr Project **
 >In my final-year project, we developed a multi-disease prediction system using machine learning. The main goal was to accurately predict the likelihood of diseases based on patient data. For diabetes prediction, we employed a random forest classifier, while for heart disease prediction, we used logistic regression. The system allowed users to input their health parameters and receive real-time, accurate predictions through an intuitive user interface.
+
+>Backend / ML: Python, scikit-learn for diff model , pandas, numpy
+Flask → backend API
+Model storage: pickle
+Web framework: Streamlit
+Frontend: React (for user interface)
+
+>pickle is a Python library used to save trained machine-learning models to a file and load them back later without retraining.
 
 ** Logistic Regression **
 >"Logistic Regression is a classification algorithm that is used to predict whether something belongs to a particular class or not — basically a yes or no type prediction.
