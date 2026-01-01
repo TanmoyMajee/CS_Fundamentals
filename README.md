@@ -8,43 +8,31 @@
 >For the tech stack, I used React for the frontend and Node.js with Express for the backend, and PostgreSQL as the database. For the AI model, I used DeepSeek to generate answers from the PDF content.
 
 
-1. AI Model Integration
 
-How did you integrate the DeepSeq model into your application?
 
-What were the main challenges you faced while integrating the AI model?
+## How do you ensure the AI-generated answers remain accurate and relevant to the PDF content?
 
-How do you ensure the AI-generated answers remain accurate and relevant to the PDF content?
+## 2. Architecture and Technology Choices
+>In my AI-powered PDF Q&A platform, the process begins with the user interacting with a React frontend. The user uploads a PDF, which is sent to the backend. On the backend, I handle the file upload and extract the text from the PDF, and the extracted text is stored in MySQL. If a conversation ID is not provided, a new conversation is created; otherwise, the file is linked to the existing conversation. A single conversation can have multiple files, and I enforce plan-based limits — free users can upload up to three files per conversation, while premium users can upload up to ten.
 
-2. Architecture and Technology Choices
+>When the user submits a query, the frontend sends the query and conversation ID to the backend. The backend authenticates the user using JWT, fetches the extracted text of all the files linked to that conversation from MySQL, and sends this content along with the user query to the Gemini API. The model is prompted to answer strictly from the document content. The generated answer is stored in the database as a message and returned to the frontend.
 
-Why did you choose Node.js and Express.js for the backend?
+>For usage control, I maintain plan-based limits using middleware, and Stripe webhooks are integrated to handle subscription upgrades so that users automatically get premium access after successful payment.
 
-Why did you opt for MySQL as the database instead of NoSQL like MongoDB?
 
-How does the JWT authentication work in your application, and why did you choose it?
+## How does the JWT authentication work in your application, and why did you choose it?
 
-3. Features and Implementation
 
-Can you explain how the Stripe payment system is integrated into the platform?
 
-How do you manage different plans (free and premium) within your application?
+## How do you manage different plans (free and premium) within your application?
 
-How do you handle and store chat history in the MySQL database?
+## How do you handle and store chat history in the MySQL database?
 
-4. Challenges and Learnings
+## How did you ensure the performance and scalability of the application?
 
-What were the biggest technical challenges you faced during the project?
+## What were the key learnings from integrating AI into a full-stack application?
 
-How did you ensure the performance and scalability of the application?
-
-What were the key learnings from integrating AI into a full-stack application?
-
-5. Future Improvements
-
-What features do you plan to add to Rideit in the future?
-
-How would you scale the application to handle more users or larger documents?
+## How would you scale the application to handle more users or larger documents?
 
 
 **2.	Why did you choose this project idea? // Motivation**
