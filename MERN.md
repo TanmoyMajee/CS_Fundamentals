@@ -347,6 +347,63 @@ View → React frontend
 
 Controller → Express route controllers handling APIs
 
+## Full Stack Development:
+Full stack development refers to working on both the frontend and the backend of a web application. The frontend is the part that users interact with directly, such as the UI, forms, and buttons, usually built using technologies like HTML, CSS, JavaScript, and frameworks like React. It focuses on user experience and how data is displayed.
+
+The backend handles the business logic, database operations, and server-side processing. It includes APIs, authentication, authorization, and database interactions using technologies like Node.js, Express, and databases such as MongoDB.
+
+A full stack developer connects the frontend and backend, ensures data flows correctly through APIs, and manages features like user login, protected routes, and role-based access. In short, a full stack developer understands the complete flow of an application from user interface to database.
+
+## Authentication:
+Authentication is the process of verifying who the user is. In a real application, this happens during the login process. When a user enters their email and password, the backend checks whether these credentials are correct and whether the user exists in the system. If the details are valid, the user is authenticated, meaning the system now knows that the request is coming from a genuine and logged-in user.
+
+## Authorization:
+Authorization happens after authentication and is about what the user is allowed to access. Even after logging in, different users can have different permissions. For example, a normal user can access general routes like their profile, but admin-only routes are restricted. If a normal user tries to access an admin route, authorization logic will block that request. So, authorization decides the level of access a user has within the application.
+
+
+## jwt ,   Full stack
+
+What is JWT and what is it used for?
+JWT, or JSON Web Token, is a compact and secure way to transmit information between a client and a server. It’s used primarily for authentication and authorization. When a user logs in, the server generates a JWT that includes essential user information, like their user ID, and signs it with a secret key. This token is then sent to the client. On subsequent requests, the client includes this token in the request headers. The server then verifies the token to confirm the user’s identity and their permissions. This way, JWT helps maintain a stateless, secure communication between the client and the server
+
+
+## How does JWT work?
+Token Creation:
+When a user logs in, the server creates a JWT by encoding the header and payload and then signing them with a secret key or a private key, depending on the algorithm.
+
+Token Transmission:
+The server sends this token to the client, and the client stores it, typically in local storage or in a cookie.
+
+Token Verification:
+When the client makes a request to the server, it includes the JWT in the authorization header. The server then takes the token and decodes it, separating the header, payload, and signature.
+
+Signature Verification:
+The server re-calculates the signature using the header and payload and the same secret or private key. If the recalculated signature matches the signature in the token, it confirms that the token hasn’t been altered and is valid. This process also verifies the user’s identity and their permissions based on the claims in the payload.
+
+## JWT Parts :
+
+Header:
+The header typically includes the type of token (which is JWT) and the signing algorithm used, such as HMAC SHA-256 or RSA.
+
+Payload:
+The payload contains the claims, which are statements about the user and additional data. These claims can include the user ID, email, and any other custom data.
+
+Signature:
+The signature is created by taking the encoded header and payload, then signing them with a secret key and the specified algorithm. This ensures that the token hasn’t been tampered with.
+
+## What are the benefits of using JWT?
+JWTs are stateless, meaning the server doesn’t need to store session information, which improves scalability. They are also compact, allowing them to be easily transmitted in URLs, headers, or cookies. Additionally, they can carry claims, allowing for more flexible and self-contained tokens. They are also widely supported across different platforms and languages.
+
+How do you securely store and transmit JWTs?
+To keep JWTs secure, always use HTTPS to encrypt the transmission, preventing token interception. Avoid storing tokens in local storage due to XSS risks; instead, consider using secure, HTTP-only cookies. Also, set appropriate expiration times and use strong algorithms for signing the tokens.
+
+## What is the difference between a JWT and a session cookie?
+A session cookie stores the session data on the server, and the server maintains the session state. In contrast, a JWT is self-contained, meaning the token itself carries all the information, and the server doesn’t need to store any session data. This makes JWT more scalable and suitable for distributed systems.
+
+## How do you handle JWT expiration and refresh tokens?
+JWTs usually have an expiration time set in their payload. When a token expires, the client must request a new one. Refresh tokens are long-lived tokens that can be used to obtain a new JWT without requiring the user to log in again. This approach balances security and usability, ensuring that users don’t have to log in frequently.
+
+
 ## This bind ,aply , Call Back , Promise , 
 
 
