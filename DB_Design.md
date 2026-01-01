@@ -81,3 +81,158 @@ CREATE TABLE IF NOT EXISTS messages (
 );
 
 ````
+
+```js
+multer (buffer)
+pdf-parse (extract text)
+Firebase upload (your existing code)
+mysql2 (pool)
+
+import { Request, Response } from "express";
+import pdfParse from "pdf-parse";
+import { pool } from "../db";
+import { FirebaseFileUpload } from "../config/firebase";
+
+export const uploadPdf = async (req: Request, res: Response) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ msg: "No file uploaded" });
+    }
+
+    const userId = req.user.id;
+    const { conversationId } = req.body;
+    const { buffer, originalname, mimetype } = req.file;
+
+    // Upload to Firebase
+    const fileUrl = await FirebaseFileUpload(
+      buffer,
+      originalname,
+      mimetype,
+      userId
+    );
+
+    // Extract text from pdf
+    const parsed = await pdfParse(buffer);
+    const extractedText = parsed.text;
+
+    let convId = conversationId;
+
+    // create conversation if not exists
+    if (!convId) {
+      const [insertConv]: any = await pool.query(
+        `INSERT INTO conversations (userId, title) VALUES (?, ?)`,
+        [userId, originalname]
+      );
+
+      convId = insertConv.insertId;
+    }
+
+    // save file
+    await pool.query(
+      `INSERT INTO files 
+      (userId, conversationId, originalName, filetype, downloadUrl, extractedText)
+      VALUES (?, ?, ?, ?, ?, ?)`,
+      [userId, convId, originalname, mimetype, fileUrl, extractedText]
+    );
+
+    return res.status(200).json({
+      msg: "File uploaded and text extracted successfully",
+      conversationId: convId,
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ msg: "Upload failed" });
+  }
+};
+
+
+import { Request, Response } from "express";
+import { pool } from "../db";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+
+export const askQuestion = async (req: Request, res: Response) => {
+  try {
+    const { query, conversationId } = req.body;
+    const userId = req.user.id;
+
+    // Check conversation ownership
+    const [convRows]: any = await pool.query(
+      `SELECT userId FROM conversations WHERE id = ?`,
+      [conversationId]
+    );
+
+    if (!convRows.length || convRows[0].userId !== userId) {
+      return res.status(403).json({ msg: "Unauthorized" });
+    }
+
+    // Get latest file text
+    const [files]: any = await pool.query(
+      `SELECT extractedText FROM files WHERE conversationId = ? ORDER BY id DESC LIMIT 1`,
+      [conversationId]
+    );
+
+    if (!files.length) {
+      return res.status(400).json({ msg: "No file for this conversation" });
+    }
+
+    const pdfText = files[0].extractedText;
+
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+    const prompt = `
+Answer ONLY using the following content. 
+If answer is not present, say exactly: "Information not found in document."
+
+Document Content:
+${pdfText}
+
+User Question:
+${query}
+`;
+
+    const result = await model.generateContent(prompt);
+    const answer = result.response.text();
+
+    // save human message
+    await pool.query(
+      `INSERT INTO messages (conversationId, sender, content) VALUES (?, 'HUMAN', ?)`,
+      [conversationId, query]
+    );
+
+    // save AI message
+    await pool.query(
+      `INSERT INTO messages (conversationId, sender, content) VALUES (?, 'AI', ?)`,
+      [conversationId, answer]
+    );
+
+    await pool.query(
+      `UPDATE conversations SET queryCount = queryCount + 1 WHERE id = ?`,
+      [conversationId]
+    );
+
+    return res.status(200).json({ answer });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ msg: "Query failed" });
+  }
+};
+In my project, when the user uploads a PDF, I extract the text using pdf-parse and store it in MySQL.
+
+When they ask a question, I fetch the stored text and send both the user question and the document text in a single prompt to Gemini API.
+
+The model is instructed to answer only from the document text.
+I store both human and AI messages in a messages table.
+
+If asked about large docs:
+
+For large documents, the limitation is model context size.
+In future I would move to RAG with vector search, but for now this approach keeps the system simple and easy to maintain.
+
+````
+
+
+
