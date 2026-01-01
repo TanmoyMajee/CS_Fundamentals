@@ -83,20 +83,11 @@ CREATE TABLE IF NOT EXISTS messages (
 ````
 
 ```js
-import { Request, Response } from "express";
-import mysql from "mysql2/promise";
-import pdfParse from "pdf-parse";
-import { FirebaseFileUpload } from "../config/firebaseUpload";
-import { pool } from "../db";
-
 export async function uploadPdfHandler(req: Request, res: Response) {
   const connection = await pool.getConnection();
   let firebaseUrl: string | null = null;
 
   try {
-    // ------------------------
-    // START TRANSACTION
-    // ------------------------
     await connection.beginTransaction();
 
     if (!req.file) {
@@ -106,23 +97,45 @@ export async function uploadPdfHandler(req: Request, res: Response) {
     const userId = req.user.id;
     const { buffer, originalname, mimetype } = req.file;
 
-    // ------------------------
-    // 1) Create conversation if not sent
-    // ------------------------
+    // get user plan
+    const [userRows]: any = await connection.query(
+      `SELECT plan FROM users WHERE id = ?`,
+      [userId]
+    );
+
+    const plan = userRows[0].plan; // FREE or PREMIUM
+
     let conversationId = req.body.conversationId;
 
+    // if conversation not provided → create
     if (!conversationId) {
       const [convResult]: any = await connection.query(
         `INSERT INTO conversations (title, userId) VALUES (?, ?)`,
         [originalname, userId]
       );
-
       conversationId = convResult.insertId;
     }
 
-    // ------------------------
-    // 2) Upload file to Firebase
-    // ------------------------
+    // check how many files already uploaded in this conversation
+    const [countRows]: any = await connection.query(
+      `SELECT COUNT(*) AS fileCount FROM files WHERE conversationId = ?`,
+      [conversationId]
+    );
+
+    const fileCount = countRows[0].fileCount;
+
+    // enforce limits
+    const limit = plan === "PREMIUM" ? 10 : 3;
+
+    if (fileCount >= limit) {
+      return res.status(403).json({
+        msg: `File upload limit reached for your plan`,
+        plan,
+        limit,
+      });
+    }
+
+    // upload file to Firebase
     firebaseUrl = await FirebaseFileUpload(
       buffer,
       originalname,
@@ -130,15 +143,11 @@ export async function uploadPdfHandler(req: Request, res: Response) {
       userId
     );
 
-    // ------------------------
-    // 3) Extract text from PDF
-    // ------------------------
+    // extract pdf text
     const parsed = await pdfParse(buffer);
     const extractedText = parsed.text;
 
-    // ------------------------
-    // 4) Save file + extracted text in DB
-    // ------------------------
+    // save file row
     await connection.query(
       `
       INSERT INTO files 
@@ -155,41 +164,25 @@ export async function uploadPdfHandler(req: Request, res: Response) {
       ]
     );
 
-    // ------------------------
-    // 5) Commit transaction
-    // ------------------------
     await connection.commit();
 
     return res.status(200).json({
       msg: "File uploaded successfully",
       conversationId,
+      plan,
+      filesUsed: fileCount + 1,
+      limit,
     });
   } catch (err) {
-    console.error("Upload failed:", err);
-
-    // rollback DB changes
     await connection.rollback();
-
-    // optional cleanup
-    // delete Firebase file if uploaded already
-    // delete temp files if used
-
-    return res.status(500).json({
-      msg: "Upload failed",
-      error: (err as any).message || err,
-    });
+    console.error(err);
+    return res.status(500).json({ msg: "Upload failed" });
   } finally {
     connection.release();
   }
 }
 
 
-
-import { Request, Response } from "express";
-import { pool } from "../db";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 export async function getAnswerHandler(req: Request, res: Response) {
   const connection = await pool.getConnection();
@@ -200,7 +193,7 @@ export async function getAnswerHandler(req: Request, res: Response) {
     const { query, conversationId } = req.body;
     const userId = req.user.id;
 
-    // 1) ownership check
+    // ownership validation
     const [convRows]: any = await connection.query(
       `SELECT userId FROM conversations WHERE id = ?`,
       [conversationId]
@@ -210,30 +203,33 @@ export async function getAnswerHandler(req: Request, res: Response) {
       return res.status(403).json({ msg: "Not authorized" });
     }
 
-    // 2) get extracted PDF text
+    // get ALL file texts in this conversation
     const [fileRows]: any = await connection.query(
-      `SELECT extractedText FROM files WHERE conversationId = ? ORDER BY id DESC LIMIT 1`,
+      `SELECT extractedText FROM files WHERE conversationId = ? ORDER BY id ASC`,
       [conversationId]
     );
 
     if (!fileRows.length) {
-      return res.status(400).json({ msg: "No PDF uploaded for conversation" });
+      return res
+        .status(400)
+        .json({ msg: "No PDF uploaded for this conversation" });
     }
 
-    const documentText = fileRows[0].extractedText;
+    // merge all text
+    const mergedText = fileRows
+      .map((row: any) => row.extractedText || "")
+      .join("\n\n");
 
-    // 3) call Gemini API
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash",
     });
 
     const prompt = `
-Answer ONLY using the following document content. 
-If answer not present, reply exactly:
-"Information not found in document."
+Answer ONLY using the following document content.
+If not present, reply exactly: "Information not found in document."
 
 Document:
-${documentText}
+${mergedText}
 
 Question:
 ${query}
@@ -242,21 +238,19 @@ ${query}
     const result = await model.generateContent(prompt);
     const answer = result.response.text();
 
-    // 4) save user message
+    // save messages
     await connection.query(
       `INSERT INTO messages (conversationId, sender, content)
        VALUES (?, 'HUMAN', ?)`,
       [conversationId, query]
     );
 
-    // 5) save AI response
     await connection.query(
       `INSERT INTO messages (conversationId, sender, content)
        VALUES (?, 'AI', ?)`,
       [conversationId, answer]
     );
 
-    // 6) update query count
     await connection.query(
       `UPDATE conversations SET queryCount = queryCount + 1 WHERE id = ?`,
       [conversationId]
@@ -275,6 +269,7 @@ ${query}
 }
 
 
+
 In my project, when the user uploads a PDF, I extract the text using pdf-parse and store it in MySQL.
 
 When they ask a question, I fetch the stored text and send both the user question and the document text in a single prompt to Gemini API.
@@ -288,6 +283,37 @@ For large documents, the limitation is model context size.
 In future I would move to RAG with vector search, but for now this approach keeps the system simple and easy to maintain.
 
 ````
+File upload flow
 
+When the user uploads a PDF, the frontend sends it to the backend.
+The backend first checks the user’s plan and the conversation.
+If the conversation already has files, I count how many are uploaded.
+Based on the plan, I enforce limits:
+– free users can upload up to 3 PDFs per conversation
+– premium users up to 10 PDFs
+
+After validation, I upload the file to Firebase, extract the PDF text, and store that text in the database inside the files table along with the conversationId. This allows one conversation to have multiple files.
+
+💬 Query / answer flow
+
+When the user asks a question, I receive the query and the conversationId.
+First, I check authorization to ensure the conversation belongs to the user.
+Then I fetch all PDFs’ extracted text linked to that conversation.
+I merge all that text together and send it to Gemini along with the query using a custom prompt that forces it to answer only from the document content.
+The generated answer is stored in the messages table and returned to the user.
+
+🎯 Key ideas you can say confidently
+
+conversations now support multiple files
+
+plan controls how many files
+
+AI answers from all files together
+
+extracted text stored in DB avoids reprocessing
+
+LIMIT problem solved, not ignored
+
+you’re aware of token limits & tradeoffs
 
 
