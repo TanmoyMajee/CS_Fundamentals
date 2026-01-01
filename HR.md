@@ -42,9 +42,12 @@ When it comes to problem-solving, I like breaking down complex problems into sma
 “One of my strengths is my ability to take constructive criticism positively. For example, when I received feedback on my code from online communities, I used it to refine my skills and improve the overall quality of my projects. This shows my openness to learning and growth.”
 
 ** 3. What are your weakness?**
->>“My main weakness is that I sometimes spend too much time trying to perfect my work./perfectionict
-For example, when I was working on the RAG-based project, I spent extra time polishing the chat interface instead of focusing on finishing the core features first. This can delay progress if I’m not careful. its a good 
->>“To overcome this, I have started setting deadlines to finish the most priority tasks first, and then I work on improving the design if there is time left.”
+>“My main weakness is that I sometimes spend too much time trying to perfect my work./perfectionict
+For example, when I was working on the RAG-based project, I spent extra time polishing the chat interface instead of focusing on finishing the core features first. This can delay progress if I’m not careful. its a good
+ 
+>“To overcome this,I’ve started setting daily goals and prioritizing tasks more effectively, ensuring that I balance quality and efficienc
+
+>“I absolutely agree that striving for perfection is important. My approach is to use the Agile methodology, which means we first build a functional demo and then iterate based on feedback. This ensures we maintain quality while also being efficient and adaptable. In this way, we get the best of both world
 
 **Where do you see yourself in 5 years? / Career & Goals**
 
