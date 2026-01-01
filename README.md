@@ -8,6 +8,45 @@
 >For the tech stack, I used React for the frontend and Node.js with Express for the backend, and PostgreSQL as the database. For the AI model, I used DeepSeek to generate answers from the PDF content.
 
 
+1. AI Model Integration
+
+How did you integrate the DeepSeq model into your application?
+
+What were the main challenges you faced while integrating the AI model?
+
+How do you ensure the AI-generated answers remain accurate and relevant to the PDF content?
+
+2. Architecture and Technology Choices
+
+Why did you choose Node.js and Express.js for the backend?
+
+Why did you opt for MySQL as the database instead of NoSQL like MongoDB?
+
+How does the JWT authentication work in your application, and why did you choose it?
+
+3. Features and Implementation
+
+Can you explain how the Stripe payment system is integrated into the platform?
+
+How do you manage different plans (free and premium) within your application?
+
+How do you handle and store chat history in the MySQL database?
+
+4. Challenges and Learnings
+
+What were the biggest technical challenges you faced during the project?
+
+How did you ensure the performance and scalability of the application?
+
+What were the key learnings from integrating AI into a full-stack application?
+
+5. Future Improvements
+
+What features do you plan to add to Rideit in the future?
+
+How would you scale the application to handle more users or larger documents?
+
+
 **2.	Why did you choose this project idea? // Motivation**
 
 >“I chose this idea because going through long documents is time-consuming. This project makes it easier to quickly extract answers — for example, from research papers or e-books — without reading every page.”
@@ -252,55 +291,6 @@ For example, if file upload succeeded but chunk creation failed, I deleted the f
 
 This way the system behaves atomically from the user’s point of view: either everything succeeds or everything is rolled back.”
 
-import mysql from "mysql2/promise";
-
-const pool = mysql.createPool({...});
-
-export async function uploadHandler(req, res) {
-  const connection = await pool.getConnection();
-
-  try {
-    await connection.beginTransaction();
-
-    // 1. create conversation
-    const [convResult] = await connection.query(
-      `INSERT INTO conversation (title, userId) VALUES (?, ?)`,
-      [req.file.originalname, req.user.id]
-    );
-    const conversationId = convResult.insertId;
-
-    // 2. upload file to Firebase
-    const url = await FirebaseFileUpload(...);
-
-    // 3. save file entry in DB
-    const [fileResult] = await connection.query(
-      `INSERT INTO file (filename, userId, conversationId, downloadUrl)
-       VALUES (?, ?, ?, ?)`,
-      [req.file.originalname, req.user.id, conversationId, url]
-    );
-    const fileId = fileResult.insertId;
-
-    // 4. process chunks + vector DB etc.
-    // (if any error happens here, we rollback)
-
-    await connection.commit();
-
-    res.json({ msg: "Success" });
-
-  } catch (err) {
-
-    // rollback DB changes
-    await connection.rollback();
-
-    // delete firebase file if already uploaded
-    // delete tmp file if created
-    // delete vector data if created
-
-    res.status(500).json({ msg: "failed", error: err });
-  } finally {
-    connection.release();
-  }
-}
 
 ```
 
