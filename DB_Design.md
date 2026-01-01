@@ -283,6 +283,32 @@ For large documents, the limitation is model context size.
 In future I would move to RAG with vector search, but for now this approach keeps the system simple and easy to maintain.
 
 ````
+## Atomicity 
+Atomicity means “all the operations in a transaction must either complete fully or not happen at all — there is no partial completion.”
+
+In my project, when a user uploads a PDF, several dependent operations occur together — a conversation may be created, the file is uploaded, the extracted text is stored, and the file–conversation relation is saved. These operations have meaning only if all of them succeed together.
+
+So I wrap them in a single MySQL transaction. If even one step fails — for example, Firebase upload fails or text extraction throws an error — I immediately trigger a rollback. This removes any partial inserts, so the database never ends up in a corrupted state like “conversation created but no file” or “file entry created without extracted text.”
+
+That is why atomicity is important in my project: it guarantees that every user action is treated as one logical unit of work — either everything is saved consistently, or nothing is save
+
+## Did you implement ACID properties in your project?”
+
+Yes, I have implemented ACID properties in my project. Since I am using MySQL, which is a relational database, it naturally supports ACID, but I also designed my backend logic to maintain these properties.
+
+For example, whenever a user uploads a PDF or asks a query, I use database transactions in MySQL. I explicitly begin a transaction, perform multiple related operations like inserting conversation data, storing the extracted PDF text, saving messages, and updating counts, and then commit the transaction only if all steps succeed.
+
+If any step fails, I roll back the transaction so that the system does not stay in a partial or inconsistent state. This ensures atomicity.
+
+Consistency is maintained because the database schema has proper foreign keys, constraints, and valid states — for example, a file cannot exist without a valid conversation ID and user ID.
+
+Isolation is handled by MySQL transaction isolation levels, which ensure that parallel users querying or uploading files do not interfere with each other.
+
+Finally, durability is ensured because once a transaction is committed, MySQL permanently writes the data to disk so even if the server crashes, the changes are preserved.
+
+So, practically, I enforced ACID using MySQL transactions, foreign keys, and rollback-on-failure logic in my backend.
+
+
 File upload flow
 
 When the user uploads a PDF, the frontend sends it to the backend.
