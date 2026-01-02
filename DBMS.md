@@ -518,7 +518,31 @@ ACID ensures that transactions are **safe, accurate, and dependable** even with 
 - Essential for **banking, ticket booking, e-commerce**, and any system involving concurrent transactions.
 
 ---
+## 🔄 Transaction States in DBMS (Short Interview Notes)
 
+A database transaction passes through the following states:
+
+### 1️⃣ Active
+- Transaction has started and operations are being executed.
+
+### 2️⃣ Partially Committed
+- All statements executed successfully, but changes not yet permanently saved.
+
+### 3️⃣ Committed
+- COMMIT executed successfully  
+- All changes permanently stored in database.
+
+### 4️⃣ Failed
+- Error or system crash occurs during transaction execution.
+
+### 5️⃣ Aborted
+- Transaction is rolled back  
+- Database restored to previous consistent state.
+
+### 6️⃣ Terminated
+- Transaction has completed — either committed or aborted.
+
+## Concureny Control ,Dirty read wtire , lost update 
 
 # 🗂️ SQL vs NoSQL Databases — Interview Notes
 
@@ -678,6 +702,35 @@ A *Student* **enrolls in** a *Course*.
 - Helps convert real-world data into a structured database design.
 
 
+
+
+## Dbms Abstruction
+“DBMS provides three levels of abstraction so that different users see different amounts of data. Everyone doesn’t need to see everything.”
+
+Physical Level – describes how data is actually stored on disk
+
+Who accesses it: Database Administrators (DBA)
+
+Logical / Conceptual Level – What data is stored , 
+
+What it is: overall structure of the database like tables, columns, relationships
+
+
+Who accesses it:Database Designers , Devlepo
+
+
+3️⃣ View / External Level – What user sees
+Application UI layer
+
+
+## tire vs 3 tire 
+“In 2-tier architecture, the client directly interacts with the database.
+The UI and business logic are mostly on the client side, and the database is on the server side — suitable for small applications.”
+
+In 3-tier architecture, there is an application/server layer between client and database.
+The client talks to the application server, and the application server talks to the database — which makes it more secure and scalable.”
+
+## “CAP theorem states that in any distributed database, we cannot achieve Consistency, Availability, and Partition tolerance simultaneously.
 
 # 📘 Indexing in DBMS
 
