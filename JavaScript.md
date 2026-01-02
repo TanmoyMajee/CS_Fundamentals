@@ -86,6 +86,39 @@ console.log(dog.eats);  // true (inherited)
 console.log(dog.hasOwnProperty("barks")); // true
 console.log(dog.hasOwnProperty("eats"));  // false
 
+🟢 What is this?
+this refers to the object that is currently executing the function.
+
+console.log(this === window);  // true In JS enviorment  return  window object
+console.log(this); // {} in Node env return {} empty obj
+
+🟢 Normal Function
+
+has its own this
+this depends on who calls it
+
+🟡 Arrow Function
+
+❌ does NOT have its own this
+inherits this from surrounding scope
+
+
+const obj = {
+  name: "Tanmoy",
+
+  normal() {
+    console.log(this.name);
+  },
+
+  arrow: () => {
+    console.log(this.name);
+  }
+};
+
+obj.normal(); // Tanmoy  ✔
+obj.arrow();  // undefined ❌
+
+
 ```
 
 ## What is isNaN()?
