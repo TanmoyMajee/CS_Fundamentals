@@ -1,3 +1,6 @@
+
+## SOLID
+
 ## 1️⃣ Inheritance vs Polymorphism
 
 Inheritance:
