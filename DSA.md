@@ -44,6 +44,105 @@ It may take 4 seconds for 20 inputs (just an example of growth).
 | Delete (DEL)       | —             | 127         |
 
 
+## Linked List Overview: 
+A linked list is a linear data structure consisting of nodes. Each node contains two parts: the data and a pointer (or reference) to the next node in the sequence. This forms a chain-like structure.
+Types of Linked Lists:
+Singly Linked List: Each node points only to the next node.
+Doubly Linked List: Each node points to both the next and the previous node.
+Circular Linked List: The last node points back to the first node, forming a circle.
+Circular Doubly Linked List: Each node points to both the next and the previous node, and the last node points back to the first.
+
+# Advantages:
+Dynamic size: Linked lists can easily grow or shrink in size without the need for reallocation.
+
+Efficient insertions and deletions: These operations are generally faster than in arrays, especially when inserting or deleting in the middle of the list.
+
+# Disadvantages:
+Extra memory usage: Each node requires additional memory for pointers.
+
+Sequential access: To access a particular element, you need to traverse the list from the head, resulting in O(n) time complexity.
+
+# Time Complexity:
+Traversal: O(n), since you may need to visit each node once.
+
+Insertion: O(1) if inserting at the beginning (with direct access to the head), but O(n) in general if you need to find the insertion point.
+
+Deletion: O(1) if you have direct access to the node to delete, but O(n) if you need to find it first.
+
+
+
+## Difference Between Linked List and Array:
+
+# Memory Allocation:
+Array: Stores elements in a contiguous block of memory, meaning all elements are adjacent in memory.
+
+Linked List: Consists of nodes that are stored in non-contiguous memory locations, and each node points to the next node.
+ 
+# Size:
+
+Array: Has a fixed size that must be defined at the time of creation and cannot be changed.
+
+Linked List: Is dynamic in size, allowing it to grow or shrink as needed without requiring reallocation of the entire structure.
+
+# Access Time:
+
+Array: Offers constant time access, O(1), because you can directly access any element using its index.
+
+Linked List: Requires sequential traversal, meaning the access time is O(n) in the worst case, as you may need to go through multiple nodes.
+
+# Insertion and Deletion:
+
+Array: Inserting or deleting elements, especially in the middle, can be costly since it may require shifting elements, resulting in O(n) time complexity.
+
+Linked List: Insertion and deletion are more efficient (typically O(1)) if you have direct access to the node, since you only need to update pointers.
+
+# Memory Overhead:
+
+Array: Generally has lower memory overhead because it only stores the elements.
+
+Linked List: Has extra memory overhead due to the pointers stored in each node.
+
+
+
+## A binary tree 
+A binary tree is a non-linear hierarchical data structure where each node has at most two children, typically referred to as the left child and the right child. The topmost node is called the root, and nodes with no children are called leaf nodes.
+
+# Key Concepts:
+Root Node: The root node is the topmost node of the binary tree and serves as the entry point to the tree. It has no parent.
+
+Node Structure: Each node in a binary tree contains data and up to two pointers or references: one to the left child and one to the right child.
+
+Children and Parent: Every node, except the root, has one parent. Nodes that have children are referred to as internal nodes.
+
+Leaf Nodes: Leaf nodes are nodes that do not have any children. They are at the bottom of the tree.
+
+Height and Depth:
+Height of a Tree: The height of a binary tree is the number of edges on the longest path from the root to a leaf.
+
+Depth of a Node: The depth of a node is the number of edges from the root to that node.
+
+Types of Binary Trees:
+Full Binary Tree: Every node other than the leaves has exactly two children.
+Complete Binary Tree: All levels are fully filled except possibly the last level, and the last level has all nodes as left as possible.
+Perfect Binary Tree: All internal nodes have two children, and all leaves are at the same level.
+Degenerate Tree: Each parent node has only one child, essentially resembling a linked list
+
+
+## Binary Search Tree (BST) Overview:
+A binary search tree (BST) is a special type of binary tree that maintains a sorted order of elements. For every node in a BST:
+
+The left subtree contains only nodes with values less than the node’s value.
+
+The right subtree contains only nodes with values greater than the node’s value.
+
+This property is applied recursively to all nodes in the tree, ensuring that for any given node, its left subtree and right subtree follow this rule.
+
+# Key Points:
+Efficiency:
+Search Operation: In a balanced BST, the average time complexity for searching is O(log n), where n is the number of nodes.
+
+Insertion and Deletion: Similarly, insertion and deletion operations also have an average time complexity of O(log n) in a balanced BST.
+
 # Sorting Algorithms – Interview Notes (C++)
 
 These notes are prepared for **service-based company interviews (TCS, Wipro, Cognizant)**.  
