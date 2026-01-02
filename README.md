@@ -11,6 +11,17 @@
 
 
 ## How do you ensure the AI-generated answers remain accurate and relevant to the PDF content?
+>To keep answers accurate and grounded, I restrict the AI to only the uploaded document content. I extract the PDF text, store it in MySQL, and when a query is asked, I send only that text and the user’s question to Gemini with a strict prompt that instructs it to answer purely from the document and not use outside knowledge.
+
+>I also include a fallback instruction: if the answer is not present in the document, it must reply “Information not found in document”. This prevents hallucination and ensures the response is relevant and sourced only from the uploaded PDF.
+
+## 2. How did you ensure the performance and scalability of the application?
+
+>To improve performance, I ensure that the PDF text is only extracted once and stored in the MySQL database. This way, for each user query, the system doesn't re-parse the PDF, which significantly reduces processing time and load.
+
+>Additionally, to manage scalability, I set plan-based limits on the number of files a user can upload per conversation. For free users, they can upload up to 3 files, and for premium users, they can upload up to 10 files. This ensures that the text length remains manageable and the database can handle it efficiently.
+
+>Also, I limit the size of the uploaded PDFs to ensure that the processing remains smooth and doesn’t overwhelm the system
 
 ## 2. Architecture and Technology Choices
 >In my AI-powered PDF Q&A platform, the process begins with the user interacting with a React frontend. The user uploads a PDF, which is sent to the backend. On the backend, I handle the file upload and extract the text from the PDF, and the extracted text is stored in MySQL. If a conversation ID is not provided, a new conversation is created; otherwise, the file is linked to the existing conversation. A single conversation can have multiple files, and I enforce plan-based limits — free users can upload up to three files per conversation, while premium users can upload up to ten.
@@ -20,19 +31,24 @@
 >For usage control, I maintain plan-based limits using middleware, and Stripe webhooks are integrated to handle subscription upgrades so that users automatically get premium access after successful payment.
 
 
+## ✅ 3. What were the key learnings from integrating AI into a full-stack application?
+
+>One of the biggest learnings was prompt engineering. I discovered how crucial it is to design prompts that ensure the AI generates answers strictly from the provided document content, minimizing the risk of hallucinations.
+
+>Another significant learning was integrating the Gemini API. I learned how to structure API calls effectively and how to craft prompts that guide the model to produce accurate, content-specific answers.
+
+>Additionally, I gained valuable experience in transaction management. Since multiple database operations occur simultaneously — like creating a conversation and inserting a file record — I implemented transactions to ensure atomicity. This means that either all related operations succeed together, or none of them do, maintaining data consistency.
+
+>I also understood  authentication, and database design — with AI capabilities to build practical, production-ready systems.
+
 ## How does the JWT authentication work in your application, and why did you choose it?
+>In my application, I use JWT for stateless authentication.
+When a user logs in successfully, the backend generates a JWT token that contains the user ID and plan information, and it is signed using a secret key. This token is then returned to the frontend and stored securely on the client side.
 
+>For every subsequent request — like uploading a PDF or asking a query — the token is sent in the Authorization header. On the backend, I verify the token using the same secret key. If it is valid, I extract the user information from it and allow access to protected routes; otherwise, the request is rejected.
 
+>I chose JWT because it is stateless and scalable. The server does not need to store session data, which makes it much easier to scale horizontally. It also works very well for APIs and microservices since the token can be verified by any service without centralized session storage. Another reason is security — the token is signed, so it cannot be tampered with, and I can also include claims like user role or subscription plan inside it.
 
-## How do you manage different plans (free and premium) within your application?
-
-## How do you handle and store chat history in the MySQL database?
-
-## How did you ensure the performance and scalability of the application?
-
-## What were the key learnings from integrating AI into a full-stack application?
-
-## How would you scale the application to handle more users or larger documents?
 
 
 **2.	Why did you choose this project idea? // Motivation**
@@ -50,33 +66,6 @@
 
 >Finally, if a free user reaches the query limit, they’ll be prompted with an option to upgrade their plan, making it easy for them to unlock unlimited access.
 
-**How does the system work step by step when a user uploads a PDF and asks a question?**
-
-> When a user uploads a document, the backend extracts the text and splits it into chunks. Each chunk is converted into embeddings using a HuggingFace sentence transformer model and saved inside Qdrant, which is a vector database. For every new conversation, I create a separate collection in Qdrant based on the conversation ID, so that the data from one session doesn’t get mixed up with another. This way each chat stays independent and organized.
-
-> When the user asks a question, we create an embedding for that query and use Qdrant to fetch the most relevant chunks. Then I built a retrieval chain in LangChain, where those chunks are combined with a custom prompt. The prompt makes sure the model only answers from the given context. Finally, a HuggingFace LLM generates the response, and both the user’s question and the AI’s answer are stored in the database to maintain chat history.
-
-
-## Why I Chose DeepSeek:
-
->"I chose DeepSeek because it’s an open-source language model hosted on Hugging Face, which makes it easy to access and integrate without the need for any credit card information. This accessibility is crucial for development, especially since I don’t have a credit card. Additionally, DeepSeek provides reliable and accurate answers, making it a perfect fit for my RAG-based project. Compared to other models like OpenAI or Gemini, DeepSeek is more accessible and cost-effective, which is why it was the best choice for my needs."
-
-
-**4.	What is an embedding? Why do you need it?**
-
->   “Embeddings are numerical vector representations of text that capture the meaning of the text. In my project, each chunk of the document gets its own embedding vector based on its content. Then, when the user asks a question, that question is also turned into an embedding. By comparing these vectors, the system can find the most similar chunks in the document and pass them to the model. That’s how semantic search works here.”
-  	
-**6.	Why did you use Qdrant instead of MongoDB or MySQL?**
->   I used Qdrant because it’s designed for vector similarity search, which is essential for retrieving relevant chunks from embeddings. Relational databases like MySQL or Postgres aren’t built for that use case. In my project, Qdrant handled the embeddings, while Prisma with Postgres managed structured data like users, sessions, and messages
-
-**8.	What is the role of LangChain in your project?**
-> “LangChain is an open-source Library that helps build applications powered by LLMs. In my project, its role was to connect different components of the RAG pipeline.
-For example, I used classes like PDFLoader to read documents, RecursiveCharacterTextSplitter to break them into smaller chunks, and HuggingFaceTransformersEmbeddings to generate embeddings. On the other side, LangChain provides functions like createRetrievalChain and createStuffDocumentsChain, which help me connect the retriever with my LLM.
-So overall, LangChain made it easy to orchestrate the whole flow — from loading the document, splitting it, generating embeddings, storing them, and finally retrieving the right chunks to pass into the LLM for answering.”
-  	
-**10.	what is HuggingFace , what is the role in yr project?**
->  Hugging Face is a popular platform for hosting and sharing machine learning mode In my project, I used their embedding model Xenova/all-MiniLM-L6-v2 (a sentence transformer) to convert document chunks and user queries into vectors, and their LLM (DeepSeek) to generate natural language answers. So, HuggingFace powered both the embedding generation and the answer generation parts of my RAG pipeline
-   	
 **13.	What challenges did you face while building RagIt?**
 
 >One of the major challenges I faced in my RAG application was implementing a plan-based subscription system. Initially, I hadn’t planned on having multiple plans, but I later decided to introduce both free and premium tiers.
@@ -105,48 +94,41 @@ So overall, LangChain made it easy to orchestrate the whole flow — from loadin
 ## Web Hook
 >A webhook is basically a message that one application sends automatically to another when a certain event happens. In my project, after a user successfully completes a payment on Stripe, the Stripe application automatically sends an HTTP request to my backend. That automatic notification is what we call a webhook.
 
-Create a Stripe Account:
+>Create a Stripe Account:
 First, I set up my Stripe account to access the dashboard.
 
-Set Up a Checkout Link:
+>Set Up a Checkout Link:
 In the Stripe dashboard, I create a hosted checkout link for my product or plan.
 
-Add the Webhook Endpoint URL in Stripe Dashboard:
+>Add the Webhook Endpoint URL in Stripe Dashboard:
 This is the step you mentioned. In the Stripe dashboard, I provide my backend’s webhook URL. This tells Stripe exactly where to send the payment completion events.
 
-Add the Checkout Link to the Frontend:
+>Add the Checkout Link to the Frontend:
 On the frontend, when the user clicks “Upgrade,” I redirect them to the Stripe checkout link.
 
-User Completes Payment:
+>User Completes Payment:
 The user enters their email and payment info on the Stripe page and completes the payment.
 
-Stripe Sends a Webhook to My Backend:
+>Stripe Sends a Webhook to My Backend:
 Because I set the webhook URL in the dashboard, Stripe knows where to send the event once the payment is done.
 
-Handle the Webhook on the Backend:
+>Handle the Webhook on the Backend:
 My backend receives the webhook, verifies it’s from Stripe, and reads the user’s email from the event.
 
-Identify and Upgrade the User:
+>Identify and Upgrade the User:
 I find the user in my database using that email and upgrade their plan to premium.
 
-Send a Response to Stripe:
+>Send a Response to Stripe:
 Finally, I send a quick “received” response back to Stripe just to confirm that I got the webhook.
 
 
-## ✅ Why I chose the RAG approach Insted of notmal api LLM call 
 
->I chose the **RAG (Retrieval-Augmented Generation)** approach because it provides answers directly from the document’s content, ensuring the information is **accurate and relevant**.
+## How do you manage different plans (free and premium) within your application?
 
->If I had used a normal API call with a general LLM like Gemini without the RAG method, there’s a chance the model could generate answers based on its own broad training data rather than the specific PDF. This could lead to **less accurate or unrelated answers**.
+## How do you handle and store chat history in the MySQL database?
 
->With RAG, we avoid that problem because the model only uses the **retrieved information from the document**. This means the answers are specifically tied to the PDF content, making them **more reliable and accurate**.
 
-### 🔹 Key Points for the Comparison
-
-- Without RAG, a general LLM might pull in **unrelated or hallucinated information**
-- RAG ensures the answer is **strictly based on the provided PDF**
-- Improves **accuracy, relevance, and trustworthiness**
-- Best suited for **document-specific question answering**
+## How would you scale the application to handle more users or larger documents?
 
 
 ```js
@@ -291,47 +273,6 @@ This way the system behaves atomically from the user’s point of view: either e
 >I save the file buffer into Firebase, set the correct MIME type, then make the file public and generate a public URL. That URL is stored in my database and used later when the user wants to access the document.So the backend never keeps large files locally; they are stored securely in Firebase, and I only keep the link.”
 ss
 
-**How I Implemented the Retrieval Chain:**
-
-*Initialization:*
->I began by initializing the LLM model and setting up a ChatPromptTemplate (a LangChain class) that defines how the model should respond — for example, to be concise and mention when there isn’t enough information in the context.
-
-*Document Chain:*
->Then I used the createStuffDocumentsChain() function from LangChain. This function combines the LLM and the prompt into a single chain that processes the retrieved documents and generates a context-aware response.
-
-*Retrieval Chain:*
->After that, I used the createRetrievalChain() function, which connects the document chain with a retriever (from the vector store). The retriever is responsible for fetching the most relevant document chunks from the vector database.
-
-*Execution:*
->Finally, I invoked the retrievalChain by passing the user’s query as input. The chain first retrieves the relevant context using the retriever, then passes it through the document chain to generate a final answer.
-
-**Challanges to  INtegrate AI Model **
->In my project, I utilized two primary AI models. First, I used the Hugging Face Sentence Transformer to generate embeddings, which helped in converting text into meaningful vector representations. Secondly, I leveraged the DeepSeek LLM to generate the final responses.
-
->In my project, I first used LangChain’s default HuggingFaceInference class. Later, Hugging Face updated their system to use something called “Inference Providers,” where you have to mention the provider name (like novita or together) in the API request. The default class didn’t allow adding a custom provider name, so it stopped working properly with the new setup.
-
->To solve this, I built my own custom LLM class where I could set the provider, endpoint, headers, and retry logic manually. This made the integration work smoothly with Hugging Face’s updated policy.
-
-
-
-
-
-
-**What is Prisma & Why did u use it **
->Prisma is an open-source ORM (Object Relational Mapping tool) that lets us write database queries in JavaScript or TypeScript instead of raw SQL, making them more readable and type-safe. It also simplifies migrations, helping us manage schema changes effortlessly and reducing errors. 
-
-
-
-**15.	If I upload a very large PDF, how does your system handle it?**
->If a very large document is uploaded, the first step is file handling.
-I use Multer with memoryStorage in my Node.js backend to temporarily store the uploaded PDF in memory.
-Then LangChain’s PDFLoader extracts the text, and a RecursiveCharacterTextSplitter breaks it into smaller overlapping chunks.
-Each chunk gets its own embedding vector and is stored in Qdrant.
-Because we only retrieve a few most relevant chunks when answering, the size of the PDF doesn’t slow down the query or overload the model.
-This chunking and retrieval strategy lets the system handle very large documents efficiently within the LLM’s context limits.
-
-24.	How do you avoid LLM hallucination — ensuring answers come from the PDF?
->To avoid LLM hallucination and ensure answers come only from the PDF, I use a retrieval-augmented generation (RAG) setup. First, I convert the PDF into vector embeddings and store them in a vector database (Qdrant). Then, when a user asks a question, a retriever fetches only the most relevant chunks from the PDF. The LLM receives both the query and these retrieved chunks as context. I also use a prompt template that instructs the LLM to answer only using the provided context and to respond with “I don’t have enough information” if the context is insufficient. This way, the LLM is grounded in the PDF content and doesn’t make up information.
 
 ** future,  improvement:**
 
