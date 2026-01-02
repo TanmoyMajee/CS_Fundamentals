@@ -28,6 +28,24 @@ sayHi(); // works
 function sayHi() { console.log("Hello"); }
 
 
+##  ES6, or ECMAScript 2015, is essentially the sixth major update to the JavaScript languagen 
+
+>Let and Const: Block-scoped variables, providing better control than var.
+
+>Arrow Functions: Shorter syntax and lexical this binding.
+
+>Template Literals: Easy string interpolation with backticks.
+
+>Destructuring: Extract values from arrays or objects into variables easily.
+
+>Default Parameters: Function parameters can have default values.
+
+>Promises: Native support for asynchronous operations.
+
+>Classes: Syntactical sugar over prototypal inheritance, making object-oriented programming clearer.
+
+>Modules: import and export statements to organize code into reusable modules.
+
 # JavaScript Types Summary
 
 | Type      | Meaning                      | Category   | Key Notes                          |
@@ -119,6 +137,30 @@ obj.normal(); // Tanmoy  ✔
 obj.arrow();  // undefined ❌
 
 
+
+✅ Spread Operator vs Rest Operator
+
+
+Purpose: Expands elements of an array or properties of an object.
+Usage: Useful for copying arrays, merging arrays, or passing elements as arguments.
+
+Example:
+
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5]; // [1, 2, 3, 4, 5]
+
+🔹 Rest Operator (...)
+
+Purpose: Collects multiple elements into a single array.
+Usage: Commonly used in function parameters to gather all arguments.
+
+Example:
+
+function sum(...numbers) {
+  return numbers.reduce((a, b) => a + b, 0);
+}
+
+console.log(sum(1, 2, 3)); // 6
 ```
 
 ## What is isNaN()?
@@ -557,6 +599,44 @@ readFileExample();
 
 
 ```
+
+
+
+## 🔹 Debouncing
+
+>Debouncing ensures that a function is only executed after a certain period of inactivity. It’s useful when you want to prevent a function from running too frequently, especially in response to events like keystrokes.
+
+When to use it?
+>For example, in a search input field on an e-commerce website, you can debounce the search function so that it only runs after the user stops typing for, say, 300 milliseconds. This avoids making too many requests to the server and improves performance.
+
+
+## 🔹 Throttling
+
+Throttling ensures that a function is executed at most once in a specified time interval. It’s useful for events that happen frequently, like scrolling or resizing the window.
+
+When to use it?
+For example, in an e-commerce website, you can throttle the scroll event to load more products only once every 200 milliseconds. This prevents excessive function calls and improves performance.
+
+````js
+// Debounced search function
+const debouncedSearch = debounce((query) => {
+  // Perform search here
+  console.log("Searching for:", query);
+}, 300);
+
+// Attaching to input event
+searchInput.addEventListener("input", (e) => {
+  debouncedSearch(e.target.value);
+});
+
+// Throttled scroll function
+const throttledScroll = throttle(() => {
+  // Load more products
+  console.log("Loading more products...");
+}, 200);
+// Attaching to scroll event
+window.addEventListener("scroll", throttledScroll);
+````
 
 
 # Local Storage vs Session Storage vs Cookies
