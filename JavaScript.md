@@ -42,16 +42,91 @@ function sayHi() { console.log("Hello"); }
 | function  | callable object              | function   | special object                     |
 | NaN       | Not-a-Number                 | number     | weird but common MCQ               |
 
-## Destructuring
+## Object  Destructuring
 “Destructuring is a syntax that allows us to extract values from arrays or properties from objects into separate variables in a clean and concise way.
+
+## What is hasOwnProperty()?
+
+hasOwnProperty() checks whether an object has a property of its own, not inherited from its prototype.
+
 ```js
 const user = { name: "Tanmoy", age: 22 };
-
 const { name, age } = user;
-
 // name = "Tanmoy", age = 22
 
+// Object Freez
+const user = { name: "Tanmoy" };
+Object.freeze(user);
+user.name = "Rahul";   // ❌ no effect
+user.city = "Kolkata"; // ❌ no effect
+console.log(user.name); // "Tanmoy"
+Object.freeze() makes an object completely immutable.
+You cannot add, delete, or modify its properties.
+
+// Objetc Seal
+const user = { name: "Tanmoy" };
+Object.seal(user);
+Object.seal() prevents adding or deleting properties,
+but you can still modify existing values.
+
+user.name = "Rahul";   // ✅ allowed
+user.city = "Kolkata"; // ❌ not allowed
+delete user.name;      // ❌ not allowed
+
+
+// HasOwnProperty
+const animal = { eats: true };
+
+const dog = Object.create(animal);
+dog.barks = true;
+
+console.log(dog.barks); // true
+console.log(dog.eats);  // true (inherited)
+
+console.log(dog.hasOwnProperty("barks")); // true
+console.log(dog.hasOwnProperty("eats"));  // false
+
 ```
+
+## What is isNaN()?
+
+isNaN() is a JavaScript function used to check whether a value is Not-a-Number.
+
+## What is Temporal Dead Zone (TDZ)?
+
+Temporal Dead Zone is the period between when a variable is declared using let or const and when it is actually initialized, during which accessing the variable will throw a ReferenceError.
+
+## What is IIFE?
+
+IIFE = Immediately Invoked Function Expression It is a function that is defined and executed immediately at the same time.
+Is uesd : to avoid polluting global scope
+to create a private scope
+commonly used in older JS patterns and modules
+```js
+(function () {
+  console.log("IIFE runs immediately");
+})();
+
+// Hier Order
+function greet(name) {
+  return "Hello " + name;
+}
+
+function higherOrder(fn) {
+  return fn("Tanmoy");
+}
+
+higherOrder(greet); // "Hello Tanmoy"
+````
+
+## What is a higher-order function?
+
+A higher-order function is a function that takes another function as argument, or returns a function, or does both.
+map()
+filter()
+reduce()
+
+
 
 **JavaScript: Synchronous or Asynchronous?**
 >"JavaScript is single-threaded and synchronous by default, but it can behave asynchronously because of the event loop
