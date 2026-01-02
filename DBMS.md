@@ -541,8 +541,104 @@ A database transaction passes through the following states:
 
 ### 6️⃣ Terminated
 - Transaction has completed — either committed or aborted.
+# 🔒 Concurrency Control Problems — Interview Notes
 
-## Concureny Control ,Dirty read wtire , lost update 
+## 🎤 How to start in interview
+“Concurrency problems occur when multiple transactions access the same data at the same time without proper control such as locks or isolation levels.”
+
+---
+
+## 1️⃣ Lost Update Problem
+
+### 🎤 Definition (interview script)
+“Lost update happens when two transactions read the same value and later overwrite each other’s updates. One transaction's result is lost.”
+
+### 🔢 Example
+Initial balance = 100
+
+T1 reads → 100  
+T2 reads → 100  
+
+T1 writes 120  
+T2 writes 90  
+
+👉 Final value = **90** (T1’s update lost)
+
+### 🔧 How to prevent
+- Write locks
+- Repeatable Read / Serializable isolation
+- Two Phase Locking (2PL)
+
+---
+
+## 2️⃣ Dirty Read
+
+### 🎤 Definition (interview script)
+“Dirty read means a transaction reads data that another transaction has updated but not yet committed.”
+
+### 🔢 Example
+Balance = 500
+
+T1 updates → 600 (not committed)  
+T2 reads → 600  
+T1 rolls back → 500  
+
+👉 T2 read **uncommitted invalid data**
+
+### 🔧 How to prevent
+- Read Committed isolation or higher
+- Avoid reading uncommitted data
+
+---
+
+## 3️⃣ Non-Repeatable Read
+
+### 🎤 Definition (interview script)
+“Non-repeatable read happens when the same row is read twice in a transaction and gives different values because another transaction updated it.”
+
+### 🔢 Example
+Balance = 200
+
+T1 reads → 200  
+T2 updates → 300 and commits  
+T1 reads again → 300  
+
+👉 Same query → different results
+
+### 🔧 How to prevent
+- Repeatable Read / Serializable isolation
+- Read locks
+
+---
+
+## 4️⃣ Phantom Read
+
+### 🎤 Definition (interview script)
+“Phantom read means the number of rows satisfying a condition changes within the same transaction.”
+
+### 🔢 Example
+Query → salary > 5000
+
+T1 counts → 3 rows  
+T2 inserts a new row with 7000 and commits  
+T1 counts again → 4 rows  
+
+👉 A **new phantom row appeared**
+
+### 🔧 How to prevent
+- Serializable isolation
+- Predicate locking
+
+---
+
+# 🛠 How concurrency problems are controlled (short script)
+
+“We prevent concurrency problems using locks, isolation levels, timestamp ordering, two-phase locking, and multiversion concurrency control.”
+
+---
+
+
+
 
 # 🗂️ SQL vs NoSQL Databases — Interview Notes
 
