@@ -80,6 +80,7 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 
 
 ## Staying Calm in Intense Situations:
+>When I face a challenging or high-pressure situation, I start by taking a deep breath to calm myself. I focus on finding a solution rather than worrying about the problem. I keep a positive mindset and handle one step at a time. This approach helps me stay calm and effective
 
 **Why should we hire you?**
 >You should hire me because I have both strong problem-solving skills and hands-on development experience. Solving more than 500 DSA problems has improved my analytical thinking, and I’ve applied those skills in building full-stack applications, including a RAG-based project and a real-time chat application. I’m confident that I can contribute from day one, help the team move forward, and ultimately support the company’s growth with the skills and experience I bring.
@@ -96,6 +97,7 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 
 ** What is Your Motivation**
 >I feel motivated when I build projects that can help people in the real world or provide useful solutions. Creating something that others can use and benefit from gives me satisfaction and inspires me to keep learning and improving.”
+>. I am also motivated by challenging problems — when I face an error or complex task, I enjoy solving it. In addition, when I am given responsibility and my work is appreciated by the team, it encourages me to perform even better.
 
 
 **Tell me about a time you faced a challenge and how you handled it.**
@@ -110,6 +112,31 @@ This experience strengthened my confidence in solving complex problems independe
 ****Tell me about a time you faced a challenge in Group / Team Project and how you handled it.**
 >"In our final-year project on multi-disease prediction using machine learning, one of the main challenges we faced was selecting the best model for each disease. Initially, we started with a decision tree for predicting diabetes, but we quickly realized it wasn't performing well. I proposed switching to a random forest classifier and explained to the team how it could provide more robust and accurate predictions. After convincing the team, we made the switch, and it significantly improved our results.
 > This experience taught me a lot about effective teamwork, communication, and how to advocate for the best technical solutions."
+
+## What Motivates You - Key Points:
+Learning and Growth: Mention that you’re motivated by opportunities to learn new skills or technologies.
+Achieving Goals: Say that reaching personal or team goals motivates you.
+Problem Solving: Explain that you enjoy solving challenges and that overcoming obstacles is motivating.
+Making an Impact: Note that contributing to meaningful projects or seeing the results of your work motivates you.
+
+## How Do You Handle Feedback - Key Points:
+>I handle feedback with an open mind. I see feedback as an opportunity to improve rather than criticism. First, I listen carefully and try to understand the other person’s perspective. Then I reflect on it, identify the areas where I need improvement, and work on them. If anything is unclear, I politely ask questions to understand better
+
+- Open-Minded Approach: Mention that you take feedback as a learning opportunity.
+- Positive Attitude: Explain that you appreciate feedback because it helps you grow.
+- Describe a Time You Worked in a Team - Key Points
+
+## How Do You Prioritize Your Work - Key Points:
+>I prioritize my work based on deadlines and importance. First, I list all the tasks I need to complete, then I identify which ones are urgent and which ones have higher impact. I try to finish high-priority tasks first while still making steady progress on the others. I also break large tasks into smaller steps so they are easier to manage. If priorities change, I re-evaluate my plan and adjust accordingly to make sure important deadlines are met.
+
+-You prioritize work based on deadlines and importance
+-You first list all tasks you need to complete
+-You identify urgent vs high-impact tasks
+-You finish high-priority work first
+-You still make steady progress on remaining tasks
+-You break big tasks into smaller steps for easy management
+-You re-evaluate and adjust priorities when things change
+-You ensure that important deadlines are always met
 
 ** What is your contibution in The Final yr project **
 >"In this project, my main contribution was developing the complete frontend using React and integrating it with our backend API that served the machine learning predictions. I designed the user interface where users can input their health parameters, and I ensured that the frontend communicates smoothly with the backend so that the model predictions are displayed instantly and clearly.
