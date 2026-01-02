@@ -429,6 +429,19 @@ ________________________________________
 *✅ What is Socket.IO?*
 >Socket.IO is a JavaScript library that enables real-time, bidirectional communication between the client and server. It builds on top of WebSockets and includes features like automatic reconnections and fallback mechanisms.
 
+## WebSocket 
+>WebSocket is a communication protocol that provides full-duplex, persistent connection between client and server.
+Unlike HTTP, where the client has to repeatedly send requests, WebSocket allows both client and server to send data anytime over a single long-lived connection.
+
+>This makes it ideal for real-time applications like chat systems, live notifications, gaming, stock updates, etc., where updates must appear instantly without refreshing.
+
+## Diff Websocke vs HTTP
+>HTTP follows a request–response model where the client must send a request every time it needs data, and the connection is closed afterward. It is stateless and not ideal for real-time updates.
+
+>WebSocket, on the other hand, creates a persistent connection after the initial handshake. It supports full-duplex communication, meaning both client and server can send messages to each other at any time without repeated requests.
+
+>That’s why WebSocket is preferred in real-time applications like chat systems, live notifications, and collaborative tools, whereas HTTP is better for standard web page requests and REST APIs.
+
 *✅ Why did you use Socket.IO instead of normal API calls?*
 >In my chat app, real-time updates are crucial. With normal API calls, the client would need to constantly poll the server, which is inefficient and introduces latency. Socket.IO, on the other hand, keeps a persistent connection, allowing the server to instantly push messages to the client. This results in a smoother and more responsive chat experience.
 
