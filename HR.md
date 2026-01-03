@@ -54,6 +54,12 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 - Find a mutually agreeable solution.
 - Escalate to a senior if needed.
 
+## Conflict Situation
+>"In my B.Tech curriculum, we had to create an e-commerce project for our software development course. We faced a conflict over the database choice: I preferred MySQL, but my teammates recommended MongoDB for its flexibility. Instead of insisting on my preference, I took the initiative to learn about MongoDB, researched its advantages, and understood how it could meet our project needs. In the end, we chose MongoDB, and this experience not only resolved the conflict but also helped me expand my skills."
+
+## DeadLine Situation
+>"During my fifth semester, as part of our software development course, my team and I had to implement an e-commerce platform within a strict two-week deadline. It was a group project, so we divided the tasks based on each member’s strengths. I took the initiative to handle the front end since I was more comfortable with it. We communicated effectively as a team, breaking down the work into smaller, manageable parts and prioritizing essential features first. By staying organized and keeping a daily to-do list, we managed to meet the deadline and deliver a quality project on time."
+
 #  Meeting Deadlines Under Pressure:
 
 ## Individual
@@ -78,6 +84,20 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 - Monitor Progress: Say that you regularly check in on the team’s progress to ensure everyone is on track.
 - Stay Calm and Supportive: Even for team questions, it’s good to mention that you remain calm and supportive to keep the team motivated.
 
+## What is your approach to learning a new technology?
+>"Sure! My general approach to learning a new technology is to start by understanding the basics through tutorials or documentation. I find that it helps to learn step-by-step rather than trying to master everything at once. Once I have a grasp of the fundamentals, I like to apply what I’ve learned by working on a small project or a practical feature. This hands-on practice helps reinforce my knowledge. If I run into any challenges, I use community resources or ask for help from teammates.
+
+>For example, in a recent project, we had to build an e-commerce platform. I was familiar with MySQL, but we chose to use MongoDB for its flexibility. I learned the basics of MongoDB, then immediately applied it to a small part of the project, which helped me pick it up quickly. That way, I was able to learn the new technology effectively and contribute to the team."
+
+### Key Points :
+
+-General Approach First: Start by saying you begin with understanding the basics.
+
+-Hands-On Learning: Emphasize that you quickly move to practical application by building something small.
+
+-Example: Provide a specific example from your experience (like learning MongoDB for a project).
+
+Seek Help When Needed: Mention that you use resources or ask teammates for support if you get stuck.
 
 ## Staying Calm in Intense Situations:
 >When I face a challenging or high-pressure situation, I start by taking a deep breath to calm myself. I focus on finding a solution rather than worrying about the problem. I keep a positive mindset and handle one step at a time. This approach helps me stay calm and effective
@@ -137,6 +157,22 @@ Making an Impact: Note that contributing to meaningful projects or seeing the re
 -You break big tasks into smaller steps for easy management
 -You re-evaluate and adjust priorities when things change
 -You ensure that important deadlines are always met
+
+** Chose TCS vs other High Paying Company
+-Long-term Growth Over Immediate Pay: You prioritize long-term career growth and learning opportunities over a slightly higher initial salary.
+
+- Job Security: TCS is known for offering stable and secure career paths, which is a major factor in your decision.
+
+- Learning and Training Opportunities: Mention the fresher training programs, like TCS’s ILP (Initial Learning Program), that help you ramp up your skills and prepare you well before diving into projects.
+
+- Global Exposure: Working at a multinational company like TCS gives you the chance to work on international projects and collaborate with global teams.
+
+- Cultural and Value Alignment: TCS’s values and work culture resonate with you, making it a place where you feel you can thrive.
+
+- Mentorship and Community: If you know TCS offers strong mentorship or a supportive community, that’s another great reason to choose them.
+
+- Future Career Pathways: Mention that TCS has a well-defined career path that can open doors to various roles in the future.
+
 
 ** What is your contibution in The Final yr project **
 >"In this project, my main contribution was developing the complete frontend using React and integrating it with our backend API that served the machine learning predictions. I designed the user interface where users can input their health parameters, and I ensured that the frontend communicates smoothly with the backend so that the model predictions are displayed instantly and clearly.
