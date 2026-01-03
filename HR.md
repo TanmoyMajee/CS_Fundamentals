@@ -114,8 +114,20 @@ For example, when I was working on the RAG-based project, I spent extra time pol
 
 Seek Help When Needed: Mention that you use resources or ask teammates for support if you get stuck.
 
-## Staying Calm in Intense Situations:
->When I face a challenging or high-pressure situation, I start by taking a deep breath to calm myself. I focus on finding a solution rather than worrying about the problem. I keep a positive mindset and handle one step at a time. This approach helps me stay calm and effective
+## Staying Calm in Intense Situations: / How do u Handle Preasure 
+>"In intense situations, I stay calm by maintaining a positive mindset and breaking tasks into smaller, manageable parts. I prioritize the most urgent tasks first, which helps prevent overwhelm. I also ensure to take regular breaks and practice deep breathing to reduce stress and stay focused. Additionally, I believe in open communication, so if I’m feeling pressured, I make sure to discuss it with my team and seek their support. This approach helps me stay balanced and maintain productivity even under pressure."
+
+-Positive Mindset: Highlight how you maintain optimism and a constructive outlook.
+
+-Task Breakdown: Emphasize how you divide tasks int2o smaller steps and prioritize them.
+
+-Regular Breaks: Mention taking breaks and practicing mindfulness to stay refreshed.
+
+-Open Communication: Highlight the importance of discussing stress with your team and seeking support.
+
+
+## Are u a Team Player ?
+>"I consider myself both a team player and someone who can work independently. For instance, I’ve successfully built projects on my own, like [mention one of your individual projects], and I’ve also collaborated effectively in a team setting, such as when we worked on the e-commerce platform with a group of four. I believe that flexibility is key, and I adapt to the situation, whether it’s collaborating with others or working independently to get the job done."
 
 
 **Why should we hire you?**
@@ -137,7 +149,9 @@ Seek Help When Needed: Mention that you use resources or ask teammates for suppo
 
 ** What is Your Motivation**
 >I feel motivated when I build projects that can help people in the real world or provide useful solutions. Creating something that others can use and benefit from gives me satisfaction and inspires me to keep learning and improving.”
->. I am also motivated by challenging problems — when I face an error or complex task, I enjoy solving it. In addition, when I am given responsibility and my work is appreciated by the team, it encourages me to perform even better.
+
+** How a stay Motivsted **
+> I am also motivated by challenging problems — when I face an error or complex task, I enjoy solving it. In addition, when I am given responsibility and my work is appreciated by the team, it encourages me to perform even better.
 
 
 **Tell me about a time you faced a challenge and how you handled it.**
