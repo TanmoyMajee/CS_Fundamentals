@@ -1,3 +1,53 @@
+
+```jsx
+Link
+
+    Purpose: Used for standard navigation between pages without a page refresh.
+
+    Use Case: Logos, "Read More" buttons, Footer links, Cards.
+
+    Key Feature: Does not know if it is currently active.
+
+JavaScript
+
+import { Link } from 'react-router-dom';
+
+// Simple navigation
+<Link to="/profile">Go to Profile</Link>
+
+2. NavLink
+
+    Purpose: A special version of Link that knows when it is "active" (when the URL matches the to prop).
+
+    Use Case: Navigation Bars, Sidebar menus, Tabs.
+
+    Key Feature: Exposes an isActive boolean for styling.
+
+JavaScript
+
+import { NavLink } from 'react-router-dom';
+
+// Adds 'active-style' class only when on the About page
+<NavLink 
+  to="/about" 
+  className={({ isActive }) => isActive ? "font-bold text-red-500" : ""}
+>
+  About
+</NavLink>
+
+One-line difference for Interview:
+
+    "I use Link for general navigation and NavLink specifically for menus where I need to highlight the current page to the user."
+````
+
+
+
+
+
+
+
+
+
 ✅ Common “Design on Paper” Questions
 1️⃣ Design a simple login page
 
