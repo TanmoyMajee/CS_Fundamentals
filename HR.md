@@ -21,7 +21,20 @@ I am passionate about software development, especially in areas like full stack 
 ## Why CSBS
 >Sir, I chose the CSBS department because I wanted to be in a computer science-related branch. Initially, my entrance exam score didn’t allow me to get into the pure CS branch, so I opted for CSBS. Once I got into the program, I realized it was a great fit because it not only covered computer science fundamentals but also gave me insights into how businesses operate and how technology can solve organizational challenges
 
+## Plan For Higher Study
+>"Right now, I don’t have any immediate plans for further studies. After completing my diploma, I joined the B.Tech program through lateral entry, which took a bit longer than the typical path. So, I’ve spent a couple of extra years compared to others. Now, I’m focused on joining the IT industry, gaining real-world experience, and continuing to grow professionally. I’m also committed to supporting my family financially, and I believe that joining a company like TCS will help me achieve those goals."
 
+## Relocation
+>"Yes, I’m definitely open to relocation as per the company’s requirements, because I believe it will help me grow both personally and professionally. It also gives me the chance to step out of my comfort zone and explore new environments, which I find exciting."
+
+## Night Shift
+>Yes, I’m comfortable with night shifts. Given that TCS has global clients, I understand that time zones can vary, and I’m more than willing to adapt to those differences. I see it as a great opportunity to learn and grow in a dynamic environment.
+
+## TCS global clients
+>Virgin Atlantic, focusing on AI-driven cloud transformations
+>walmart
+
+## TCS Partner : AWS , Google Cloud , Jaguar Racing
 
 **2. What are your strengths?**
 >“My primary strengths are problem-solving and consistent learning.
