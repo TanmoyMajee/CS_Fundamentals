@@ -40,7 +40,28 @@ One-line difference for Interview:
     "I use Link for general navigation and NavLink specifically for menus where I need to highlight the current page to the user."
 ````
 
+```jsx
+Ah, understood. So for a standard dropdown list, you'd use the <select> tag with <option>:
+HTML
 
+<label for="standard-select">Choose an option:</label>
+<select id="standard-select" name="standard-select">
+  <option value="option1">Option 1</option>
+  <option value="option2">Option 2</option>
+  <option value="option3">Option 3</option>
+</select>
+
+And for the input with datalist, as mentioned earlier:
+HTML
+
+<label for="datalist-input">Type or select:</label>
+<input list="data-options" id="datalist-input" name="datalist-input" />
+<datalist id="data-options">
+  <option value="Suggestion 1"></option>
+  <option value="Suggestion 2"></option>
+  <option value="Suggestion 3"></option>
+</datalist>
+````
 
 
 
