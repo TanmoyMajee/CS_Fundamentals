@@ -36,6 +36,8 @@ I am passionate about software development, especially in areas like full stack 
 
 ## TCS Partner : AWS , Google Cloud , Jaguar Racing
 
+## TCS's current tagline is "Building on Belief," ceo :  Natarajan Chandrasekaran ,  chairman: Natarajan Chandrasekaran ,  Founded : FC Kohli 1968 ( Father of the Indian IT industry,)
+
 **2. What are your strengths?**
 >“My primary strengths are problem-solving and consistent learning.
 When it comes to problem-solving, I like breaking down complex problems into smaller, manageable parts. For example, while developing my real-time chat application, I faced an issue with message duplication in group chats. I carefully debugged the code and refined the socket connections to make sure messages were delivered correctly.
@@ -115,6 +117,7 @@ Seek Help When Needed: Mention that you use resources or ask teammates for suppo
 ## Staying Calm in Intense Situations:
 >When I face a challenging or high-pressure situation, I start by taking a deep breath to calm myself. I focus on finding a solution rather than worrying about the problem. I keep a positive mindset and handle one step at a time. This approach helps me stay calm and effective
 
+
 **Why should we hire you?**
 >You should hire me because I have both strong problem-solving skills and hands-on development experience. Solving more than 500 DSA problems has improved my analytical thinking, and I’ve applied those skills in building full-stack applications, including a RAG-based project and a real-time chat application. I’m confident that I can contribute from day one, help the team move forward, and ultimately support the company’s growth with the skills and experience I bring.
 
@@ -124,9 +127,13 @@ Seek Help When Needed: Mention that you use resources or ask teammates for suppo
 >What makes me unique is my ability to learn quickly and adapt to new challenges. In my projects—especially when implementing complex features like plan-based structures and Stripe integration—I didn’t rely on shortcuts. I explored documentation, broke down the problems, and figured out solutions independently. This combination of deep problem-solving, self-learning, and the ability to implement features end-to-end helps me stand out from other candidates.
 
 
+
+## TCS Achivment
+>TCS has achieved some significant milestones recently. Financially, they crossed the $30 billion dollar annual revenue mark in the financial year 2025. They also became the second IT service company globally with a brand valuation of over $20 billion. Additionally, they're making significant investments in AI, committing approximately $6.5 billion to AI data centers and achieving $1.5 billion in annualized AI revenue. (Accenture is 1st)
+
 ** What's ur Achivment **
 >"During my education, I maintained a strong academic record, securing 88.4% in my 12th grade. In my diploma, I achieved an 8.5 CGPA, and I currently hold around an 8.5 CGPA in my B.Tech as well. Additionally, I have hands-on experience with the MERN stack. I also actively participated in LeetCode weekly contests, where I ranked around 3,000 out of 5,000 participants. Moreover, I hold a 2-star rating on CodeChef
-
+>Clear COdevita 1st round
 
 ** What is Your Motivation**
 >I feel motivated when I build projects that can help people in the real world or provide useful solutions. Creating something that others can use and benefit from gives me satisfaction and inspires me to keep learning and improving.”
@@ -134,12 +141,7 @@ Seek Help When Needed: Mention that you use resources or ask teammates for suppo
 
 
 **Tell me about a time you faced a challenge and how you handled it.**
->One of the biggest challenges I faced was while building my RAG-based application. Initially, I hadn’t planned for a plan-based structure or payment system, but later I decided to include them to make the project more meaningful.
-This required significant changes — updating multiple schemas, adding middleware, and integrating Stripe payments, which I had never used before.
-
->Instead of depending on AI tools or copying solutions, I broke the entire problem into smaller parts, read the official documentation carefully, and implemented every step by myself.
->It took time, but I learned a lot, and I was able to integrate the entire feature successfully.
-This experience strengthened my confidence in solving complex problems independently and adapting to new requirements.
+>When I face a challenge, I always try to remain calm and approach the problem methodically. For instance, while working on my chat application, I encountered an issue where multiple API calls were triggered each time the send button was pressed. To address this, I implemented a loading state that disabled the send button while the API call was in progress. This prevented duplicate requests and significantly improved the user experience. This experience taught me the importance of staying calm, thoroughly analyzing the problem, and finding solutions independently rather than relying on external tools. It helped me understand how to debug effectively and improve my skills."
 
 
 ****Tell me about a time you faced a challenge in Group / Team Project and how you handled it.**
@@ -171,7 +173,8 @@ Making an Impact: Note that contributing to meaningful projects or seeing the re
 -You re-evaluate and adjust priorities when things change
 -You ensure that important deadlines are always met
 
-** Chose TCS vs other High Paying Company
+## Chose TCS vs other High Paying Company
+
 -Long-term Growth Over Immediate Pay: You prioritize long-term career growth and learning opportunities over a slightly higher initial salary.
 
 - Job Security: TCS is known for offering stable and secure career paths, which is a major factor in your decision.
