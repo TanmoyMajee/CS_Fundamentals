@@ -489,6 +489,17 @@ Deployment – We release the software to users.
 Maintenance – We monitor and update it after release.
 
 ## Testing (Quick Mention)
+“Software testing is a process used to verify that a system works correctly and meets the specified requirements. It helps identify any bugs or issues before the software is deployed. We perform testing using various test cases to ensure that the software behaves as expected and is free of defects before it goes live.”
+
+✅ Unit Testing
+Unit testing involves testing individual components or modules of an application independently. For example, you might test the authentication function separately from the rest of the application to ensure it works correctly on its own.
+
+✅ Integration Testing
+Integration testing checks how different modules or services interact with each other. For instance, after testing authentication, you might verify that the order service correctly interacts with the authenticated user’s data, ensuring that all components work together seamlessly.
+
+✅ System Testing
+System testing involves testing the complete application as a whole. This means verifying that all the integrated modules work together correctly and that the entire application meets the specified requirements.
+
  unit testing is testing individual parts, integration testing is making sure those parts work together, and system testing is testing the whole application."
 
 ##  The Agile model
