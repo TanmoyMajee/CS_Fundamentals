@@ -1,3 +1,4 @@
+
 #### 1. Using `namespace std`
 In C++, the standard library is in the `std` namespace. Writing `using namespace std;` means you don't have to write `std::` before standard components like `vector`, `string`, or `cout`.
 
@@ -13,6 +14,99 @@ for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); ++it) {
     cout << *it << " ";
 }
 ```
+
+
+# Compiler vs Interpreter (Interview Notes)
+
+## What is a Compiler?
+
+A **compiler**:
+
+- translates the **entire program at once**
+- generates an **executable file**
+- shows **errors after full compilation**
+- program runs **faster**
+
+**One-line answer**
+
+> A compiler converts the whole source code into machine code at once before execution.
+
+---
+
+## What is an Interpreter?
+
+An **interpreter**:
+
+- translates code **line by line**
+- **no executable file** is generated
+- errors are reported **one line at a time**
+- execution is usually **slower**
+
+**One-line answer**
+
+> An interpreter converts and executes code line-by-line.
+
+---
+
+## Difference Between Compiler and Interpreter
+
+| Feature | Compiler | Interpreter |
+|--------|----------|-------------|
+| Translation | Whole program at once | Line by line |
+| Error reporting | After full scan | Immediately line-by-line |
+| Execution speed | Faster | Slower |
+| Output | Executable file (.exe) | No executable generated |
+| Memory usage | More | Less |
+
+---
+
+# Which Uses What? (C, C++, Java, JavaScript)
+
+| Language | Uses | Notes |
+|---------|------|-------|
+| **C** | Compiler | Uses GCC/Clang |
+| **C++** | Compiler | Uses g++/clang++ |
+| **Java** | Compiler + Interpreter | Compiled to bytecode, run by JVM |
+| **JavaScript** | Interpreter (with JIT) | Runs in browser engine (V8 etc.) |
+
+### Short explanation for Java
+
+Java is:
+
+- compiled by `javac` → bytecode  
+- executed by JVM (interpreted/JIT)
+
+So Java is **both compiled and interpreted**.
+
+### Short explanation for JavaScript
+
+JavaScript is:
+
+- mainly **interpreted**
+- modern engines use **JIT compilation** for speed
+
+---
+
+# Difference Between C, C++, Java, and JavaScript
+
+| Feature | C | C++ | Java | JavaScript |
+|--------|----|------|------|-----------|
+| Type | Procedural | Procedural + OOP | Object-Oriented | Scripting (prototype-based) |
+| Platform dependency | Dependent | Dependent | Independent (JVM) | Independent |
+| Compilation | Compiled | Compiled | Compiled + Interpreted | Interpreted (JIT) |
+| OOPS support | No | Yes | Yes | Yes (prototype-based) |
+| Memory management | Manual | Manual | Automatic (GC) | Automatic (GC) |
+| Pointers | Fully supported | Fully supported | Restricted | Not used directly |
+| Multiple inheritance | Not supported | Supported | Not directly (via interfaces) | Not applicable |
+| Primary use | System programming | System & app development | Enterprise & Android | Web apps/browser scripting |
+
+---
+
+## Ultra-short interview memory trick
+
+- **C, C++ → compiled**
+- **Java → compiled + interpreted**
+- **JavaScript → interpreted**
 
 
 #### Call by Value
