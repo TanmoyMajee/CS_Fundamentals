@@ -27,6 +27,33 @@ let x = 5;
 sayHi(); // works
 function sayHi() { console.log("Hello"); }
 
+## Why is JavaScript single-threaded?
+
+JavaScript is single-threaded because it was designed to run inside the browser.  
+Browsers update the UI and handle user events, so running JS on one thread avoids conflicts in the DOM.
+
+JavaScript uses:
+- one **main thread**
+- **call stack + event loop**
+- async features like callbacks, promises
+
+### One-line answer
+JavaScript is single-threaded to safely handle browser UI updates and uses an event loop for asynchronous tasks.
+
+
+## Why is Node.js also single-threaded?
+
+Node.js is **not a new language** — it is a **runtime environment for JavaScript**.  
+So since JavaScript is single-threaded, **Node.js is also single-threaded**.
+
+Node.js uses:
+- main thread → runs JS
+- event loop → handles async tasks
+- background thread pool (libuv) → heavy I/O work
+
+### One-line answer
+Node.js is single-threaded because it runs JavaScript; it uses an event loop and background threads for efficiency.
+
 
 ##  ES6, or ECMAScript 2015, is essentially the sixth major update to the JavaScript languagen 
 
