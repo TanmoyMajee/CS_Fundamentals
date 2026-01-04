@@ -276,6 +276,160 @@ int main() {
 }
 ````
 
+# C++ Interview Notes (Quick Revision)
+
+## 1. How to Access Array Elements Using First Address
+
+In C++, arrays are stored in **contiguous memory locations**.
+
+If we know:
+
+* Base address of array = `arr`
+* Index = `i`
+* Size of data type = `sizeof(type)`
+
+### Formula:
+
+```
+Address of arr[i] = Base Address + (i × size of data type)
+```
+
+### Example:
+
+```cpp
+int arr[5] = {10, 20, 30, 40, 50};
+```
+
+* Base address = `&arr[0]`
+* Size of `int` = 4 bytes
+
+```
+arr[3] address = base + (3 × 4)
+```
+
+### Key Interview Points:
+
+* `arr` and `&arr[0]` point to the same address
+* Enables **O(1)** random access
+
+---
+
+## 2. Data Types in C++ and Their Sizes
+
+> ⚠️ Sizes may vary slightly depending on system/compiler, but these are standard for most systems.
+
+### Fundamental Data Types
+
+| Data Type       | Size         | Description                    |
+| --------------- | ------------ | ------------------------------ |
+| `char`          | 1 byte       | Stores single character        |
+| `bool`          | 1 byte       | Stores true/false              |
+| `short int`     | 2 bytes      | Small integer                  |
+| `int`           | 4 bytes      | Integer values                 |
+| `long int`      | 4 or 8 bytes | Large integers                 |
+| `long long int` | 8 bytes      | Very large integers            |
+| `float`         | 4 bytes      | Decimal values (6–7 precision) |
+| `double`        | 8 bytes      | Decimal values (15 precision)  |
+| `long double`   | 8–16 bytes   | High precision decimal         |
+
+---
+
+## 3. Derived & STL Data Types (Quick Mention)
+
+| Type      | Description                      |
+| --------- | -------------------------------- |
+| Array     | Collection of same type elements |
+| Pointer   | Stores address of variable       |
+| Reference | Alias of variable                |
+| `string`  | STL class for text               |
+| `vector`  | Dynamic array                    |
+| `set`     | Unique sorted elements           |
+| `map`     | Key–value pairs                  |
+
+---
+
+## 4. One‑Line Interview Summary
+
+* Arrays use **contiguous memory**, accessed using base address + offset
+* C++ has **primitive**, **derived**, and **STL data types**
+* Data type size impacts memory and address calculation
+
+---
+
+✅ Best for **TCS / Digital / Prime interviews**
+
+---
+
+## Static in C++ (Short & Concise – Interview Notes)
+
+### 1. Static Local Variable
+
+* Declared inside a function
+* Initialized only once
+* Retains its value between function calls
+* Useful for counting, caching, or maintaining state
+
+### 2. Static Data Member
+
+* Declared inside a class using `static`
+* Belongs to the **class**, not to individual objects
+* Only **one copy** exists and is shared by all objects
+* Must be defined outside the class
+
+### 3. Static Member Function
+
+* Belongs to the class, not objects
+* Can be called using class name
+* Can access **only static data members**
+* Does not have access to `this` pointer
+
+---
+
+## Single Combined Code Example
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Counter {
+public:
+    static int count;   // static data member
+
+    Counter() {
+        count++;        // shared among all objects
+    }
+
+    static void showCount() {  // static member function
+        cout << "Total objects created: " << count << endl;
+    }
+};
+
+int Counter::count = 0;  // static member definition
+
+void demo() {
+    static int calls = 0;  // static local variable
+    calls++;
+    cout << "Function called " << calls << " times" << endl;
+}
+
+int main() {
+    Counter c1, c2;
+    Counter::showCount();
+
+    demo();
+    demo();
+}
+```
+
+---
+
+### Interview One‑Line Summary
+
+* **Static local variable** → remembers value between calls
+* **Static data member** → one shared copy per class
+* **Static function** → accessed using class name, works with static data only
+
+
 ## 🔹 Memory Leak in C++
 
 ### ✅ Definition
