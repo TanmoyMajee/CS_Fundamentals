@@ -69,6 +69,69 @@ Insertion: O(1) if inserting at the beginning (with direct access to the head), 
 
 Deletion: O(1) if you have direct access to the node to delete, but O(n) if you need to find it first.
 
+## Array
+An aray is a linear data structure used to store multiple elements of the same data type in contiguous memory locations.
+Each element can be accessed directly using its index, which provides constant time access.
+
+An array is stored in contiguous memory blocks.
+If the base address of the array is known, the address of any element can be calculated using its index and data size.
+
+## string ,Char 
+A character is a single unit of data that represents one symbol, such as a letter, digit, or special character.
+In C++, a character is stored using the char data type and typically occupies 1 byte of memor 
+
+A string is a collection of characters stored sequentially and treated as a single unit.
+In C++, strings can be represented either as character arrays or using the std::string class.
+
+char array	std::string
+Fixed size	Dynamic size
+
+## 2. Data Types in C++ and Their Sizes
+
+> ⚠️ Sizes may vary slightly depending on system/compiler, but these are standard for most systems.
+
+### Fundamental Data Types
+
+| Data Type | Size | Description |
+|----------|------|------------|
+| `char` | 1 byte | Stores single character |
+| `bool` | 1 byte | Stores true/false |
+| `short int` | 2 bytes | Small integer |
+| `int` | 4 bytes | Integer values |
+| `long int` | 4 or 8 bytes | Large integers |
+| `long long int` | 8 bytes | Very large integers |
+| `float` | 4 bytes | Decimal values (6–7 digits precision) |
+| `double` | 8 bytes | Decimal values (≈15 digits precision) |
+| `long double` | 8–16 bytes | High precision decimal |
+
+---
+
+## 3. Derived & STL Data Types (Quick Mention)
+
+| Type | Description |
+|-----|------------|
+| Array | Collection of same type elements |
+| Pointer | Stores address of variable |
+| Reference | Alias of a variable |
+| `string` | STL class used to store text |
+| `vector` | Dynamic array (STL container) |
+| `set` | Stores unique sorted elements |
+| `map` | Stores key–value pairs |
+
+## Difference Between struct and class in C++
+
+Both `struct` and `class` are user-defined data types in C++ and support
+object-oriented programming concepts like encapsulation, inheritance, and polymorphism.
+
+---
+
+### Key Differences
+
+| Feature | struct | class |
+|------|-------|-------|
+| Default access specifier | `public` | `private` |
+| Data hiding | Less secure by default | More secure by default |
+| Usage |
 
 
 ## Difference Between Linked List and Array:
