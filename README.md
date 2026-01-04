@@ -30,6 +30,38 @@
 
 >For usage control, I maintain plan-based limits using middleware, and Stripe webhooks are integrated to handle subscription upgrades so that users automatically get premium access after successful payment.
 
+-Frontend (React):
+"So, on the frontend, I used React. Users start by uploading a PDF through a simple form. The frontend then sends that PDF file, along with any user queries, to the backend using an API call."
+
+-Backend (Node.js & Express):
+"On the backend, I'm using Node.js and Express. When a PDF is uploaded, the backend uses Multer to handle the file upload and extracts the text from the PDF using LangChain’s PDF loader. This extracted text is then stored in a MySQL database."
+
+-Creating and Managing Conversations:
+"Each PDF is linked to a conversation. If a user hasn’t started a conversation, the backend creates one. If they have, it just attaches the PDF to that conversation. This way, each conversation can have multiple PDFs, and we keep track of all the files and queries related to that conversation."
+
+-AI and Gemini API:
+"When the user asks a question about the PDF, the backend compiles all the relevant text from the PDFs in that conversation and sends it as a prompt to the Gemini API. The AI then generates an answer strictly based on the document’s content and sends it back to the frontend."
+
+-Plan-Based System and Stripe:
+"I also integrated a plan-based system using Stripe for payments. Free users have limited queries, while premium users have more. This means the backend also handles subscription status and enforces limits based on the user’s plan."
+
+
+## ✅ RAGIT Project Modules (script)
+
+>Authentication Module:
+This module handles user registration and login using JWT. It manages user sessions and ensures that only authenticated users can access the platform.
+
+>PDF Handling Module:
+This module is responsible for uploading PDFs, extracting their text content, and storing that text in the database. It’s essentially the backbone of how we turn uploaded documents into searchable text.
+
+>Conversation and Chat Module:
+This module manages conversations, which are basically threads where users can attach multiple PDFs and ask questions. It also keeps track of the chat history and user queries.
+
+>AI Integration Module:
+This module is where the Gemini API comes in. It handles sending the extracted text and user queries to the Gemini API and retrieving the answers.
+
+>Plan Management and Payments Module:
+Finally, there's the plan management module, which uses Stripe to handle subscriptions. It enforces free and premium plan limits and makes sure users get the correct level of access based on their
 
 ## ✅ 3. What were the key learnings from integrating AI into a full-stack application?
 
@@ -123,13 +155,59 @@ Finally, I send a quick “received” response back to Stripe just to confirm t
 
 
 
-## How do you manage different plans (free and premium) within your application?
-
 ## How do you handle and store chat history in the MySQL database?
 
+>On the frontend side, when the user uploads a PDF, I create a FormData object and attach the file to it. This FormData is then sent to the backend via an API request.
 
-## How would you scale the application to handle more users or larger documents?
+>On the backend, I use the Multer middleware to handle the file upload. Multer reads the file from the request and provides the file buffer.
 
+>Next, I take this buffer and pass it to the pdf-parse library, which extracts all the text from the PDF. Once I have the extracted text, I store it in the MySQL database along with the conversation ID and the user ID.
+
+>In other words, every time a user uploads a PDF and asks a question, the text and the conversation details are saved in the database. This way, we can keep track of the entire chat history and refer back to it whenever needed
+
+## Why Use FormData and Multer (script)
+>In a typical web application, when you’re uploading files, you don’t send them as regular JSON data in the request body because a file is binary data. Instead, you use a FormData object on the frontend. FormData is specifically designed to handle file uploads. It lets you send files and other form fields in a single request.
+
+>On the backend, we use Multer as middleware because it makes it easy to parse that FormData. Multer takes the file from the FormData and converts it into a buffer, so we can easily process it.
+
+>In short, using FormData on the frontend and Multer on the backend is a standard way to handle file uploads. It ensures that the file data is transmitted correctly and can be processed as a file, rather than trying to send binary data in a JSON format, which wouldn't work as smoothly."
+
+## What are the main limitations 
+>First, there’s a limitation with how we extract text. Right now, if the PDF contains text in image form rather than actual text, our current approach with pdf-parse can’t extract that text. We would need an OCR solution or a different approach to handle images within PDFs.
+
+>Another limitation is related to the Gemini API itself. While it works well, if a user uploads very large files or we have a high number of simultaneous requests, we have to enforce size limits. For example, we limit the file size to 10 MB to ensure stable performance. If we want to handle larger files or scale up further, we might look into a RAG (Retrieval-Augmented Generation) approach in the future to handle even larger documents more efficiently
+
+
+## How would you scale the application to handle  larger documents?
+>Current approach:
+Right now, we handle file uploads using Multer, and we’ve set a file size limit of 10MB. This means that if a user tries to upload a file larger than 10MB, the upload is automatically rejected. This helps us keep the server running smoothly and ensures that we don’t overload it with very large files.
+
+>Limitation:
+The main limitation here is that this 10MB cap means we can’t handle very large documents right now. If a user has a file larger than that, they would need to split it up or we’d have to find another way to process it.
+
+>Future solution:
+In the future, we plan to overcome this by using a RAG (Retrieval-Augmented Generation) approach. This will let us handle larger documents more efficiently by only retrieving and processing the parts of the document that are needed for the query, rather than processing the entire document at once."
+
+## Explaining the 10MB Limit
+
+
+>We set the 10MB file size limit because we’re storing the extracted text of the PDF directly in our database. If the file is too large, the amount of text becomes very large as well, which can impact both our database storage and the performance of generating answers.
+
+>When we send the text to the Gemini API, we include it in the prompt. If the text is extremely long, it can exceed the input limits of the API and affect response times or even cause errors.
+
+>In the future, to handle larger documents, we’d move to a RAG approach so we only process the parts of the document we need, instead of the entire text at once."
+
+##  How would you scale the application to handle more users ?
+>Current approach:
+Right now, we handle multiple simultaneous user requests using Node.js’s asynchronous nature. Thanks to async/await and the non-blocking I/O model of Node.js, the server can efficiently handle multiple requests concurrently. This allows us to serve several users at the same time without significant slowdowns.
+
+>Limitations:
+However, as the number of users grows significantly, there’s a limit to how much a single server can handle, even with Node’s asynchronous capabilities.
+
+>Future scaling:
+To scale for a larger user base, we’d introduce load balancing and possibly horizontal scaling. That means running multiple instances of the server behind a load balancer, optimizing the database, and ensuring we can distribute the traffic evenly. This way, we can maintain performance even as the number of users grows."
+
+## How do you manage different plans (free and premium) within your application?
 
 ```js
 1. Setting Up the Database Connection
@@ -338,63 +416,28 @@ Update user’s plan = "PREMIUM"
 Set planExpiry = now() + 30 days
 This way the upgrade is fully automatic — no manual involvement.
 
+## Unique Freatures of All the projects
+>"In my RAGIT project, what makes it unique is the integration of a plan-based system. Unlike a basic Q&A platform, I implemented free and premium plans using Stripe, which limits the number of queries or files a user can handle depending on their subscription. This taught me a lot about integrating payment systems and enforcing usage limits, which adds a real-world subscription management aspect to the project."
+
+>ven though the chat application is straightforward, I've added a couple of unique touches. It supports both one-to-one and group chats, and it includes an online user indicator using Socket.io. So it’s a bit more dynamic and interactive than a basic chat app."
+
+>For the blog application, while it's a standard CRUD app, I implemented pagination to keep the UI clean and user-friendly. That way, users can navigate through posts easily without being overwhelmed by too many posts at once."
+
+
 ## Real-world use cases:
 >imagine a researcher or a student who has a large collection of PDF research papers. Instead of spending hours flipping through each page to find a specific piece of information, they can just upload the document into the platform, ask their question in plain English, and get an immediate, context-aware answer drawn directly from that PDF
 
-Be prepared to discuss how RAGIT can be applied in various industries, like legal, academic, or corporate settings
+>Be prepared to discuss how RAGIT can be applied in various industries, like legal, academic, or corporate settings
 Performance and scalability: Be prepared to discuss how your project can scale and handle larger documents or more users.
 
-Can you walk me through how RAGIT works?
 
-What motivated you to build this project?
 
-DeepSeek and AI Model Questions:
 
-How does the DeepSeek model generate answers from the PDF?
 
-Why did you choose DeepSeek over other language models?
-
-Can you explain how the retrieval-based system works in your project?
-
-Authentication and Payment:
-
-How did you implement JWT-based authentication, and what security measures did you consider?
-
-Can you explain how the Stripe integration works for handling payments?
-
-What were the challenges you faced while implementing the plan-based structure?
-
-Data Management and Storage:
-
-How do you ensure that the chat history is securely stored in PostgreSQL?
-
-Can you describe how you manage file storage using Firebase?
-
-General Technical Questions:
-
-Why did you choose React for the frontend and Node.js for the backend?
 
 How did you handle the integration between the frontend and backend components?
 
-17.	Can your app handle multiple PDFs at the same time? If not, how would you extend it?
-19.	Why k=3 chunks in retrieval? How did you decide?
-21.	How do you chunk PDF text? (chunk size and overlap)
-22.	How do you create embeddings and which model did you use?
-23.	Why Qdrant and how many chunks do you retrieve?
-25.	How do you scale the system for large documents or many users?
-26.	How do you store and secure user PDFs?
-27.	What are the main limitations 
-28.	•  What is HuggingFace and why did you use it?
-29.	•  What is LangChain and why did you use it?
-30.	•  What is a retriever chain? How does it work?
-31.	•  How do you create embeddings for documents and queries?
-32.	•  How do you split documents into chunks? Why is it needed?
-33.	•  What is Qdrant and why did you choose it as a vector database?
-34.	•  How do you manage multiple sessions in your app?
-35.	•  How do you ensure the model only answers from the given context?
-36.	•  How do you handle chat history storage?
-37.	•  What are alternatives to HuggingFace, LangChain, or Qdrant?
-38.	•  How do you perform similarity search in the vector DB?
+
 39.	•  How do you handle scalability if many users upload documents?
 
 
