@@ -824,3 +824,80 @@ SELECT dept_id FROM employee GROUP BY dept_id HAVING SUM(salary) > 50000
 ```
 
 
+# MYSQL 
+```sql
+SELECT CURDATE();
+
+
+3. DATE_ADD()
+
+Interview script:
+“Adds a time interval to a date using INTERVAL.”
+
+SELECT DATE_ADD(hire_date, INTERVAL 3 MONTH) AS new_date
+FROM employees;
+
+🔹 4. DATE_SUB()
+
+Interview script:
+“Subtracts a time interval from a date using INTERVAL.”
+
+SELECT DATE_SUB(hire_date, INTERVAL 2 YEAR) AS old_date
+FROM employees;
+
+
+🔹 5. DATEDIFF()
+
+Interview script:
+“Returns the number of days between two dates.”
+
+SELECT DATEDIFF(CURDATE(), hire_date) AS days_worked
+FROM employees;
+
+🔹 6. YEAR(), MONTH(), DAY()
+
+Interview script:
+“These extract year, month, or day from a date.”
+
+SELECT YEAR(hire_date), MONTH(hire_date), DAY(hire_date)
+FROM employees;
+
+🔹 7. DATE_FORMAT() (MySQL specific)
+
+Interview script:
+“Formats a date into the required string format.”
+
+SELECT DATE_FORMAT(hire_date, '%d-%b-%Y') FROM employees;  // SELECT DATE_FORMAT('2201-12-18', '%a'); to pritn day ( mon , sun ) ,%W for week 
+
+🔹 8. STR_TO_DATE()
+
+Interview script:
+“Converts a string into a date using a format.”
+
+SELECT STR_TO_DATE('2025-10-07 12:30', '%Y-%m-%d %H:%i');
+
+🧠 Common Date Comparisons
+Employees joined in last 1 year
+SELECT * FROM employees
+WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR);
+
+Employees working for >2 years
+SELECT * FROM employees
+WHERE hire_date <= DATE_SUB(CURDATE(), INTERVAL 2 YEAR);
+```
+## Give Unique name (firt , last ) Nm
+```sql
+both DISTINCT and GROUP BY, you simply list the columns separated by commas.  ( no nned of bracket ) 
+✅ Using DISTINCT
+SELECT DISTINCT first_name, last_name
+FROM employees;
+
+✅ Using GROUP BY (equivalent result)
+SELECT first_name, last_name
+FROM employees
+GROUP BY first_name, last_name;
+```
+
+
+
+
