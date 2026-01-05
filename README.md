@@ -726,3 +726,101 @@ Also, reads and writes need to be fast, and MongoDB handles high-speed insert op
 
 “However, in RAGit, I used PostgreSQL because the data needed to be more structured, relational, and consistent.
 For example, features like subscription plans, tracking session limits, conversations, file management, and strict foreign key relationships require strong ACID transactions. PostgreSQL is more suitable for that level of data integrity and relational querying.”
+
+## Blog App
+Absolutely, sir. I built a blog application where users can create, update, and delete multiple posts or articles.
+
+One of the key features I implemented is JWT-based authentication, so only authenticated users can create, edit, or delete their own posts. I also added features like search functionality and pagination to make it easier to navigate through posts.
+
+The project is built with a React frontend, and the backend is powered by Node.js and Express.js. I used MongoDB for data storage, and the entire stack helped me understand how the frontend and backend communicate seamlessly
+
+## Goal 
+I built this blog application because I wanted to create a platform where users could easily share their thoughts, articles, and ideas. The main goal was to build a full-stack web application from scratch and understand the entire development process.
+
+Through this project, I learned how to handle user authentication with JWT, how to manage CRUD operations for blog posts, and how to integrate features like image uploads, search, and pagination.
+
+The project’s goal was not just to build a functional blog platform, but also to deepen my understanding of the MERN stack and how the frontend and backend communicate. Overall, it was a fantastic learning experience that gave me confidence in full-stack development.
+
+## Seach
+For search functionality, I added a search bar on the frontend that lets users type in keywords. When the user submits a search query, the frontend sends that query to the backend API. On the backend, I perform a case-insensitive search on the titles and content of the posts in the database. The results are filtered and returned to the frontend, displaying only the posts that match the search terms.
+
+
+Yes, exactly! In my frontend, I set up a useEffect that listens to changes in both the current page and the search title. Whenever either of these values changes, the useEffect automatically triggers a new API call. That way, if the user navigates to another page or enters a new search term, the data is always kept in sync.
+
+
+
+## Pagination
+For pagination, I implemented a system where the frontend requests a specific page number and page size from the backend. On the backend, I used query parameters to determine which set of posts to return. For example, if the frontend asks for page 2 with 10 posts per page, the backend calculates the correct offset and returns the appropriate slice of posts. This makes it easy to load posts page by page without overwhelming the user.
+
+So for pagination, I used React's useState to track the current page, and I placed the page state in the dependency array of a useEffect hook. This way, whenever the page number changes, the useEffect automatically triggers a new API request to fetch the corresponding set of posts.
+
+Whenever the user navigates to a different page, I update that state. Then, I send an API request to the backend with the current page number and page size as query parameters.
+
+On the backend, I used req.query to get the page and limit parameters from the URL. I calculated the number of documents to skip using (page - 1) * limit. Then I used Mongoose's skip() and limit() functions to return only the posts for that page.
+
+Finally, I calculated the total number of pages and sent that information back to the frontend, so the user can navigate through the pages easily.
+
+```jsx
+let [allpost, setAllPost] = useState([]);
+  let [page, setPage] = useState(1);
+  let [totalPost, setTotalPost] = useState(0);
+  let [hasMore, setHasMore] = useState(true);
+  let [genre, setGenre] = useState('');  // New state for genre
+  let [title, setTitle] = useState('');
+  // let [t, ] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();  // Prevent default form submission
+    setPage(1);  // Reset to the first page when filter changes
+    // console.log(e)
+    setGlobalTitl(title)
+    setShouldFetch(true);  // Set the trigger state to true
+  };
+
+  const handleNext = () => setPage((prev) => (hasMore ? prev + 1 : prev));
+  const handlePrev = () => setPage((prev) => (prev > 1 ? prev - 1 : 1));
+
+  useEffect(() => {
+    // if (shouldFetch) {  // Only fetch if shouldFetch is true
+      axios
+        .get(`https://blog-mern-backend-x81a.onrender.com/get-post/?page=${page}&title=${globatTitl}&genre=${genre}`)
+        .then((response) => {
+          const postData = response.data;
+          setAllPost(postData.posts);
+          setTotalPost(postData.totalPosts);
+          setHasMore(postData.hasMore);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setShouldFetch(false);  // Reset the trigger state
+          // setTitle('');
+        });
+    // }
+  }, [p]
+
+// Backedn
+
+GetPostRouter.get('/get-post', async (req, res) => {
+  // sorting, and searching
+  // console.log(req.query)
+  let {title,genre,author} = req.query
+  const filter = {}
+
+//let { page } = req.query;
+  let pg = Number(page) || 1;   // Default to page 1 if no page is provided
+  let lim = 6;                  // Limit the number of posts per page
+  let skp = (pg - 1) * lim;     // Calculate the number of posts to skip for the current page
+
+  try {
+    // Get the total number of posts (for pagination)
+    let totalPosts = await PostMode.countDocuments(filter);
+
+    // Fetch the posts for the current page
+    let allPost = await PostMode.find(filter)
+      .populate('user', ['name'])
+      .skip(skp)
+      .limit(lim);
+````
+
