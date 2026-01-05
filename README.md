@@ -760,6 +760,32 @@ On the backend, I used req.query to get the page and limit parameters from the U
 
 Finally, I calculated the total number of pages and sent that information back to the frontend, so the user can navigate through the pages easily.
 
+## Explanation Script for Fetching Posts with Comments
+
+Sure! In my blog application, each post references an array of comments, and each comment references a user. To fetch a post along with its comments and the user details, I use Mongoose’s .populate() method. This allows me to load the related comments and user data in a single query.
+
+```jsx
+const Post = require('./models/Post');
+
+app.get('/api/posts/:id', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id)
+      .populate({
+        path: 'comments',       // Populate the comments array
+        populate: { 
+          path: 'user',     // Inside each comment, populate the user
+          select: 'username email' // Only fetch the username and email fields
+        }
+      });
+
+    res.json(post);
+  } catch (error) {
+    console.error("Error fetching post with comments", error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+```
+
 ```jsx
 let [allpost, setAllPost] = useState([]);
   let [page, setPage] = useState(1);
