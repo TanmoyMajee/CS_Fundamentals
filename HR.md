@@ -1,12 +1,11 @@
 # HR
 
 🔹 **1.Tell me about yourself**
-Good morning sir, good morning ma’am.
-My name is Tanmoy Majee and I am from Kolkata. I am currently in my final year, pursuing B.Tech in Computer Science and Business Systems from Heritage Institute of Technology. Before that, I completed a diploma in Computer Science from APC Roy Polytechnic.
+Go"Good afternoon, ma’am. Good afternoon, sir. My name is Tanmoy Majee, and I'm from Kolkata. I'm currently in my final year pursuing a B.Tech in Computer Science and Business Systems at Heritage Institute of Technology. Before that, I completed my diploma from Acharya Prafulla Chandra Roy Polytechnic in Computer Science.
 
-During my computer science journey, I've built skills in React, MySQ , OOP concept and I have built projects such as an AI-powered PDF Question-and-Answer platform. I also practice Data Structures and Algorithms regularly and have solved more than 500 problems on platforms like LeetCode and Codeforces, which helped me improve my problem-solving ability.
+During this computer science journey, I've built skills in React, MySQL, and object-oriented programming. I've also built some projects, such as an AI-powered PDF Q&A platform where users can upload a PDF and get answers from it. Apart from development, I've solved around 500 problems on LeetCode, which has really helped improve my problem-solving skills.
 
-In my free time, I enjoy watching football. I am a fast learner, and "I'm enthusiastic about joining TCS, applying my skills, learning from experienced professionals, and growing as a software developer."
+In my free time, I like to watch football, and I'm a fast learner who's eager to learn and grow. I'm enthusiastic about joining TCS, where I can apply my technical skills, learn from experienced professionals, and grow as a software developer."
 
 >Good morning/afternoon, my name is Tanmoy Majhi.
 I am currently in my final year of B.Tech in Computer Science at Heritage Institute of Technology. Before that, 
