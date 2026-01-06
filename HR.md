@@ -18,6 +18,11 @@ I am passionate about software development, especially in areas like full stack 
 
 >Alongside development, I have solved more than 600 coding problems,  on platfrom like LeetCode , codeforces , which has improved my problem-solving skills.Outside academics, I enjoy watching football and playing chess.
 
+## Why TCS :
+"I want to join TCS because it offers excellent learning opportunities and a great work culture. As a fresher, I appreciate that TCS provides an initial training program that makes the transition from academics to the corporate environment smooth and effective. I’m also excited that TCS works in multiple domains, like generative AI and cloud computing, and across various sectors such as banking, finance, and healthcare. I believe this will give me the opportunity to work on diverse projects, grow my technical skills, and develop as a professional.
+
+
+
 ** Not mention in resuem **
 >“Something not mentioned in my resume is that I’m very disciplined about self-learning. I maintain a small daily learning routine, and recently I’ve started learning the basics of Java and OOP concepts along with my other subjects. I also completed an industrial training related to AI, which gave me exposure to how AI can be used in real applications. Apart from academics, I casually enjoy playing chess — I’m not an expert, but I like it because it helps me think strategically and stay focused.”
  
