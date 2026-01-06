@@ -15,11 +15,49 @@ Compile-time polymorphism (method overloading): Same method name but different p
 
 Run-time polymorphism (method overriding): A subclass provides a specific implementation of a method already defined in the parent class.
 
-## 2️⃣ Method Overloading vs Method Overriding
 
-Overloading: Same method name but different parameter list (number or type of parameters). Happens in the same class.
+## Method Overloading — Interview Script
 
-Overriding: Subclass provides its own implementation of a parent class method with the same name and same parameters.
+Method overloading means same method name, but different parameters in the same class.
+The difference can be in number of arguments or type of arguments.
+Which method is called is decided at compile time, so it is compile-time polymorphism.
+
+We use it to improve readability and reusability because the method name remains the same while the inputs differ.
+
+⭐ Real-life example you can say
+
+Think of a calculator app.
+We have one function named add.
+If we pass two numbers, it adds two numbers.
+If we pass three numbers, it adds three numbers.
+Same name “add”, but it behaves based on different inputs.
+That is method overloading.
+
+## Method Overriding — Interview Script
+
+Method overriding happens when child class provides its own implementation of a method that already exists in the parent class with the same name and same parameters.
+It is used to change or extend the behavior of the parent class function.
+
+Which function gets executed is decided at runtime, so it is runtime polymorphism.
+
+⭐ Real-life example you can say
+
+Think of an Animal making a sound.
+The parent class defines a general sound() behavior.
+A Dog overrides it and barks, a Cat overrides it and meows.
+Same method name sound(), but behavior depends on the object.
+That is method overriding.
+
+🧠 How to explain difference in one flow (interview-ready)
+
+You can say:
+
+Method overloading happens in the same class with same name but different parameters, and it is compile-time polymorphism.
+Method overriding happens in parent–child classes with same name and same parameters, and it is runtime polymorphism.
+
+Overloading focuses on input difference.
+Overriding focuses on behavior difference
+
 
 ## 3️⃣ Encapsulation
 
