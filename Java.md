@@ -105,43 +105,298 @@ Java is strictly typed and does **not** allow implicit narrowing conversions (e.
 | **Binary/Hex String $\rightarrow$ `int`** | `stoi(s, nullptr, 2)` | `Integer.parseInt(s, 2)` | Pass radix (`2`, `8`, `16`) as 2nd argument. |
 | **`int` $\rightarrow$ Binary/Hex String** | `bitset<32>(n).to_string()` | `Integer.toBinaryString(n)` | Also `Integer.toHexString(n)`, `Integer.toOctalString(n)`. |
 
-### B. Primitive Type Casting & Gotchas
+# C++ vs. Java: Custom Sorting, Maps & PriorityQueues
 
-```java
-// 1. Widening (Implicit - Safe in both C++ & Java)
-int a = 10;
-long b = a;      // Automatic
-double d = b;    // Automatic
+A side-by-side reference comparing C++ STL and Java Collections for custom sorting, iterating over maps, converting map entries to lists, and using custom `PriorityQueue` heaps.
 
-// 2. Narrowing (Explicit Cast REQUIRED in Java - C++ allows implicit with warning)
-long big = 100L;
-int small = (int) big;        // Without (int), Java fails to compile!
+---
 
-double pi = 3.14;
-int truncated = (int) pi;     // 3
+## 1. Custom Sorting Rules: C++ vs. Java
 
-// 3. Char arithmetic requires explicit cast back to char
-char c = 'a';
-c = (char) (c + 1);           // 'b' (In C++, c = c + 1 works without casting; Java promotes to int)
+Before writing comparators, remember the fundamental mental model shift between C++ and Java:
 
-// 4. Boolean is NOT an integer in Java!
-int x = 1;
-// if (x) { ... }             // COMPILE ERROR in Java! Must write: if (x != 0)
-// int flag = (int) true;     // COMPILE ERROR in Java! Must write: boolean ? 1 : 0
+* **C++ (`bool` comparator):** Return `true` if `a` should come **before** `b` (`a < b` for ascending).
+* **Java (`int` comparator):**
+  * Return **negative (`< 0`)** if `a` comes **before** `b`.
+  * Return **positive (`> 0`)** if `a` comes **after** `b`.
+  * Return **`0`** if `a` and `b` are equal.
+  * *Safe shortcut:* Always use `Integer.compare(a, b)` instead of `a - b` to prevent integer overflow.
+
+---
+
+## 2. Sorting Lists / Vectors (`int` and `String`)
+
+### A. Basic Ascending & Descending Sort
+
+**C++ (`std::vector`)**
+```cpp
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+// Integers
+vector<int> nums = {5, 1, 4, 2};
+sort(nums.begin(), nums.end());                  // Ascending: {1, 2, 4, 5}
+sort(nums.begin(), nums.end(), greater<int>());  // Descending: {5, 4, 2, 1}
+
+// Strings
+vector<string> words = {"banana", "apple", "cherry"};
+sort(words.begin(), words.end());                 // Lexicographical ascending
+sort(words.begin(), words.end(), greater<string>()); // Descending
 ```
 
-### C. Autoboxing & Wrapper Class Traps (`int` vs. `Integer`)
-Java collections (`List<Integer>`, `Map<Character, Integer>`) cannot store primitives—they store **Wrapper Objects**.
-
+**Java (`List` / `ArrayList`)**
 ```java
-// Converting int[] <-> List<Integer>
-int[] primArr = {1, 2, 3};
-List<Integer> list = Arrays.stream(primArr).boxed().toList(); // Java 16+ (or .collect(Collectors.toList()))
-int[] backToPrim = list.stream().mapToInt(Integer::intValue).toArray();
+import java.util.*;
 
-// CRITICAL TRAP: Comparing Wrapper Objects
-Integer x = 200;
-Integer y = 200;
-System.out.println(x == y);      // FALSE! (Caches only -128 to 127; checks reference above 127)
-System.out.println(x.equals(y)); // TRUE! Always use .equals() for Integer, Long, Character, String
+// Integers
+List<Integer> nums = new ArrayList<>(Arrays.asList(5, 1, 4, 2));
+Collections.sort(nums);                            // Ascending: [1, 2, 4, 5]
+nums.sort(Collections.reverseOrder());             // Descending: [5, 4, 2, 1]
+
+// Strings
+List<String> words = new ArrayList<>(Arrays.asList("banana", "apple", "cherry"));
+Collections.sort(words);                           // Lexicographical ascending
+words.sort(Collections.reverseOrder());            // Descending
 ```
+
+### B. Custom Sorting (e.g., Sort Strings by Length, Tie-break Lexicographically)
+
+**C++**
+```cpp
+vector<string> words = {"cat", "apple", "bat", "an"};
+
+sort(words.begin(), words.end(), [](const string& a, const string& b) {
+    if (a.length() != b.length()) {
+        return a.length() < b.length(); // Shorter length first
+    }
+    return a < b;                       // Tie-breaker: alphabetical
+});
+// Result: {"an", "bat", "cat", "apple"}
+```
+
+**Java**
+```java
+List<String> words = new ArrayList<>(Arrays.asList("cat", "apple", "bat", "an"));
+
+words.sort((a, b) -> {
+    if (a.length() != b.length()) {
+        return Integer.compare(a.length(), b.length()); // Shorter length first
+    }
+    return a.compareTo(b);                              // Tie-breaker: alphabetical
+});
+// Result: ["an", "bat", "cat", "apple"]
+```
+
+---
+
+## 3. Iterating Over a Map
+
+**C++ (`unordered_map<char, int>`)**
+```cpp
+unordered_map<char, int> mp = {{'a', 3}, {'b', 1}, {'c', 2}};
+
+// 1. Structured bindings (C++17 - cleanest)
+for (auto& [key, val] : mp) {
+    cout << key << " -> " << val << "\n";
+}
+
+// 2. Pair reference
+for (auto& it : mp) {
+    cout << it.first << " -> " << it.second << "\n";
+}
+```
+
+**Java (`Map<Character, Integer>`)**
+```java
+Map<Character, Integer> map = new HashMap<>();
+map.put('a', 3); map.put('b', 1); map.put('c', 2);
+
+// 1. entrySet() loop (Best & fastest way)
+for (Map.Entry<Character, Integer> it : map.entrySet()) {
+    System.out.println(it.getKey() + " -> " + it.getValue());
+}
+
+// 2. keySet() loop (Slightly slower due to extra .get() lookup)
+for (Character key : map.keySet()) {
+    System.out.println(key + " -> " + map.get(key));
+}
+
+// 3. forEach lambda (Java 8+)
+map.forEach((key, val) -> System.out.println(key + " -> " + val));
+```
+
+---
+
+## 4. Storing Map Entries in a List & Custom Sorting
+
+### C++ (`vector<pair<char, int>>`)
+```cpp
+unordered_map<char, int> mp = {{'b', 2}, {'a', 2}, {'c', 5}};
+
+// 1. Copy map entries into vector<pair<char, int>>
+vector<pair<char, int>> vec(mp.begin(), mp.end());
+
+// OR manually push_back:
+// vector<pair<char, int>> vec;
+// for (auto& [k, v] : mp) vec.push_back({k, v});
+
+// 2. Sort: Higher value first; tie-breaker: smaller key first
+sort(vec.begin(), vec.end(), [](const pair<char, int>& a, const pair<char, int>& b) {
+    if (a.second != b.second) {
+        return a.second > b.second; // Higher frequency first
+    }
+    return a.first < b.first;       // Smaller char first
+});
+
+// 3. Print
+for (auto& [k, v] : vec) {
+    cout << k << ": " << v << "\n";
+}
+```
+
+### Java (`List<Map.Entry<Character, Integer>>`)
+```java
+Map<Character, Integer> map = new HashMap<>();
+map.put('b', 2); map.put('a', 2); map.put('c', 5);
+
+// 1. Convert entrySet() directly in constructor (Fastest)
+List<Map.Entry<Character, Integer>> li = new ArrayList<>(map.entrySet());
+
+// OR populate manually in a loop (3 ways):
+List<Map.Entry<Character, Integer>> manualList = new ArrayList<>();
+for (Map.Entry<Character, Integer> it : map.entrySet()) {
+    manualList.add(it);                                            // Option A: Add existing entry
+    // manualList.add(Map.entry(it.getKey(), it.getValue()));      // Option B: Immutable copy (Java 9+)
+    // manualList.add(new AbstractMap.SimpleEntry<>(it.getKey(), it.getValue())); // Option C: Mutable copy
+}
+
+// 2. Sort: Higher value first; tie-breaker: smaller key first
+// CRITICAL: Use .equals() for Integer comparison, NOT ==
+li.sort((a, b) -> {
+    if (!a.getValue().equals(b.getValue())) {
+        return Integer.compare(b.getValue(), a.getValue()); // Higher frequency first
+    }
+    return Character.compare(a.getKey(), b.getKey());       // Smaller char first
+});
+
+// 3. Print
+for (Map.Entry<Character, Integer> entry : li) {
+    System.out.println(entry.getKey() + ": " + entry.getValue());
+}
+```
+
+#### Bonus: Storing Swapped `<Frequency, Character>` Entries in Java
+If you want the frequency to be the key (`Map.Entry<Integer, Character>`):
+```java
+List<Map.Entry<Integer, Character>> swappedList = new ArrayList<>();
+for (Map.Entry<Character, Integer> it : map.entrySet()) {
+    swappedList.add(Map.entry(it.getValue(), it.getKey()));
+}
+
+swappedList.sort((a, b) -> {
+    if (a.getKey().equals(b.getKey())) {
+        return Character.compare(a.getValue(), b.getValue()); // Smaller char first
+    }
+    return Integer.compare(b.getKey(), a.getKey());           // Higher freq first
+});
+```
+
+---
+
+## 5. PriorityQueue Basics (Min-Heap vs. Max-Heap)
+
+> **Crucial Difference:** C++ `priority_queue` defaults to a **Max-Heap**. Java `PriorityQueue` defaults to a **Min-Heap**.
+
+### C++ (`std::priority_queue`)
+```cpp
+#include <queue>
+#include <vector>
+using namespace std;
+
+// 1. Default Max-Heap (Largest on top)
+priority_queue<int> maxHeap;
+maxHeap.push(10);
+maxHeap.push(30);
+int topMax = maxHeap.top(); // 30
+maxHeap.pop();              // Removes 30
+
+// 2. Min-Heap (Smallest on top)
+priority_queue<int, vector<int>, greater<int>> minHeap;
+minHeap.push(10);
+minHeap.push(30);
+int topMin = minHeap.top(); // 10
+minHeap.pop();              // Removes 10
+```
+
+### Java (`java.util.PriorityQueue`)
+```java
+import java.util.*;
+
+// 1. Default Min-Heap (Smallest on top)
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+minHeap.offer(10);
+minHeap.offer(30);
+int topMin = minHeap.peek(); // 10
+minHeap.poll();              // Removes & returns 10
+
+// 2. Max-Heap (Largest on top)
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+// Alternative lambda: new PriorityQueue<>((a, b) -> Integer.compare(b, a));
+maxHeap.offer(10);
+maxHeap.offer(30);
+int topMax = maxHeap.peek(); // 30
+maxHeap.poll();              // Removes & returns 30
+```
+
+---
+
+## 6. Custom PriorityQueue & PQ with Map Entries
+
+> **C++ vs. Java Heap Comparator Trap:**
+> * In **C++**, a custom `struct` comparator behaves opposite to `sort()` (`a.val < b.val` creates a **Max-Heap**).
+> * In **Java**, a `PriorityQueue` comparator behaves **identically** to `list.sort()`—whatever comes "first" in the comparator sits at the **top (`peek()`)** of the heap!
+
+### C++ (`priority_queue` with `pair<char, int>`)
+```cpp
+struct Compare {
+    bool operator()(const pair<char, int>& a, const pair<char, int>& b) {
+        // Return true if 'a' has LOWER priority than 'b' (goes deeper in heap)
+        if (a.second != b.second) {
+            return a.second < b.second; // Higher frequency stays at top
+        }
+        return a.first > b.first;       // Smaller char stays at top on tie
+    }
+};
+
+unordered_map<char, int> mp = {{'b', 2}, {'a', 2}, {'c', 5}};
+priority_queue<pair<char, int>, vector<pair<char, int>>, Compare> pq;
+
+for (auto& [k, v] : mp) {
+    pq.push({k, v});
+}
+
+while (!pq.empty()) {
+    auto [ch, freq] = pq.top();
+    pq.pop();
+    cout << ch << " -> " << freq << "\n";
+}
+```
+
+### Java (`PriorityQueue` with `Map.Entry<Character, Integer>`)
+```java
+Map<Character, Integer> map = new HashMap<>();
+map.put('b', 2); map.put('a', 2); map.put('c', 5);
+
+// Top of PQ = element that comes FIRST according to comparator
+PriorityQueue<Map.Entry<Character, Integer>> pq = new PriorityQueue<>((a, b) -> {
+    if (a.getValue().equals(b.getValue())) {
+        return Character.compare(a.getKey(), b.getKey());   // Smaller char at top
+    }
+    return Integer.compare(b.getValue(), a.getValue());     // Higher freq at top
+});
+
+// Insert all entries at once:
+pq.addAll(map.entrySet());
+
